@@ -3,38 +3,40 @@ repository_type: pipeline
 nf_core_version: 4.0.2
 
 lint:
-  files_unchanged:
-    - CODE_OF_CONDUCT.md
-    - assets/nf-core-oncoflow_logo_light.png
-    - docs/images/nf-core-oncoflow_logo_light.png
-    - docs/images/nf-core-oncoflow_logo_dark.png
-    - .github/ISSUE_TEMPLATE/bug_report.yml
-    - .github/PULL_REQUEST_TEMPLATE.md
-    - assets/email_template.txt
-    - docs/README.md
-  nextflow_config:
-    - manifest.name
-    - manifest.homePage
-  multiqc_config:
-    - report_comment
+  actions_awsfulltest: false
+  actions_awstest: false
   files_exist:
-    - CODE_OF_CONDUCT.md
-    - assets/nf-core-oncoflow_logo_light.png
-    - docs/images/nf-core-oncoflow_logo_light.png
-    - docs/images/nf-core-oncoflow_logo_dark.png
-    - .github/ISSUE_TEMPLATE/config.yml
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
+    - conf/igenomes.config
+    - conf/igenomes_ignored.config
+    - conf/test.config
+    - tests/default.config
+    - tests/default.nf.test
+    - CODE_OF_CONDUCT.md
+  files_unchanged:
+    - .github/ISSUE_TEMPLATE/config.yml
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+    - .github/ISSUE_TEMPLATE/feature_request.yml
+    - .github/PULL_REQUEST_TEMPLATE.md
+    - .github/workflows/linting.yml
+    - .prettierignore
+    - assets/email_template.txt
+    - docs/README.md
+  multiqc_config: false
+  nextflow_config:
+    - params.input
 
 template:
   org: Clinical-Genomics
   name: oncoflow
   description: Pipeline cascade of nf-core/oncoanalyser + Clinical-Genomics/oncorefiner,
     written in Nextflow.
-  author: "Beatriz Sá Vinhas"
+  author: Clinical Genomics Stockholm
   version: 1.0.0dev
-  force: true
+  force: false
   outdir: .
   skip_features:
-    - gpu
+    - igenomes
+    - fastqc
   is_nfcore: false

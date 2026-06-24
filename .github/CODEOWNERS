@@ -1,5 +1,0 @@
-# This document shows who is the owner to which of the files, and have permissions to make changes to them.
-# In general, the product owner owns all product specific documents,
-# and the dev team as a whole owns all release specific files.
-* <ADD PRODUCT OWNER GITHUB HANDLE HERE>
-/releases/ @Clinical-Genomics/<ADD DEV TEAM HERE>

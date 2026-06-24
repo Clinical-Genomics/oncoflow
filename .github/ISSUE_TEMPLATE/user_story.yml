@@ -1,0 +1,93 @@
+name: User story
+description: Feature request
+labels: ["User-Story"]
+projects: ["Clinical-Genomics/XXX"]
+body:
+  - type: textarea
+    attributes:
+      label: Need
+      description: Describe the need from the perspective of the user.
+      value: |
+        As a <role>,
+        I want <functionality>,
+        so that <reason>.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Acceptance criteria
+      description: |
+        List the requirements needed for this feature to be implemented.
+        If you are unsure, apply the label "Needs Refinement" to the issue.
+      value: |
+        - [ ] <acceptance criterion>
+        - [ ] <acceptance criterion>
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Traceability
+      description: How was the need for this feature identified?
+      value: |
+        - [ ] User feedback: <paste the message or link to the relevant ticket here>
+        - [ ] Deviation: <link to deviation>
+        - [ ] Other: <specify>
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional information
+      description: |
+        Please provide any information that can give us more context about this issue.
+      value: |
+        #### Suggested approach 
+        <!-- Any ideas on how this should be implemented? -->
+
+        #### Considered alternatives
+        <!-- Were there alternative approaches which have been rejected? -->
+
+        #### Blockers
+        <!-- Anything preventing this from happening? -->
+
+        #### Other notes
+        <!-- Links? References? -->
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Product requirements
+      description: |
+        Does this feature change the product requirements?
+        Link to any system requirements added or changed, or motivate why no requirements are affected.
+      value: |
+        - [ ] Requirement(s) should be added: <requirement>
+        - [ ] Requirement(s) should be changed: <requirement and change>
+        - [ ] No requirements are affected because <reason>
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Risk assessment
+      description: If a risk assessment is needed, link to it here. If not, motivate why not.
+      value: |
+        - [ ] A risk assessment is needed: <link to risk assessment>
+        - [ ] No risk assessment is need because <reason>
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: SOUPs
+      description: |
+        Does this feature involve introduce or modify an SOUP(s)? If so, link to the SOUP(s) here.
+        If you are unsure, apply the label "Needs Refinement" to the issue.
+      value: |
+        - [ ] SOUP(s) should be added: <SOUPs>
+        - [ ] SOUP(s) should be changed: <requirement and change>
+        - [ ] No changes in SOUPs.
+    validations:
+      required: true

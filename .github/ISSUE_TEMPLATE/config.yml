@@ -1,7 +1,5 @@
+blank_issues_enabled: true
 contact_links:
-  - name: Join nf-core
-    url: https://nf-co.re/join
-    about: Please join the nf-core community here
-  - name: "Slack #oncoflow channel"
-    url: https://nfcore.slack.com/channels/oncoflow
-    about: Discussion about the Clinical-Genomics/oncoflow pipeline
+  - name: Contributing Guidelines
+    url: https://github.com/Clinical-Genomics/oncorefiner?tab=contributing-ov-file#readme
+    about: If you would like to contribute to this pipeline, please follow the contributing guidelines.

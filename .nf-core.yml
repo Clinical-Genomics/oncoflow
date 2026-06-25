@@ -2,6 +2,9 @@ lint:
   actions_awsfulltest: false
   actions_awstest: false
   files_exist:
+    - assets/nf-core-oncoflow_logo_light.png
+    - docs/images/nf-core-oncoflow_logo_light.png
+    - docs/images/nf-core-oncoflow_logo_dark.png
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
     - conf/igenomes.config

@@ -36,4 +36,5 @@ template:
   skip_features:
     - igenomes
     - fastqc
+    - multiqc
   version: 1.0.0dev

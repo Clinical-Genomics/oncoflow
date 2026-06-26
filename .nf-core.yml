@@ -2,6 +2,9 @@ lint:
   actions_awsfulltest: false
   actions_awstest: false
   files_exist:
+    - assets/email_template.html
+    - assets/email_template.txt
+    - assets/sendmail_template.txt
     - assets/nf-core-oncoflow_logo_light.png
     - docs/images/nf-core-oncoflow_logo_light.png
     - docs/images/nf-core-oncoflow_logo_dark.png

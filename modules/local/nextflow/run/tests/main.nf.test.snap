@@ -64,11 +64,10 @@
                 "SAMPLE2_PE_sample2_R1.fastq.gz:md5,05dba9c26396cbdbe0e6da26f037106e",
                 "SAMPLE2_PE_sample2_R2.fastq.gz:md5,63d5e4ac37927c2ecec4b74d2ff99a10",
                 "SAMPLE3_SE_sample1_R1.fastq.gz:md5,7dd2fd0d542d9259d9aed53550907fae",
-                "SAMPLE3_SE_sample2_R1.fastq.gz:md5,05dba9c26396cbdbe0e6da26f037106e",
-                "nf_core_demo_software_mqc_versions.yml:md5,74326c85ce13ec18c2e46093f80c5f48"
+                "SAMPLE3_SE_sample2_R1.fastq.gz:md5,05dba9c26396cbdbe0e6da26f037106e"
             ]
         ],
-        "timestamp": "2026-06-29T10:40:06.455663",
+        "timestamp": "2026-06-29T10:58:05.668915",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.2"

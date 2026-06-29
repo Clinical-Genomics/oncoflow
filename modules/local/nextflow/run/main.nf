@@ -11,6 +11,10 @@ process NEXTFLOW_RUN {
     val additional_config // custom configs
     val cache_dir         // cache directory
 
+    output:
+    path "results" , emit: output
+    val stdout, emit: log
+
     when:
     task.ext.when == null || task.ext.when
 
@@ -39,8 +43,4 @@ process NEXTFLOW_RUN {
     // Copy nextflow log to work directory
     cache_path.resolve(".nextflow.log").copyTo("${task.workDir}/nextflow.log")
     assert process.exitValue() == 0: stdout
-
-    output:
-    path "results" , emit: output
-    val stdout, emit: log
 }

@@ -15,7 +15,6 @@ nextflow_process {
                 input[3] = Channel.value([])
                 input[4] = Channel.value([])
                 input[5] = workflow.workDir.resolve('nf-core/demo').toUriString()
-                input[6] = 'results'
                 """
             }
         }
@@ -26,6 +25,7 @@ nextflow_process {
             def stable_path = getAllFilesFromDir(outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
             // stable_content: All files in outdir with stable content
             def stable_content = getAllFilesFromDir(outdir, ignore: ['pipeline_info/**', 'multiqc/**'])
+
 
             assert process.success
             assert snapshot(

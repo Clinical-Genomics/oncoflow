@@ -20,9 +20,16 @@ nextflow_process {
         }
 
         then {
+            def outdir = process.out.output[0]
+            // stable_path: All files + folders in outdir with a stable path (including file name)
+            def stable_path = getAllFilesFromDir(outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            // stable_content: All files in outdir with stable content
+            def stable_content = getAllFilesFromDir(outdir, ignore: ['pipeline_info/*.{html,json,txt}', 'multiqc/**'])
+
             assert process.success
             assert snapshot(
-                process.out.output[0] //collect { it.collect { file(it).name } }
+                stable_path,
+                stable_content,
                 ).match()
         }
 

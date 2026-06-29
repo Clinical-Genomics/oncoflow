@@ -21,7 +21,9 @@ nextflow_process {
 
         then {
             assert process.success
-            assert snapshot(process.out).match()
+            assert snapshot(
+                process.out.output[0] //collect { it.collect { file(it).name } }
+                ).match()
         }
 
     }

@@ -26,10 +26,13 @@ nextflow_process {
             // stable_content: All files in outdir with stable content
             def stable_content = getAllFilesFromDir(outdir, ignore: ['pipeline_info/**', 'multiqc/**'])
 
-
             assert process.success
             assert snapshot(
+                // pipeline versions.yml file for multiqc from which Nextflow version is removed because we test pipelines on multiple Nextflow versions
+                removeNextflowVersion("${outdir}/pipeline_info/nf_core_demo_software_mqc_versions.yml"),
+                // All stable path name, with a relative path
                 stable_path,
+                // All files with stable contents
                 stable_content,
                 ).match()
         }

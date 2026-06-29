@@ -1,6 +1,20 @@
 {
     "Nextflow run nf-core/demo - docker,test": {
         "content": [
+            {
+                "COWPY": {
+                    "cowpy": "1.1.5"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "SEQTK_TRIM": {
+                    "seqtk": "1.4-r122"
+                },
+                "Workflow": {
+                    "nf-core/demo": "v1.2.0-g32893af"
+                }
+            },
             [
                 "",
                 "cowpy",
@@ -67,10 +81,10 @@
                 "SAMPLE3_SE_sample2_R1.fastq.gz:md5,05dba9c26396cbdbe0e6da26f037106e"
             ]
         ],
-        "timestamp": "2026-06-29T10:58:05.668915",
+        "timestamp": "2026-06-29T12:09:35.915307",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.2"
+            "nextflow": "25.10.4"
         }
     }
 }

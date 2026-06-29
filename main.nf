@@ -35,7 +35,7 @@ workflow {
         params.oncoanalyser.params_file,
         params.oncoanalyser.samplesheet,
         params.oncoanalyser.additional_config,
-        params.oncoanalyser.cache_dir,
+        workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
     )
 
 }

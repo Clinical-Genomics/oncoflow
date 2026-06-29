@@ -9,6 +9,8 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 
 ### `Added`
 
+- [#2](https://github.com/Clinical-Genomics/oncoflow/pull/2) `NEXTFLOW_RUN` local module based on `mahesh-panchal/nf-cascade`.
+
 ### `Fixed`
 
 ### `Dependencies`

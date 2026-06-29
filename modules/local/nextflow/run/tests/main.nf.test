@@ -1,0 +1,42 @@
+nextflow_process {
+
+    name "Test Process NEXTFLOW_RUN"
+    script "modules/local/nextflow/run/main.nf"
+    process "NEXTFLOW_RUN"
+
+    test("Nextflow run nf-core/demo - docker,test") {
+
+        when {
+            process {
+                """
+                input[0] = 'nf-core/demo'
+                input[1] = '-ansi-log false -profile docker,test -revision 1.2.0'
+                input[2] = ''
+                input[3] = ''
+                input[4] = ''
+                input[5] = workflow.workDir.resolve('nf-core/demo').toUriString()
+                """
+            }
+        }
+
+        then {
+            def outdir = process.out.output[0]
+            // stable_path: All files + folders in outdir with a stable path (including file name)
+            def stable_path = getAllFilesFromDir(outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            // stable_content: All files in outdir with stable content
+            def stable_content = getAllFilesFromDir(outdir, ignore: ['pipeline_info/**', 'multiqc/**'])
+
+            assert process.success
+            assert snapshot(
+                // pipeline versions.yml file for multiqc from which Nextflow version is removed because we test pipelines on multiple Nextflow versions
+                removeNextflowVersion("${outdir}/pipeline_info/nf_core_demo_software_mqc_versions.yml"),
+                // All stable path name, with a relative path
+                stable_path,
+                // All files with stable contents
+                stable_content,
+                ).match()
+        }
+
+    }
+
+}

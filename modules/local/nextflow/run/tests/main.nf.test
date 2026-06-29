@@ -11,9 +11,9 @@ nextflow_process {
                 """
                 input[0] = 'nf-core/demo'
                 input[1] = '-ansi-log false -profile docker,test -revision 1.2.0'
-                input[2] = Channel.value([])
-                input[3] = Channel.value([])
-                input[4] = Channel.value([])
+                input[2] = ''
+                input[3] = ''
+                input[4] = ''
                 input[5] = workflow.workDir.resolve('nf-core/demo').toUriString()
                 """
             }

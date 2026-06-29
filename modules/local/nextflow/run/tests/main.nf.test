@@ -15,6 +15,7 @@ nextflow_process {
                 input[3] = Channel.value([])
                 input[4] = Channel.value([])
                 input[5] = workflow.workDir.resolve('nf-core/demo').toUriString()
+                input[6] = 'results'
                 """
             }
         }

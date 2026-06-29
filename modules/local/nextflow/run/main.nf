@@ -10,6 +10,7 @@ process NEXTFLOW_RUN {
     val samplesheet       // pipeline samplesheet
     val additional_config // custom configs
     val cache_dir         // cache directory
+    val outdir            // output directory
 
     when:
     task.ext.when == null || task.ext.when
@@ -26,7 +27,7 @@ process NEXTFLOW_RUN {
             params_file ? "-params-file $params_file" : '',
             additional_config ? "-c $additional_config" : '',
             samplesheet ? "--input $samplesheet" : '',
-            "--outdir ${task.workDir}/results",
+            "--outdir ${task.workDir}/$outdir",
     ].join(" ")
     // Copy command to shell script in work dir for reference/debugging.
     file("$task.workDir/nf-cmd.sh").text = nxf_cmd
@@ -41,6 +42,6 @@ process NEXTFLOW_RUN {
     assert process.exitValue() == 0: stdout
 
     output:
-    path "results" , emit: output
+    path outdir , emit: output
     val stdout, emit: log
 }

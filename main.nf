@@ -31,11 +31,11 @@ workflow {
 
     NFCORE_ONCOANALYSER(
         'nf-core/oncoanalyser',
-        params.nextflow_opts,
-        params.params_file,
-        ch_samplesheet,
-        params.additional_config,
-        params.cache_dir
+        params.oncoanalyser.nextflow_opts,
+        params.oncoanalyser.params_file,
+        params.oncoanalyser.samplesheet,
+        params.oncoanalyser.additional_config,
+        params.oncoanalyser.cache_dir,
     )
 
 }

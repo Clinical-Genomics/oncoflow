@@ -13,6 +13,8 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+include { NEXTFLOW_RUN as CLINICAL_GENOMICS_ONCOREFINER } from './modules/local/nextflow/run/main.nf'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     NAMED WORKFLOWS FOR PIPELINE
@@ -25,6 +27,17 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+workflow {
+
+    CLINICAL_GENOMICS_ONCOREFINER(
+        'Clinical-Genomics/oncorefiner',
+        params.oncorefiner.nextflow_opts,
+        params.oncorefiner.params_file,
+        '',
+        params.oncorefiner.additional_config,
+        workflow.workDir.resolve('Clinical-Genomics/oncorefiner').toUriString(),
+    )
+}
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

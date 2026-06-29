@@ -29,6 +29,10 @@ lint:
   nextflow_config:
     - params.input
     - params.outdir
+    - timeline.enabled
+    - trace.enabled
+    - report.enabled
+    - dag.enabled
 nf_core_version: 4.0.2
 repository_type: pipeline
 template:

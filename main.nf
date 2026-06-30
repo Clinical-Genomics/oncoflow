@@ -28,7 +28,6 @@ include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER } from "./modules/local/nextflow/r
 
 workflow {
 
-
     NFCORE_ONCOANALYSER(
         'nf-core/oncoanalyser',
         params.oncoanalyser.nextflow_opts,

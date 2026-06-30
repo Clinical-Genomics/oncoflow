@@ -29,6 +29,8 @@ include { NEXTFLOW_RUN as CLINICAL_GENOMICS_ONCOREFINER } from './modules/local/
 
 workflow {
 
+    main:
+
     CLINICAL_GENOMICS_ONCOREFINER(
         'Clinical-Genomics/oncorefiner',
         params.oncorefiner.nextflow_opts,
@@ -37,7 +39,17 @@ workflow {
         params.oncorefiner.additional_config,
         workflow.workDir.resolve('Clinical-Genomics/oncorefiner').toUriString(),
     )
+
+    publish:
+    oncorefiner_output = CLINICAL_GENOMICS_ONCOREFINER.out.output
 }
+
+output {
+    oncorefiner_output {
+        path "oncorefiner"
+    }
+}
+
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

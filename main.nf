@@ -26,13 +26,16 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_onco
 //
 workflow CLINICALGENOMICS_ONCOFLOW {
 
+    take:
+    outdir // string: The output directory where the results will be saved
+
     main:
 
     //
     // WORKFLOW: Run pipeline
     //
     ONCOFLOW (
-        params.outdir,
+        outdir,
     )
 
     emit:
@@ -64,7 +67,9 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    CLINICALGENOMICS_ONCOFLOW ()
+    CLINICALGENOMICS_ONCOFLOW (
+        params.outdir
+    )
 
     //
     // SUBWORKFLOW: Run completion tasks

@@ -14,12 +14,29 @@
 */
 include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER } from "./modules/local/nextflow/run/main"
 
+include { ONCOFLOW  } from './workflows/oncoflow'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_oncoflow_pipeline'
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_oncoflow_pipeline'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     NAMED WORKFLOWS FOR PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+//
+// WORKFLOW: Run main analysis pipeline depending on type of input
+//
+workflow CLINICALGENOMICS_ONCOFLOW {
+
+    main:
+
+    //
+    // WORKFLOW: Run pipeline
+    //
+    ONCOFLOW (
+        params.outdir,
+    )
+}
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -29,23 +46,35 @@ include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER } from "./modules/local/nextflow/r
 workflow {
 
     main:
-
-    NFCORE_ONCOANALYSER(
-        'nf-core/oncoanalyser',
-        params.oncoanalyser.nextflow_opts,
-        params.oncoanalyser.params_file,
-        params.oncoanalyser.samplesheet,
-        params.oncoanalyser.additional_config,
-        workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
+    //
+    // SUBWORKFLOW: Run initialisation tasks
+    //
+    PIPELINE_INITIALISATION (
+        params.version,
+        params.validate_params,
+        params.monochrome_logs,
+        args,
+        params.outdir,
+        params.help,
+        params.help_full,
+        params.show_hidden
     )
-    publish:
-    oncoanalyser_output = NFCORE_ONCOANALYSER.out.output
-}
 
-output {
-    oncoanalyser_output {
-        path "oncoanalyser"
-    }
+    //
+    // WORKFLOW: Run main workflow
+    //
+    CLINICALGENOMICS_ONCOFLOW (
+    )
+    //
+    // SUBWORKFLOW: Run completion tasks
+    //
+    PIPELINE_COMPLETION (
+        params.email,
+        params.email_on_fail,
+        params.plaintext_email,
+        params.outdir,
+        params.monochrome_logs,
+    )
 }
 
 /*

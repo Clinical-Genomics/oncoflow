@@ -2,9 +2,6 @@ lint:
   actions_awsfulltest: false
   actions_awstest: false
   files_exist:
-    - assets/email_template.html
-    - assets/email_template.txt
-    - assets/sendmail_template.txt
     - assets/nf-core-oncoflow_logo_light.png
     - docs/images/nf-core-oncoflow_logo_light.png
     - docs/images/nf-core-oncoflow_logo_dark.png
@@ -28,11 +25,6 @@ lint:
   multiqc_config: false
   nextflow_config:
     - params.input
-    - params.outdir
-    - timeline.enabled
-    - trace.enabled
-    - report.enabled
-    - dag.enabled
 nf_core_version: 4.0.2
 repository_type: pipeline
 template:

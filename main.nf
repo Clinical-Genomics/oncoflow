@@ -12,9 +12,7 @@
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER } from "./modules/local/nextflow/run/main"
-
-include { ONCOFLOW  } from './workflows/oncoflow'
+include { ONCOFLOW                } from './workflows/oncoflow'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_oncoflow_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_oncoflow_pipeline'
 /*

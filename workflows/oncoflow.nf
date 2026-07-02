@@ -3,6 +3,7 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER } from "../modules/local/nextflow/run/main"
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 
 /*
@@ -19,6 +20,15 @@ workflow ONCOFLOW {
     main:
 
     def ch_versions = channel.empty()
+
+    NFCORE_ONCOANALYSER(
+        'nf-core/oncoanalyser',
+        params.oncoanalyser.nextflow_opts,
+        params.oncoanalyser.params_file,
+        params.oncoanalyser.samplesheet,
+        params.oncoanalyser.additional_config,
+        workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
+    )
 
     //
     // Collate and save software versions
@@ -49,7 +59,8 @@ workflow ONCOFLOW {
             newLine: true
         )
     emit:
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    oncoanalyser_output = NFCORE_ONCOANALYSER.out.output // channel: [ path(analysis_output_directory) ]
+    versions            = ch_versions                    // channel: [ path(versions.yml) ]
 }
 
 /*

@@ -1,0 +1,22 @@
+{
+    "-profile test (stub runs for all pipelines)": {
+        "content": [
+            [
+                "pipeline_info",
+                "pipeline_info/execution_report_2026-07-02_18-04-34.html",
+                "pipeline_info/execution_timeline_2026-07-02_18-04-34.html",
+                "pipeline_info/oncoflow_software_versions.yml",
+                "pipeline_info/params_2026-07-02_18-04-35.json",
+                "pipeline_info/pipeline_dag_2026-07-02_18-04-34.html"
+            ],
+            [
+                
+            ]
+        ],
+        "timestamp": "2026-07-02T18:06:09.824955",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    }
+}

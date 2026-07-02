@@ -61,8 +61,8 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    CLINICALGENOMICS_ONCOFLOW (
-    )
+    CLINICALGENOMICS_ONCOFLOW ()
+
     //
     // SUBWORKFLOW: Run completion tasks
     //
@@ -73,6 +73,15 @@ workflow {
         params.outdir,
         params.monochrome_logs,
     )
+
+    publish:
+    oncoanalyser_output = CLINICALGENOMICS_ONCOFLOW.oncoanalyser_output
+}
+
+output {
+    oncoanalyser_output {
+        path "oncoanalyser"
+    }
 }
 
 /*

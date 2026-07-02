@@ -27,16 +27,12 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_onco
 //
 workflow CLINICALGENOMICS_ONCOFLOW {
 
-    take:
-    samplesheet // channel: samplesheet read in from --input
-
     main:
 
     //
     // WORKFLOW: Run pipeline
     //
     ONCOFLOW (
-        samplesheet,
         params.outdir,
     )
 }
@@ -58,7 +54,6 @@ workflow {
         params.monochrome_logs,
         args,
         params.outdir,
-        params.input,
         params.help,
         params.help_full,
         params.show_hidden
@@ -68,7 +63,6 @@ workflow {
     // WORKFLOW: Run main workflow
     //
     CLINICALGENOMICS_ONCOFLOW (
-        PIPELINE_INITIALISATION.out.samplesheet
     )
     //
     // SUBWORKFLOW: Run completion tasks

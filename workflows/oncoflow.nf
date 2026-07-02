@@ -14,7 +14,6 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow ONCOFLOW {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
     outdir
 
     main:

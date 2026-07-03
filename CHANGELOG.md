@@ -14,7 +14,7 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 
 ### `Changed`
 
-- [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Updated `.nftignore` to also ignore `pipeline_info`, `multiqc`, and `vep` files for all pipelines.
+- [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Updated `.nftignore` to also ignore `pipeline_info` and `multiqc` files for all pipelines.
 - [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Changed default test to not capture `pipeline_info` files for run pipelines.
 
 ### `Fixed`

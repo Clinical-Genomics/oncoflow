@@ -12,7 +12,7 @@ process NEXTFLOW_RUN {
     val cache_dir         // cache directory
 
     output:
-    path "results" , emit: output
+    path "results", emit: output
     val stdout, emit: log
 
     when:

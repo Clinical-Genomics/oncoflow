@@ -4,16 +4,16 @@ nextflow_process {
     script "modules/local/nextflow/run/main.nf"
     process "NEXTFLOW_RUN"
 
-    test("Nextflow run nf-core/demo - docker,test") {
+    test("Nextflow run nf-core/demo -revision 1.2.0 -profile docker,test -stub") {
 
         when {
             process {
                 """
                 input[0] = 'nf-core/demo'
-                input[1] = '-ansi-log false -profile docker,test -revision 1.2.0'
-                input[2] = Channel.value([])
-                input[3] = Channel.value([])
-                input[4] = Channel.value([])
+                input[1] = '-ansi-log false -profile docker,test -revision 1.2.0 -stub'
+                input[2] = ''
+                input[3] = ''
+                input[4] = ''
                 input[5] = workflow.workDir.resolve('nf-core/demo').toUriString()
                 """
             }

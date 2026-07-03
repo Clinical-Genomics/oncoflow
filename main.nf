@@ -12,15 +12,35 @@
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
-include { NEXTFLOW_RUN as CLINICAL_GENOMICS_ONCOREFINER } from './modules/local/nextflow/run/main.nf'
-
+include { ONCOFLOW  } from './workflows/oncoflow'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_oncoflow_pipeline'
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_oncoflow_pipeline'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     NAMED WORKFLOWS FOR PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+//
+// WORKFLOW: Run main analysis pipeline depending on type of input
+//
+workflow CLINICALGENOMICS_ONCOFLOW {
+
+    take:
+    outdir // string: The output directory where the results will be saved
+
+    main:
+
+    //
+    // WORKFLOW: Run pipeline
+    //
+    ONCOFLOW (
+        outdir,
+    )
+
+    emit:
+    oncorefiner_output = ONCOFLOW.out.oncorefiner_output // channel: [path(oncorefiner_output_directory)]
+}
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -31,17 +51,42 @@ workflow {
 
     main:
 
-    CLINICAL_GENOMICS_ONCOREFINER(
-        'Clinical-Genomics/oncorefiner',
-        params.oncorefiner.nextflow_opts,
-        params.oncorefiner.params_file,
-        '',
-        params.oncorefiner.additional_config,
-        workflow.workDir.resolve('Clinical-Genomics/oncorefiner').toUriString(),
+
+
+    //
+    // SUBWORKFLOW: Run initialisation tasks
+    //
+    PIPELINE_INITIALISATION (
+        params.version,
+        params.validate_params,
+        params.monochrome_logs,
+        args,
+        params.outdir,
+        params.help,
+        params.help_full,
+        params.show_hidden
+    )
+
+    //
+    // WORKFLOW: Run main workflow
+    //
+    CLINICALGENOMICS_ONCOFLOW (
+        params.outdir
+    )
+
+    //
+    // SUBWORKFLOW: Run completion tasks
+    //
+    PIPELINE_COMPLETION (
+        params.email,
+        params.email_on_fail,
+        params.plaintext_email,
+        params.outdir,
+        params.monochrome_logs,
     )
 
     publish:
-    oncorefiner_output = CLINICAL_GENOMICS_ONCOREFINER.out.output
+    oncorefiner_output = CLINICALGENOMICS_ONCOFLOW.out.oncorefiner_output // channel: [path(oncorefiner_output_directory)]
 }
 
 output {
@@ -49,6 +94,7 @@ output {
         path "oncorefiner"
     }
 }
+
 
 
 /*

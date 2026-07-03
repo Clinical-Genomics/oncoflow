@@ -17,6 +17,7 @@
                 "oncorefiner/results/multiqc/multiqc_plots/.stub",
                 "oncorefiner/results/multiqc/multiqc_report.html",
                 "oncorefiner/results/pipeline_info",
+                "oncorefiner/results/pipeline_info/oncorefiner_software_mqc_versions.yml",
                 "oncorefiner/results/process_svs",
                 "oncorefiner/results/process_svs/test_tumor_normal_case_clinical.vcf.gz",
                 "oncorefiner/results/process_svs/test_tumor_normal_case_clinical.vcf.gz.tbi",
@@ -39,16 +40,14 @@
                 "oncorefiner/results/vep/test_tumor_normal_case_svdbquery_vep.vcf.gz",
                 "oncorefiner/results/vep/test_tumor_normal_case_svdbquery_vep.vcf.gz.tbi",
                 "oncorefiner/results/vep/test_tumor_normal_case_svdbquery_vep_summary.html",
-                "pipeline_info"
+                "pipeline_info",
+                "pipeline_info/oncoflow_software_versions.yml"
             ],
             [
                 "subject_a_normal.cram:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a_normal.cram.crai:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a_tumor.cram:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a_tumor.cram.crai:md5,d41d8cd98f00b204e9800998ecf8427e",
-                ".stub:md5,d41d8cd98f00b204e9800998ecf8427e",
-                ".stub:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "multiqc_report.html:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "test_tumor_normal_case_clinical.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
                 "test_tumor_normal_case_clinical.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "test_tumor_normal_case_research.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
@@ -65,11 +64,10 @@
                 "normal.cgh:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "tumor.cgh:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "test_tumor_normal_case_svdbquery_vep.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
-                "test_tumor_normal_case_svdbquery_vep.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "test_tumor_normal_case_svdbquery_vep_summary.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                "test_tumor_normal_case_svdbquery_vep.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
             ]
         ],
-        "timestamp": "2026-07-03T11:19:18.255981",
+        "timestamp": "2026-07-03T12:01:17.478807",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

@@ -15,6 +15,10 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow ONCOFLOW {
 
     take:
+    oncoanalyser_additional_config
+    oncoanalyser_nextflow_opts
+    oncoanalyser_params_file
+    oncoanalyser_samplesheet
     outdir
 
     main:
@@ -23,10 +27,10 @@ workflow ONCOFLOW {
 
     NFCORE_ONCOANALYSER(
         'nf-core/oncoanalyser',
-        params.oncoanalyser.nextflow_opts,
-        params.oncoanalyser.params_file,
-        params.oncoanalyser.samplesheet,
-        params.oncoanalyser.additional_config,
+        oncoanalyser_nextflow_opts,
+        oncoanalyser_params_file,
+        oncoanalyser_samplesheet,
+        oncoanalyser_additional_config,
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
     )
 

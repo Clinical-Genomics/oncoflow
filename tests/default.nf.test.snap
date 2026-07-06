@@ -322,6 +322,8 @@
                 "oncoanalyser/results/subject_a/virusbreakend/subject_a.tumor.virusbreakend.vcf",
                 "oncoanalyser/results/subject_a/virusinterpreter",
                 "oncoanalyser/results/subject_a/virusinterpreter/subject_a.tumor.virus.annotated.tsv",
+                "oncorefiner",
+                "oncorefiner/oncorefiner_params.yaml",
                 "pipeline_info",
                 "pipeline_info/oncoflow_software_versions.yml"
             ],
@@ -406,10 +408,11 @@
                 "subject_a.tumor.teal.tellength.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a.tumor.summary.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a.tumor.virusbreakend.vcf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "subject_a.tumor.virus.annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                "subject_a.tumor.virus.annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "oncorefiner_params.yaml:md5,28d103d129e8e5d8ea672a7f7186d9d8"
             ]
         ],
-        "timestamp": "2026-07-06T10:35:01.939539",
+        "timestamp": "2026-07-06T15:47:38.825724",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

@@ -4,7 +4,8 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER } from "../modules/local/nextflow/run/main"
-include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { CREATE_ONCOREFINER_PARAMS_FILE      } from "../modules/local/createoncorefinerparamsfile/main"
+include { softwareVersionsToYAML              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -15,10 +16,15 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow ONCOFLOW {
 
     take:
+    val_case_id                        // string: [mandatory] Case ID
     val_oncoanalyser_additional_config // string: [optional]  Additional config file for oncoanalyser pipeline
     val_oncoanalyser_nextflow_opts     // string: [mandatory] Nextflow options for oncoanalyser pipeline
     val_oncoanalyser_params_file       // string: [mandatory] Parameters file for oncoanalyser pipeline
     val_oncoanalyser_samplesheet       // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    val_sample_id_tumor                // string: [mandatory] Sample ID of the tumor sample
+    val_sample_id_normal               // string: [mandatory] Sample ID of the normal sample
+    val_subject_id                     // string: [mandatory] Subject ID
+    val_sex                            // string: [mandatory] Sex of the patient
     outdir                             // string: [mandatory] The output directory where the results will be saved
 
     main:
@@ -33,6 +39,14 @@ workflow ONCOFLOW {
         val_oncoanalyser_additional_config,
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
     )
+
+    CREATE_ONCOREFINER_PARAMS_FILE(
+        val_case_id,
+        val_subject_id,
+        val_sample_id_tumor,
+        val_sample_id_normal,
+        val_sex,
+        NFCORE_ONCOANALYSER.out.output)
 
     //
     // Collate and save software versions
@@ -64,8 +78,9 @@ workflow ONCOFLOW {
         )
 
     emit:
-    oncoanalyser_output = NFCORE_ONCOANALYSER.out.output // channel: [path(oncoanalyser_output_directory)]
-    versions            = ch_versions                    // channel: [ path(versions.yml) ]
+    oncoanalyser_output     = NFCORE_ONCOANALYSER.out.output                 // channel: [path(oncoanalyser_output_directory)]
+    oncorefiner_params_file = CREATE_ONCOREFINER_PARAMS_FILE.out.params_file // channel: [path(yaml)]
+    versions                = ch_versions
 }
 
 /*

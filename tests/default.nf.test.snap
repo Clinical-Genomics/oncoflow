@@ -409,10 +409,10 @@
                 "subject_a.tumor.summary.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a.tumor.virusbreakend.vcf:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a.tumor.virus.annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "oncorefiner_params.yaml:md5,28d103d129e8e5d8ea672a7f7186d9d8"
+                "oncorefiner_params.yaml:md5,b111aa8543e1e0253c66ab5bd0d1b795"
             ]
         ],
-        "timestamp": "2026-07-06T15:47:38.825724",
+        "timestamp": "2026-07-06T16:52:49.957411",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

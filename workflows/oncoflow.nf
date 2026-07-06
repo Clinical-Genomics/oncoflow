@@ -15,11 +15,11 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow ONCOFLOW {
 
     take:
-    oncoanalyser_additional_config // string: [optional]  Additional config file for oncoanalyser pipeline
-    oncoanalyser_nextflow_opts     // string: [mandatory] Nextflow options for oncoanalyser pipeline
-    oncoanalyser_params_file       // string: [mandatory] Parameters file for oncoanalyser pipeline
-    oncoanalyser_samplesheet       // string: [mandatory] Samplesheet file for oncoanalyser pipeline
-    outdir                         // string: [mandatory] The output directory where the results will be saved
+    val_oncoanalyser_additional_config // string: [optional]  Additional config file for oncoanalyser pipeline
+    val_oncoanalyser_nextflow_opts     // string: [mandatory] Nextflow options for oncoanalyser pipeline
+    val_oncoanalyser_params_file       // string: [mandatory] Parameters file for oncoanalyser pipeline
+    val_oncoanalyser_samplesheet       // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    outdir                             // string: [mandatory] The output directory where the results will be saved
 
     main:
 
@@ -27,10 +27,10 @@ workflow ONCOFLOW {
 
     NFCORE_ONCOANALYSER(
         'nf-core/oncoanalyser',
-        oncoanalyser_nextflow_opts,
-        oncoanalyser_params_file,
-        oncoanalyser_samplesheet,
-        oncoanalyser_additional_config,
+        val_oncoanalyser_nextflow_opts,
+        val_oncoanalyser_params_file,
+        val_oncoanalyser_samplesheet,
+        val_oncoanalyser_additional_config,
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
     )
 

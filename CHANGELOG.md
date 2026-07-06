@@ -9,8 +9,9 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 
 ### `Added`
 
-- [#2](https://github.com/Clinical-Genomics/oncoflow/pull/2) `NEXTFLOW_RUN` local module based on `mahesh-panchal/nf-cascade`.
+- [#2](https://github.com/Clinical-Genomics/oncoflow/pull/2) Added `NEXTFLOW_RUN` local module based on `mahesh-panchal/nf-cascade`.
 - [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Added `NFCORE_ONCOANALYSER` using the `NEXTFLOW_RUN` local module to run the `nf-core/oncoanalyser` pipeline.
+- [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Added input parameters for running `nf-core/oncoanalyser`: `oncoanalyser_additional_config`, `oncoanalyser_nextflow_opts`, `oncoanalyser_params_file` and `oncoanalyser_samplesheet`.
 
 ### `Changed`
 

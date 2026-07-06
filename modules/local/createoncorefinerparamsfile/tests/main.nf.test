@@ -1,0 +1,65 @@
+// TODO nf-core: Once you have added the required tests, please run the following command to build this file:
+// nf-core modules test createoncorefinerparamsfile
+nextflow_process {
+
+    name "Test Process CREATE_ONCOREFINER_PARAMS_FILE"
+    script "../main.nf"
+    process "CREATE_ONCOREFINER_PARAMS_FILE"
+
+    tag "modules"
+    tag "create_oncorefiner_params_file"
+
+    test("Given a valid oncoanalyser results directory") {
+
+        when {
+            process {
+                """
+                input[0] = "test_case_id"
+                input[1] = "test_subject_id"
+                input[2] = "test_sample_id_tumor"
+                input[3] = "test_sample_id_normal"
+                input[4] = "female"
+                input[5] = "$projectDir"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(
+                    process.out,
+                    file(process.out.params_file[0]).text
+                    ).match() }
+            )
+        }
+
+    }
+
+    test("-stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = "test_case_id"
+                input[1] = "test_subject_id"
+                input[2] = "test_sample_id_tumor"
+                input[3] = "test_sample_id_normal"
+                input[4] = "female"
+                input[5] = "$projectDir"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

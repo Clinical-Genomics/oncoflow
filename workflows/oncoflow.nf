@@ -65,7 +65,7 @@ workflow ONCOFLOW {
 
     emit:
     oncoanalyser_output = NFCORE_ONCOANALYSER.out.output // channel: [path(oncoanalyser_output_directory)]
-    versions            = ch_versions                    // channel: [ path(versions.yml) ]
+    versions            = ch_versions                    // channel: [path(versions.yml)]
 }
 
 /*

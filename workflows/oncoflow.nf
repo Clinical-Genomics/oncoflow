@@ -46,7 +46,9 @@ workflow ONCOFLOW {
         val_sample_id_tumor,
         val_sample_id_normal,
         val_sex,
-        NFCORE_ONCOANALYSER.out.output)
+        NFCORE_ONCOANALYSER.out.output,
+        outdir
+        )
 
     //
     // Collate and save software versions

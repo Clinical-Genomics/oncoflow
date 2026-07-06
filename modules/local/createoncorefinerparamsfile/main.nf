@@ -9,6 +9,7 @@ process CREATE_ONCOREFINER_PARAMS_FILE {
     val sample_id_normal
     val sex
     path oncoanalyser_results_dir
+    val outdir
 
     output:
 
@@ -22,13 +23,14 @@ process CREATE_ONCOREFINER_PARAMS_FILE {
     script:
     def args = task.ext.args ?: ''
 
-    def path_snv_vcf = oncoanalyser_results_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.somatic.vcf.gz")
-    def path_sv_vcf = oncoanalyser_results_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
-    def path_bam_tumor = oncoanalyser_results_dir.resolve("${subject_id}/alignments/dna/${sample_id_tumor}.normal.redux.bam")
-    def path_bai_tumor = oncoanalyser_results_dir.resolve("${subject_id}/alignments/dna/${sample_id_tumor}.normal.redux.bam.bai")
-    def path_bam_normal = oncoanalyser_results_dir.resolve("${subject_id}/alignments/dna/${sample_id_normal}.normal.redux.bam")
-    def path_bai_normal = oncoanalyser_results_dir.resolve("${subject_id}/alignments/dna/${sample_id_normal}.normal.redux.bam.bai")
+    def oncoanalyser_output_dir = file(outdir).resolve("oncoanalyser/${oncoanalyser_results_dir}")
 
+    def path_snv_vcf    = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.somatic.vcf.gz")
+    def path_sv_vcf     = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
+    def path_bam_tumor  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_tumor}.normal.redux.bam")
+    def path_bai_tumor  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_tumor}.normal.redux.bam.bai")
+    def path_bam_normal = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_normal}.normal.redux.bam")
+    def path_bai_normal = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_normal}.normal.redux.bam.bai")
 
     def oncorefiner_params_file =
         [

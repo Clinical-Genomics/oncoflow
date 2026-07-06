@@ -20,6 +20,7 @@ nextflow_process {
                 input[3] = "test_sample_id_normal"
                 input[4] = "female"
                 input[5] = "$projectDir"
+                input[6] = "test_outdir"
                 """
             }
         }
@@ -28,8 +29,7 @@ nextflow_process {
             assert process.success
             assertAll(
                 { assert snapshot(
-                    process.out,
-                    file(process.out.params_file[0]).text
+                    process.out
                     ).match() }
             )
         }
@@ -49,6 +49,7 @@ nextflow_process {
                 input[3] = "test_sample_id_normal"
                 input[4] = "female"
                 input[5] = "$projectDir"
+                input[6] = "test_outdir"
                 """
             }
         }

@@ -2,4 +2,6 @@
 pipeline_info/*.{html,json,txt,yml}
 **/pipeline_info/*.{html,json,txt,yml}
 **/multiqc/**
+oncoanalyser/**/*.gz
+oncoanalyser/**/*.command.*
 **/vep/*.{html}

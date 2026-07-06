@@ -3,6 +3,7 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER } from "../modules/local/nextflow/run/main"
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { NEXTFLOW_RUN as CLINICAL_GENOMICS_ONCOREFINER } from '../modules/local/nextflow/run'
 
@@ -15,11 +16,24 @@ include { NEXTFLOW_RUN as CLINICAL_GENOMICS_ONCOREFINER } from '../modules/local
 workflow ONCOFLOW {
 
     take:
-    outdir
+    oncoanalyser_additional_config // string: [optional]  Additional config file for oncoanalyser pipeline
+    oncoanalyser_nextflow_opts     // string: [mandatory] Nextflow options for oncoanalyser pipeline
+    oncoanalyser_params_file       // string: [mandatory] Parameters file for oncoanalyser pipeline
+    oncoanalyser_samplesheet       // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    outdir                         // string: [mandatory] The output directory where the results will be saved
 
     main:
 
     def ch_versions = channel.empty()
+
+    NFCORE_ONCOANALYSER(
+        'nf-core/oncoanalyser',
+        oncoanalyser_nextflow_opts,
+        oncoanalyser_params_file,
+        oncoanalyser_samplesheet,
+        oncoanalyser_additional_config,
+        workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
+    )
 
     CLINICAL_GENOMICS_ONCOREFINER(
         'Clinical-Genomics/oncorefiner',
@@ -58,9 +72,11 @@ workflow ONCOFLOW {
             sort: true,
             newLine: true
         )
+
     emit:
-    oncorefiner_output = CLINICAL_GENOMICS_ONCOREFINER.out.output // channel: [path(oncorefiner_output_directory)]
-    versions           = ch_versions                              // channel: [ path(versions.yml) ]
+    oncoanalyser_output = NFCORE_ONCOANALYSER.out.output           // channel: [ path(analysis_output_directory) ]
+    oncorefiner_output  = CLINICAL_GENOMICS_ONCOREFINER.out.output // channel: [path(oncorefiner_output_directory)]
+    versions            = ch_versions                              // channel: [ path(versions.yml) ]
 }
 
 /*

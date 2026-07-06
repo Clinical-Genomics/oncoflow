@@ -100,7 +100,7 @@ workflow {
 
     publish:
     oncoanalyser_output = CLINICALGENOMICS_ONCOFLOW.out.oncoanalyser_output
-    oncorefiner_output  = CLINICALGENOMICS_ONCOFLOW.out.oncorefiner_output // channel: [path(oncorefiner_output_directory)]
+    oncorefiner_output  = CLINICALGENOMICS_ONCOFLOW.out.oncorefiner_output
 }
 
 output {

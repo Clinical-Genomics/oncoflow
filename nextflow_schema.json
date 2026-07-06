@@ -13,7 +13,7 @@
             "properties": {
                 "oncoanalyser_config": {
                     "type": "string",
-                    "description": "Path to additional config file for nf-core/oncoanlyser (optional).",
+                    "description": "Path to config file for nf-core/oncoanlyser (optional).",
                     "format": "file-path",
                     "exists": true,
                     "fa_icon": "far fa-file"

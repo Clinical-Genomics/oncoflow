@@ -11,7 +11,7 @@
             "description": "Necessary input files and nextflow options for running nf-core/oncoanlyser.",
             "default": "",
             "properties": {
-                "oncoanalyser_additional_config": {
+                "oncoanalyser_config": {
                     "type": "string",
                     "description": "Path to additional config file for nf-core/oncoanlyser (optional).",
                     "format": "file-path",

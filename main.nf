@@ -27,11 +27,11 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_onco
 workflow CLINICALGENOMICS_ONCOFLOW {
 
     take:
-    oncoanalyser_additional_config // string: [optional]  Additional config file for oncoanalyser pipeline
-    oncoanalyser_nextflow_opts     // string: [mandatory] Nextflow options for oncoanalyser pipeline
-    oncoanalyser_params_file       // string: [mandatory] Parameters file for oncoanalyser pipeline
-    oncoanalyser_samplesheet       // string: [mandatory] Samplesheet file for oncoanalyser pipeline
-    outdir                         // string: [mandatory] The output directory where the results will be saved
+    val_oncoanalyser_additional_config // string: [optional]  Additional config file for oncoanalyser pipeline
+    val_oncoanalyser_nextflow_opts     // string: [mandatory] Nextflow options for oncoanalyser pipeline
+    val_oncoanalyser_params_file       // string: [mandatory] Parameters file for oncoanalyser pipeline
+    val_oncoanalyser_samplesheet       // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    outdir                             // string: [mandatory] The output directory where the results will be saved
 
     main:
 
@@ -39,10 +39,10 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     // WORKFLOW: Run pipeline
     //
     ONCOFLOW (
-        oncoanalyser_additional_config,
-        oncoanalyser_nextflow_opts,
-        oncoanalyser_params_file,
-        oncoanalyser_samplesheet,
+        val_oncoanalyser_additional_config,
+        val_oncoanalyser_nextflow_opts,
+        val_oncoanalyser_params_file,
+        val_oncoanalyser_samplesheet,
         outdir
     )
 

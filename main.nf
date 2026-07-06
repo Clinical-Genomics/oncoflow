@@ -47,7 +47,7 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     )
 
     emit:
-    oncoanalyser_output = ONCOFLOW.out.oncoanalyser_output // channel: [ path(analysis_output_directory) ]
+    oncoanalyser_output = ONCOFLOW.out.oncoanalyser_output // channel: [path(oncoanalyser_output_directory)]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

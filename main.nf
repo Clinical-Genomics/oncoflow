@@ -74,9 +74,6 @@ workflow CLINICALGENOMICS_ONCOFLOW {
 workflow {
 
     main:
-
-
-
     //
     // SUBWORKFLOW: Run initialisation tasks
     //

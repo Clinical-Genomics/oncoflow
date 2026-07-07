@@ -20,8 +20,8 @@ nextflow_pipeline {
 
             // Remove the run $outputDir path from the params file content so it can be snapshot
             def oncorefiner_params_file_path = "$outputDir/oncorefiner/oncorefiner_params.yaml"
-            def params_file = file(oncorefiner_params_file_path)
-            def clean_params_file_content = params_file.text.replace("$outputDir", "<output_directory>")
+            def oncorefiner_params_file = file(oncorefiner_params_file_path)
+            def clean_oncorefiner_params_file_content = oncorefiner_params_file.text.replace("$outputDir", "<output_directory>")
 
             assert workflow.success
             assertAll(
@@ -33,7 +33,7 @@ nextflow_pipeline {
                     // All files with stable contents
                     stable_content,
                     // Oncorefiner params file without the $outputDir path
-                    clean_params_file_content.split("\n")
+                    clean_oncorefiner_params_file_content.split("\n")
                 ).match() }
             )
         }

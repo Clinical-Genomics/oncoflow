@@ -5,6 +5,45 @@
     "description": "Pipeline cascade of nf-core/oncoanalyser + Clinical-Genomics/oncorefiner, written in Nextflow.",
     "type": "object",
     "$defs": {
+        "oncoanalyser": {
+            "title": "Oncoanalyser",
+            "type": "object",
+            "description": "Necessary input files and nextflow options for running nf-core/oncoanlyser.",
+            "default": "",
+            "properties": {
+                "oncoanalyser_config": {
+                    "type": "string",
+                    "description": "Path to config file for nf-core/oncoanlyser (optional).",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "far fa-file"
+                },
+                "oncoanalyser_nextflow_opts": {
+                    "type": "string",
+                    "description": "Nextflow options for running nf-core/oncoanlyser.",
+                    "fa_icon": "fas fa-terminal"
+                },
+                "oncoanalyser_params_file": {
+                    "type": "string",
+                    "description": "Path to params file for nf-core/oncoanlyser.",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.(json|ya?ml)$",
+                    "exists": true,
+                    "fa_icon": "fas fa-file"
+                },
+                "oncoanalyser_samplesheet": {
+                    "type": "string",
+                    "description": "Path to csv samplesheet file for nf-core/oncoanalyser.",
+                    "format": "file-path",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "exists": true,
+                    "fa_icon": "fas fa-file-csv"
+                }
+            },
+            "required": ["oncoanalyser_nextflow_opts"],
+            "fa_icon": "fas fa-file-import"
+        },
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -153,6 +192,9 @@
         }
     },
     "allOf": [
+        {
+            "$ref": "#/$defs/oncoanalyser"
+        },
         {
             "$ref": "#/$defs/input_output_options"
         },

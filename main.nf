@@ -12,8 +12,7 @@
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
-include { ONCOFLOW  } from './workflows/oncoflow'
+include { ONCOFLOW                } from './workflows/oncoflow'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_oncoflow_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_oncoflow_pipeline'
 /*
@@ -28,7 +27,11 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_onco
 workflow CLINICALGENOMICS_ONCOFLOW {
 
     take:
-    outdir // string: The output directory where the results will be saved
+    val_oncoanalyser_config        // string: [optional]  Config file for oncoanalyser pipeline
+    val_oncoanalyser_nextflow_opts // string: [mandatory] Nextflow options for oncoanalyser pipeline
+    val_oncoanalyser_params_file   // string: [mandatory] Parameters file for oncoanalyser pipeline
+    val_oncoanalyser_samplesheet   // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    outdir                         // string: [mandatory] The output directory where the results will be saved
 
     main:
 
@@ -36,8 +39,15 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     // WORKFLOW: Run pipeline
     //
     ONCOFLOW (
-        outdir,
+        val_oncoanalyser_config,
+        val_oncoanalyser_nextflow_opts,
+        val_oncoanalyser_params_file,
+        val_oncoanalyser_samplesheet,
+        outdir
     )
+
+    emit:
+    oncoanalyser_output = ONCOFLOW.out.oncoanalyser_output // channel: [path(oncoanalyser_output_directory)]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,6 +76,10 @@ workflow {
     // WORKFLOW: Run main workflow
     //
     CLINICALGENOMICS_ONCOFLOW (
+        params.oncoanalyser_config,
+        params.oncoanalyser_nextflow_opts,
+        params.oncoanalyser_params_file,
+        params.oncoanalyser_samplesheet,
         params.outdir
     )
 
@@ -79,6 +93,15 @@ workflow {
         params.outdir,
         params.monochrome_logs,
     )
+
+    publish:
+    oncoanalyser_output = CLINICALGENOMICS_ONCOFLOW.out.oncoanalyser_output
+}
+
+output {
+    oncoanalyser_output {
+        path "oncoanalyser"
+    }
 }
 
 /*

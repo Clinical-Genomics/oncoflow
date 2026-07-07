@@ -1,19 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "createoncorefinerparamsfile"
-description: write your description here
+description: Generate a parameters file for the oncorefiner pipeline based on the output of the oncoanalyser pipeline.
 keywords:
   - samplesheet
   - oncoanalyser
   - oncorefiner
-tools:
-  - "createoncorefinerparamsfile":
-      description: "Generate a parameters file for the oncorefiner pipeline based on the output of the oncoanalyser pipeline."
-      homepage: ""
-      documentation: ""
-      tool_dev_url: ""
-      doi: ""
-      licence: null
-      identifier: null
 
 input:
   - case_id:
@@ -34,6 +25,9 @@ input:
   - oncoanalyser_results_dir:
       type: directory
       description: Path to the output directory of the oncoanalyser pipeline
+  - outdir:
+      type: string
+      description: Output directory for pipeline output files
 output:
   parameters_file:
     - "oncorefiner_params.yaml":

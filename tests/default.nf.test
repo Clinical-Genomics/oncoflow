@@ -32,7 +32,7 @@ nextflow_pipeline {
                     stable_path,
                     // All files with stable contents
                     stable_content,
-                    // Oncorefiner params file without the $outputDir path
+                    // Oncorefiner params file without the run $outputDir path
                     clean_oncorefiner_params_file_content.split("\n")
                 ).match() }
             )

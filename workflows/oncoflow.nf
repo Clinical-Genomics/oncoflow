@@ -15,7 +15,7 @@ include { softwareVersionsToYAML              } from '../subworkflows/nf-core/ut
 workflow ONCOFLOW {
 
     take:
-    val_oncoanalyser_config        // string: [optional]  Additional config file for oncoanalyser pipeline
+    val_oncoanalyser_config        // string: [optional]  Config file for oncoanalyser pipeline
     val_oncoanalyser_nextflow_opts // string: [mandatory] Nextflow options for oncoanalyser pipeline
     val_oncoanalyser_params_file   // string: [mandatory] Parameters file for oncoanalyser pipeline
     val_oncoanalyser_samplesheet   // string: [mandatory] Samplesheet file for oncoanalyser pipeline

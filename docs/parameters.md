@@ -2,13 +2,25 @@
 
 Pipeline cascade of nf-core/oncoanalyser + Clinical-Genomics/oncorefiner, written in Nextflow.
 
+## Metadata
+
+
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `case_id` | Case ID. | `string` |  | True |  |
+| `sample_id_tumor` | Sample id of the tumor sample. | `string` |  | True |  |
+| `sample_id_normal` | Sample id of the normal sample. | `string` |  | True |  |
+| `subject_id` | Subject ID of the patient. | `string` |  | True |  |
+| `sex` | Sex of the patient. (accepted: `female`\|`male`\|`unknown`) | `string` |  | True |  |
+
 ## Oncoanalyser
 
 Necessary input files and nextflow options for running nf-core/oncoanlyser.
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
-| `oncoanalyser_additional_config` | Path to additional config file for nf-core/oncoanlyser (optional). | `string` |  |  |  |
+| `oncoanalyser_config` | Path to config file for nf-core/oncoanlyser (optional). | `string` |  |  |  |
 | `oncoanalyser_nextflow_opts` | Nextflow options for running nf-core/oncoanlyser. | `string` |  | True |  |
 | `oncoanalyser_params_file` | Path to params file for nf-core/oncoanlyser. | `string` |  |  |  |
 | `oncoanalyser_samplesheet` | Path to csv samplesheet file for nf-core/oncoanalyser. | `string` |  |  |  |

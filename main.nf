@@ -27,10 +27,15 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_onco
 workflow CLINICALGENOMICS_ONCOFLOW {
 
     take:
-    oncoanalyser_additional_config // string: [optional]  Additional config file for oncoanalyser pipeline
-    oncoanalyser_nextflow_opts     // string: [mandatory] Nextflow options for oncoanalyser pipeline
-    oncoanalyser_params_file       // string: [mandatory] Parameters file for oncoanalyser pipeline
-    oncoanalyser_samplesheet       // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    val_case_id                    // string: [mandatory] Case ID
+    val_oncoanalyser_config        // string: [optional]  Additional config file for oncoanalyser pipeline
+    val_oncoanalyser_nextflow_opts // string: [mandatory] Nextflow options for oncoanalyser pipeline
+    val_oncoanalyser_params_file   // string: [mandatory] Parameters file for oncoanalyser pipeline
+    val_oncoanalyser_samplesheet   // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    val_sample_id_tumor            // string: [mandatory] Sample ID of the tumor sample
+    val_sample_id_normal           // string: [mandatory] Sample ID of the normal sample
+    val_subject_id                 // string: [mandatory] Subject ID
+    val_sex                        // string: [mandatory] Sex of the patient
     outdir                         // string: [mandatory] The output directory where the results will be saved
 
     main:
@@ -39,15 +44,21 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     // WORKFLOW: Run pipeline
     //
     ONCOFLOW (
-        oncoanalyser_additional_config,
-        oncoanalyser_nextflow_opts,
-        oncoanalyser_params_file,
-        oncoanalyser_samplesheet,
+        val_case_id,
+        val_oncoanalyser_config,
+        val_oncoanalyser_nextflow_opts,
+        val_oncoanalyser_params_file,
+        val_oncoanalyser_samplesheet,
+        val_sample_id_tumor,
+        val_sample_id_normal,
+        val_subject_id,
+        val_sex,
         outdir
     )
 
     emit:
-    oncoanalyser_output = ONCOFLOW.out.oncoanalyser_output // channel: [path(oncoanalyser_output_directory)]
+    oncoanalyser_output     = ONCOFLOW.out.oncoanalyser_output     // channel: [path(oncoanalyser_output_directory)]
+    oncorefiner_params_file = ONCOFLOW.out.oncorefiner_params_file // channel: [path(yaml)]
     oncorefiner_output  = ONCOFLOW.out.oncorefiner_output  // channel: [path(oncorefiner_output_directory)]
 }
 /*
@@ -80,10 +91,15 @@ workflow {
     // WORKFLOW: Run main workflow
     //
     CLINICALGENOMICS_ONCOFLOW (
-        params.oncoanalyser_additional_config,
+        params.case_id,
+        params.oncoanalyser_config,
         params.oncoanalyser_nextflow_opts,
         params.oncoanalyser_params_file,
         params.oncoanalyser_samplesheet,
+        params.sample_id_tumor,
+        params.sample_id_normal,
+        params.subject_id,
+        params.sex,
         params.outdir
     )
 
@@ -99,13 +115,17 @@ workflow {
     )
 
     publish:
-    oncoanalyser_output = CLINICALGENOMICS_ONCOFLOW.out.oncoanalyser_output
-    oncorefiner_output  = CLINICALGENOMICS_ONCOFLOW.out.oncorefiner_output
+    oncoanalyser_output     = CLINICALGENOMICS_ONCOFLOW.out.oncoanalyser_output
+    oncorefiner_params_file = CLINICALGENOMICS_ONCOFLOW.out.oncorefiner_params_file
+    oncorefiner_output      = CLINICALGENOMICS_ONCOFLOW.out.oncorefiner_output
 }
 
 output {
     oncoanalyser_output {
         path "oncoanalyser"
+    }
+    oncorefiner_params_file {
+        path "oncorefiner"
     }
     oncorefiner_output {
         path "oncorefiner"

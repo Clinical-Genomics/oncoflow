@@ -33,7 +33,6 @@ Necessary input files and nextflow options for running Clinical-Genomics/oncoref
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `oncorefiner_config` | Path to config file for Clinical-Genomics/oncorefiner (optional). | `string` |  |  |  |
 | `oncorefiner_nextflow_opts` | Nextflow options for running Clinical-Genomics/oncorefiner. | `string` |  | True |  |
-| `oncorefiner_params_file` | Path to params file for Clinical-Genomics/oncorefiner. | `string` |  |  |  |
 
 ## Input/output options
 

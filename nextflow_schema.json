@@ -92,11 +92,6 @@
                     "type": "string",
                     "description": "Nextflow options for running Clinical-Genomics/oncorefiner.",
                     "fa_icon": "fas fa-terminal"
-                },
-                "oncorefiner_params_file": {
-                    "type": "string",
-                    "description": "Path to params file for Clinical-Genomics/oncorefiner.",
-                    "format": "file-path"
                 }
             },
             "required": ["oncorefiner_nextflow_opts"],

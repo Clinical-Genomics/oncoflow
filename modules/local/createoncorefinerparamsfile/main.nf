@@ -34,7 +34,7 @@ process CREATE_ONCOREFINER_PARAMS_FILE {
 
     def oncorefiner_params_file =
         [
-            "\"case_id: ${case_id}",
+            "case_id: ${case_id}",
             "sample_id_tumor: ${sample_id_tumor}",
             "sample_id_normal: ${sample_id_normal}",
             "sex: ${sex}",
@@ -43,13 +43,13 @@ process CREATE_ONCOREFINER_PARAMS_FILE {
             "bam_tumor: ${path_bam_tumor}",
             "bai_tumor: ${path_bai_tumor}",
             "bam_normal: ${path_bam_normal}",
-            "bai_normal: ${path_bai_normal}\""
+            "bai_normal: ${path_bai_normal}"
         ].join("\\n")
 
     """
     echo $args
 
-    printf $oncorefiner_params_file > oncorefiner_params.yaml
+    printf "$oncorefiner_params_file" > oncorefiner_params.yaml
     """
 
     stub:

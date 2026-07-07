@@ -92,10 +92,10 @@ workflow ONCOFLOW {
         )
 
     emit:
-    oncoanalyser_output     = NFCORE_ONCOANALYSER.out.output                 // channel: [ path(analysis_output_directory) ]
+    oncoanalyser_output     = NFCORE_ONCOANALYSER.out.output                 // channel: [path(analysis_output_directory)]
     oncorefiner_params_file = CREATE_ONCOREFINER_PARAMS_FILE.out.params_file // channel: [path(yaml)]
     oncorefiner_output      = CLINICAL_GENOMICS_ONCOREFINER.out.output       // channel: [path(oncorefiner_output_directory)]
-    versions                = ch_versions                                    // channel: [ path(versions.yml) ]
+    versions                = ch_versions                                    // channel: [path(versions.yml)]
 }
 
 /*

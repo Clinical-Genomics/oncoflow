@@ -21,16 +21,14 @@ process CREATE_ONCOREFINER_PARAMS_FILE {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
-
     def oncoanalyser_output_dir = file(outdir).resolve("oncoanalyser/${oncoanalyser_results_dir}")
 
-    def path_snv_vcf    = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.somatic.vcf.gz")
-    def path_sv_vcf     = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
-    def path_bam_tumor  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_tumor}.normal.redux.bam")
-    def path_bai_tumor  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_tumor}.normal.redux.bam.bai")
-    def path_bam_normal = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_normal}.normal.redux.bam")
-    def path_bai_normal = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_normal}.normal.redux.bam.bai")
+    def snv_vcf_path    = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.somatic.vcf.gz")
+    def sv_vcf_path     = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
+    def bam_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_tumor}.normal.redux.bam")
+    def bai_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_tumor}.normal.redux.bam.bai")
+    def bam_normal_path = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_normal}.normal.redux.bam")
+    def bai_normal_path = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_normal}.normal.redux.bam.bai")
 
     def oncorefiner_params_file =
         [
@@ -38,26 +36,20 @@ process CREATE_ONCOREFINER_PARAMS_FILE {
             "sample_id_tumor: ${sample_id_tumor}",
             "sample_id_normal: ${sample_id_normal}",
             "sex: ${sex}",
-            "snv_vcf: ${path_snv_vcf}",
-            "sv_vcf: ${path_sv_vcf}",
-            "bam_tumor: ${path_bam_tumor}",
-            "bai_tumor: ${path_bai_tumor}",
-            "bam_normal: ${path_bam_normal}",
-            "bai_normal: ${path_bai_normal}"
+            "snv_vcf: ${snv_vcf_path}",
+            "sv_vcf: ${sv_vcf_path}",
+            "bam_tumor: ${bam_tumor_path}",
+            "bai_tumor: ${bai_tumor_path}",
+            "bam_normal: ${bam_normal_path}",
+            "bai_normal: ${bai_normal_path}"
         ].join("\\n")
 
     """
-    echo $args
-
     printf "$oncorefiner_params_file" > oncorefiner_params.yaml
     """
 
     stub:
-    def args = task.ext.args ?: ''
-
     """
-    echo $args
-
     touch oncorefiner_params.yaml
     """
 }

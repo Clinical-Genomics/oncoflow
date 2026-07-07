@@ -24,7 +24,7 @@ nextflow_process {
         }
 
         then {
-            // Remove the run $outputDir path from the params file content so it can be snapshot
+            // Replace the run $outputDir path (variable for every test run) with a placeholder string in the params file content so it can be snapshot
             def oncorefiner_params_file = file(process.out.params_file[0])
             def clean_oncorefiner_params_file_content = oncorefiner_params_file.text.replace("$outputDir", "<output_directory>")
 

@@ -20,16 +20,21 @@ nextflow_process {
                 input[3] = "test_sample_id_normal"
                 input[4] = "female"
                 input[5] = "$projectDir"
-                input[6] = "test_outdir"
+                input[6] = "$outputDir"
                 """
             }
         }
 
         then {
+            // Remove the outputDir from the params file content as it changes every run and therefore cannot be snapshot
+            def params_file = file(process.out.params_file[0])
+            def clean_params_file_content = params_file.text.replace("$outputDir", "")
+
             assert process.success
             assertAll(
                 { assert snapshot(
-                    process.out
+                    process.out.versions_createoncorefinerparamsfile,
+                    clean_params_file_content.split("\n")
                     ).match() }
             )
         }
@@ -49,7 +54,7 @@ nextflow_process {
                 input[3] = "test_sample_id_normal"
                 input[4] = "female"
                 input[5] = "$projectDir"
-                input[6] = "test_outdir"
+                input[6] = "$outputDir"
                 """
             }
         }

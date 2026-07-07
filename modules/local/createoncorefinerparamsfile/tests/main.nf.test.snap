@@ -1,30 +1,27 @@
 {
     "Given a valid oncoanalyser results directory": {
         "content": [
-            {
-                "0": [
-                    "oncorefiner_params.yaml:md5,2f1b615720d5629714cf3e237faffa60"
-                ],
-                "1": [
-                    [
-                        "CREATE_ONCOREFINER_PARAMS_FILE",
-                        "createoncorefinerparamsfile",
-                        "1.0"
-                    ]
-                ],
-                "params_file": [
-                    "oncorefiner_params.yaml:md5,2f1b615720d5629714cf3e237faffa60"
-                ],
-                "versions_createoncorefinerparamsfile": [
-                    [
-                        "CREATE_ONCOREFINER_PARAMS_FILE",
-                        "createoncorefinerparamsfile",
-                        "1.0"
-                    ]
+            [
+                [
+                    "CREATE_ONCOREFINER_PARAMS_FILE",
+                    "createoncorefinerparamsfile",
+                    "1.0"
                 ]
-            }
+            ],
+            [
+                "case_id: test_case_id",
+                "sample_id_tumor: test_sample_id_tumor",
+                "sample_id_normal: test_sample_id_normal",
+                "sex: female",
+                "snv_vcf: /oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.somatic.vcf.gz",
+                "sv_vcf: /oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.sv.vcf.gz",
+                "bam_tumor: /oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_sample_id_tumor.normal.redux.bam",
+                "bai_tumor: /oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_sample_id_tumor.normal.redux.bam.bai",
+                "bam_normal: /oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_sample_id_normal.normal.redux.bam",
+                "bai_normal: /oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_sample_id_normal.normal.redux.bam.bai"
+            ]
         ],
-        "timestamp": "2026-07-06T16:45:24.231416",
+        "timestamp": "2026-07-07T09:19:21.656387",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

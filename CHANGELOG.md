@@ -17,10 +17,10 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 
 ### `Changed`
 
+- [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Changed default test to not capture `pipeline_info` files for all pipelines.
 - [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Updated `.nftignore` to ignore `pipeline_info` and `multiqc` files for all pipelines.
 - [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Updated `.nftignore` to ignore gzipped output files from `oncoanalyser` due to https://github.com/nf-core/oncoanalyser/issues/299.
 - [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Updated `.nftignore` to ignore `*.command.*` output files from `oncoanalyser` since several files include the run directory and platform information which changes for each run and therefore cannot be snapshot.
-- [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Changed default test to not capture `pipeline_info` files for all pipelines.
 - [#5](https://github.com/Clinical-Genomics/oncoflow/pull/5) Added `CREATE_ONCOREFINER_PARAMS_FILE` module to `ONCOFLOW` workflow.
 
 ### `Fixed`

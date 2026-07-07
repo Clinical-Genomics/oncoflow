@@ -15,13 +15,13 @@
                 "sex: female",
                 "snv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.somatic.vcf.gz",
                 "sv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.sv.vcf.gz",
-                "bam_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_sample_id_tumor.normal.redux.bam",
-                "bai_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_sample_id_tumor.normal.redux.bam.bai",
-                "bam_normal: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_sample_id_normal.normal.redux.bam",
-                "bai_normal: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_sample_id_normal.normal.redux.bam.bai"
+                "bam_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam",
+                "bai_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam.bai",
+                "bam_normal: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam",
+                "bai_normal: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam.bai"
             ]
         ],
-        "timestamp": "2026-07-07T12:05:07.570191",
+        "timestamp": "2026-07-07T15:42:48.686446",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

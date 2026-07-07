@@ -25,10 +25,10 @@ process CREATE_ONCOREFINER_PARAMS_FILE {
 
     def snv_vcf_path    = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.somatic.vcf.gz")
     def sv_vcf_path     = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
-    def bam_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_tumor}.normal.redux.bam")
-    def bai_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_tumor}.normal.redux.bam.bai")
-    def bam_normal_path = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_normal}.normal.redux.bam")
-    def bai_normal_path = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${sample_id_normal}.normal.redux.bam.bai")
+    def bam_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.normal.redux.bam")
+    def bai_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.normal.redux.bam.bai")
+    def bam_normal_path = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.normal.redux.bam")
+    def bai_normal_path = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.normal.redux.bam.bai")
 
     def oncorefiner_params_file =
         [

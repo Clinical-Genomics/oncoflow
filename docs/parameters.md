@@ -25,6 +25,16 @@ Necessary input files and nextflow options for running nf-core/oncoanlyser.
 | `oncoanalyser_params_file` | Path to params file for nf-core/oncoanlyser. | `string` |  |  |  |
 | `oncoanalyser_samplesheet` | Path to csv samplesheet file for nf-core/oncoanalyser. | `string` |  |  |  |
 
+## Oncorefiner
+
+Necessary input files and nextflow options for running Clinical-Genomics/oncorefiner.
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `oncorefiner_config` | Path to config file for Clinical-Genomics/oncorefiner (optional). | `string` |  |  |  |
+| `oncorefiner_nextflow_opts` | Nextflow options for running Clinical-Genomics/oncorefiner. | `string` |  | True |  |
+| `oncorefiner_params_file` | Path to params file for Clinical-Genomics/oncorefiner. | `string` |  |  |  |
+
 ## Input/output options
 
 Define where the pipeline should find input data and save output data.

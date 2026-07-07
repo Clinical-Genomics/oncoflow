@@ -28,10 +28,13 @@ workflow CLINICALGENOMICS_ONCOFLOW {
 
     take:
     val_case_id                    // string: [mandatory] Case ID
-    val_oncoanalyser_config        // string: [optional]  Additional config file for oncoanalyser pipeline
+    val_oncoanalyser_config        // string: [optional]  Config file for oncoanalyser pipeline
     val_oncoanalyser_nextflow_opts // string: [mandatory] Nextflow options for oncoanalyser pipeline
     val_oncoanalyser_params_file   // string: [mandatory] Parameters file for oncoanalyser pipeline
     val_oncoanalyser_samplesheet   // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    val_oncorefiner_config         // string: [optional]  Config file for oncorefiner pipeline
+    val_oncorefiner_nextflow_opts  // string: [mandatory] Nextflow options for oncorefiner pipeline
+    val_oncorefiner_params_file    // string: [mandatory] Parameters file for oncorefiner pipeline
     val_sample_id_tumor            // string: [mandatory] Sample ID of the tumor sample
     val_sample_id_normal           // string: [mandatory] Sample ID of the normal sample
     val_subject_id                 // string: [mandatory] Subject ID
@@ -49,6 +52,9 @@ workflow CLINICALGENOMICS_ONCOFLOW {
         val_oncoanalyser_nextflow_opts,
         val_oncoanalyser_params_file,
         val_oncoanalyser_samplesheet,
+        val_oncorefiner_config,
+        val_oncorefiner_nextflow_opts,
+        val_oncorefiner_params_file,
         val_sample_id_tumor,
         val_sample_id_normal,
         val_subject_id,
@@ -59,7 +65,7 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     emit:
     oncoanalyser_output     = ONCOFLOW.out.oncoanalyser_output     // channel: [path(oncoanalyser_output_directory)]
     oncorefiner_params_file = ONCOFLOW.out.oncorefiner_params_file // channel: [path(yaml)]
-    oncorefiner_output  = ONCOFLOW.out.oncorefiner_output  // channel: [path(oncorefiner_output_directory)]
+    oncorefiner_output      = ONCOFLOW.out.oncorefiner_output      // channel: [path(oncorefiner_output_directory)]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -96,6 +102,9 @@ workflow {
         params.oncoanalyser_nextflow_opts,
         params.oncoanalyser_params_file,
         params.oncoanalyser_samplesheet,
+        params.oncorefiner_config,
+        params.oncorefiner_nextflow_opts,
+        params.oncorefiner_params_file,
         params.sample_id_tumor,
         params.sample_id_normal,
         params.subject_id,

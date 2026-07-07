@@ -75,6 +75,33 @@
             "required": ["oncoanalyser_nextflow_opts"],
             "fa_icon": "fas fa-file-import"
         },
+        "oncorefiner": {
+            "title": "Oncorefiner",
+            "type": "object",
+            "description": "Necessary input files and nextflow options for running Clinical-Genomics/oncorefiner.",
+            "default": "",
+            "properties": {
+                "oncorefiner_config": {
+                    "type": "string",
+                    "description": "Path to config file for Clinical-Genomics/oncorefiner (optional).",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "far fa-file"
+                },
+                "oncorefiner_nextflow_opts": {
+                    "type": "string",
+                    "description": "Nextflow options for running Clinical-Genomics/oncorefiner.",
+                    "fa_icon": "fas fa-terminal"
+                },
+                "oncorefiner_params_file": {
+                    "type": "string",
+                    "description": "Path to params file for Clinical-Genomics/oncorefiner.",
+                    "format": "file-path"
+                }
+            },
+            "required": ["oncorefiner_nextflow_opts"],
+            "fa_icon": "fas fa-file-import"
+        },
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",

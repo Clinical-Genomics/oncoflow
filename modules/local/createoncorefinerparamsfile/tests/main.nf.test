@@ -24,7 +24,7 @@ nextflow_process {
         }
 
         then {
-            // Remove the outputDir from the params file content as it changes every run and therefore cannot be snapshot
+            // Remove the run $outputDir path from the params file content so it can be snapshot
             def params_file = file(process.out.params_file[0])
             def clean_params_file_content = params_file.text.replace("$outputDir", "<output_directory>")
 

@@ -16,7 +16,13 @@ nextflow_pipeline {
             // stable_path: All files + folders in ${params.outdir}/ with a stable path (including file name)
             def stable_path = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['**pipeline_info/*.{html,json,txt}'])
             // stable_content: All files in ${params.outdir}/ with stable content
-            def stable_content = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            def stable_content = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore', ignore: ['oncorefiner/oncorefiner_params.yaml'])
+
+            // Remove the run $outputDir path from the params file content so it can be snapshot
+            def oncorefiner_params_file_path = "$outputDir/oncorefiner/oncorefiner_params.yaml"
+            def params_file = file(oncorefiner_params_file_path)
+            def clean_params_file_content = params_file.text.replace("$outputDir", "<output_directory>")
+
             assert workflow.success
             assertAll(
                 { assert snapshot(
@@ -25,7 +31,9 @@ nextflow_pipeline {
                     // All stable path name, with a relative path
                     stable_path,
                     // All files with stable contents
-                    stable_content
+                    stable_content,
+                    // Oncorefiner params file without the $outputDir path
+                    clean_params_file_content.split("\n")
                 ).match() }
             )
         }

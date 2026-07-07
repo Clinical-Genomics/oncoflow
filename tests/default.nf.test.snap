@@ -408,11 +408,22 @@
                 "subject_a.tumor.teal.tellength.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a.tumor.summary.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a.tumor.virusbreakend.vcf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "subject_a.tumor.virus.annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "oncorefiner_params.yaml:md5,b111aa8543e1e0253c66ab5bd0d1b795"
+                "subject_a.tumor.virus.annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+            ],
+            [
+                "case_id: test_case_id",
+                "sample_id_tumor: test_sample_id_tumor",
+                "sample_id_normal: test_sample_id_normal",
+                "sex: female",
+                "snv_vcf: <output_directory>/oncoanalyser/results/subject_a/purple/subject_a.tumor.purple.somatic.vcf.gz",
+                "sv_vcf: <output_directory>/oncoanalyser/results/subject_a/purple/subject_a.tumor.purple.sv.vcf.gz",
+                "bam_tumor: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/test_sample_id_tumor.normal.redux.bam",
+                "bai_tumor: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/test_sample_id_tumor.normal.redux.bam.bai",
+                "bam_normal: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/test_sample_id_normal.normal.redux.bam",
+                "bai_normal: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/test_sample_id_normal.normal.redux.bam.bai"
             ]
         ],
-        "timestamp": "2026-07-06T16:52:49.957411",
+        "timestamp": "2026-07-07T12:45:31.962618",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

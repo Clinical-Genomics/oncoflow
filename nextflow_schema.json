@@ -252,6 +252,9 @@
             "$ref": "#/$defs/oncoanalyser"
         },
         {
+            "$ref": "#/$defs/oncorefiner"
+        },
+        {
             "$ref": "#/$defs/input_output_options"
         },
         {

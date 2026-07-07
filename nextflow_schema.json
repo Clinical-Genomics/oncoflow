@@ -42,9 +42,9 @@
             "description": "Necessary input files and nextflow options for running nf-core/oncoanlyser.",
             "default": "",
             "properties": {
-                "oncoanalyser_additional_config": {
+                "oncoanalyser_config": {
                     "type": "string",
-                    "description": "Path to additional config file for nf-core/oncoanlyser (optional).",
+                    "description": "Path to config file for nf-core/oncoanlyser (optional).",
                     "format": "file-path",
                     "exists": true,
                     "fa_icon": "far fa-file"
@@ -58,6 +58,7 @@
                     "type": "string",
                     "description": "Path to params file for nf-core/oncoanlyser.",
                     "format": "file-path",
+                    "pattern": "^\\S+\\.(json|ya?ml)$",
                     "exists": true,
                     "fa_icon": "fas fa-file"
                 },

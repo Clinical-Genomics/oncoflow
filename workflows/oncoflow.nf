@@ -16,16 +16,16 @@ include { softwareVersionsToYAML              } from '../subworkflows/nf-core/ut
 workflow ONCOFLOW {
 
     take:
-    val_case_id                        // string: [mandatory] Case ID
-    val_oncoanalyser_additional_config // string: [optional]  Additional config file for oncoanalyser pipeline
-    val_oncoanalyser_nextflow_opts     // string: [mandatory] Nextflow options for oncoanalyser pipeline
-    val_oncoanalyser_params_file       // string: [mandatory] Parameters file for oncoanalyser pipeline
-    val_oncoanalyser_samplesheet       // string: [mandatory] Samplesheet file for oncoanalyser pipeline
-    val_sample_id_tumor                // string: [mandatory] Sample ID of the tumor sample
-    val_sample_id_normal               // string: [mandatory] Sample ID of the normal sample
-    val_subject_id                     // string: [mandatory] Subject ID
-    val_sex                            // string: [mandatory] Sex of the patient
-    outdir                             // string: [mandatory] The output directory where the results will be saved
+    val_case_id                    // string: [mandatory] Case ID
+    val_oncoanalyser_config        // string: [optional]  Additional config file for oncoanalyser pipeline
+    val_oncoanalyser_nextflow_opts // string: [mandatory] Nextflow options for oncoanalyser pipeline
+    val_oncoanalyser_params_file   // string: [mandatory] Parameters file for oncoanalyser pipeline
+    val_oncoanalyser_samplesheet   // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    val_sample_id_tumor            // string: [mandatory] Sample ID of the tumor sample
+    val_sample_id_normal           // string: [mandatory] Sample ID of the normal sample
+    val_subject_id                 // string: [mandatory] Subject ID
+    val_sex                        // string: [mandatory] Sex of the patient
+    outdir                         // string: [mandatory] The output directory where the results will be saved
 
     main:
 
@@ -36,7 +36,7 @@ workflow ONCOFLOW {
         val_oncoanalyser_nextflow_opts,
         val_oncoanalyser_params_file,
         val_oncoanalyser_samplesheet,
-        val_oncoanalyser_additional_config,
+        val_oncoanalyser_config,
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
     )
 

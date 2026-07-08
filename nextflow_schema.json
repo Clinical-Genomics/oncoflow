@@ -39,7 +39,7 @@
         "oncoanalyser": {
             "title": "Oncoanalyser",
             "type": "object",
-            "description": "Necessary input files and nextflow options for running nf-core/oncoanlyser.",
+            "description": "Necessary input parameters, files and nextflow options for running nf-core/oncoanlyser.",
             "default": "",
             "properties": {
                 "oncoanalyser_config": {
@@ -51,18 +51,18 @@
                 },
                 "oncoanalyser_create_stub_placeholders": {
                     "type": "boolean",
-                    "description": "Create placeholders for reference data during stub run.",
+                    "description": "Create placeholders for reference data during stub run. Used for creating the params file for oncoanalyser.",
                     "default": false,
                     "fa_icon": "fas fa-diagram-project"
                 },
                 "oncoanalyser_genome": {
                     "type": "string",
-                    "description": "Name of genome reference.",
+                    "description": "Name of genome reference. Used for creating the params file for oncoanalyser.",
                     "fa_icon": "fas fa-book"
                 },
                 "oncoanalyser_mode": {
                     "type": "string",
-                    "description": "Workflow run mode.",
+                    "description": "Workflow run mode. Used for creating the params file for oncoanalyser.",
                     "fa_icon": "fas fa-diagram-project",
                     "pattern": "^(wgts|targeted|purity_estimate|panel_resource_creation|prepare_reference)"
                 },

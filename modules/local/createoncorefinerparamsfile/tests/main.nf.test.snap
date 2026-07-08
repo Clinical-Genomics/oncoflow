@@ -76,11 +76,11 @@
                 "sv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.sv.vcf.gz",
                 "bam_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.tumor.redux.bam",
                 "bai_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.tumor.redux.bam.bai",
-                "bam_normal: null",
-                "bai_normal: null"
+                "bam_normal: ",
+                "bai_normal: "
             ]
         ],
-        "timestamp": "2026-07-08T10:56:52.672346",
+        "timestamp": "2026-07-08T15:36:03.021214",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

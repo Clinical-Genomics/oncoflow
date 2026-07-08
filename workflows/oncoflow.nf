@@ -4,6 +4,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { CREATE_ONCOREFINER_PARAMS_FILE                } from "../modules/local/createoncorefinerparamsfile/main"
+include { CREATE_ONCOANALYSER_PARAMS_FILE               } from "../modules/local/createoncoanalyserparamsfile/main"
 include { NEXTFLOW_RUN as CLINICAL_GENOMICS_ONCOREFINER } from '../modules/local/nextflow/run'
 include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER           } from "../modules/local/nextflow/run/main"
 include { softwareVersionsToYAML                        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -17,27 +18,36 @@ include { softwareVersionsToYAML                        } from '../subworkflows/
 workflow ONCOFLOW {
 
     take:
-    val_case_id                    // string: [mandatory] Case ID
-    val_oncoanalyser_config        // string: [optional]  Config file for oncoanalyser pipeline
-    val_oncoanalyser_nextflow_opts // string: [mandatory] Nextflow options for oncoanalyser pipeline
-    val_oncoanalyser_params_file   // string: [mandatory] Parameters file for oncoanalyser pipeline
-    val_oncoanalyser_samplesheet   // string: [mandatory] Samplesheet file for oncoanalyser pipeline
-    val_oncorefiner_config         // string: [optional]  Config file for oncorefiner pipeline
-    val_oncorefiner_nextflow_opts  // string: [mandatory] Nextflow options for oncorefiner pipeline
-    val_sample_id_tumor            // string: [mandatory] Sample ID of the tumor sample
-    val_sample_id_normal           // string: [mandatory] Sample ID of the normal sample
-    val_subject_id                 // string: [mandatory] Subject ID
-    val_sex                        // string: [mandatory] Sex of the patient
-    outdir                         // string: [mandatory] The output directory where the results will be saved
+    val_case_id                               // string: [mandatory] Case ID
+    val_oncoanalyser_config                   // string: [optional]  Config file for oncoanalyser pipeline
+    val_oncoanalyser_create_stub_placeholders // bool:   [mandatory] Create stub placeholders for oncoanalyser pipeline
+    val_oncoanalyser_genome                   // string: [mandatory] Genome for oncoanalyser pipeline
+    val_oncoanalyser_mode                     // string: [mandatory] Mode for oncoanalyser pipeline
+    val_oncoanalyser_nextflow_opts            // string: [mandatory] Nextflow options for oncoanalyser pipeline
+    val_oncoanalyser_samplesheet              // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    val_oncorefiner_config                    // string: [optional]  Config file for oncorefiner pipeline
+    val_oncorefiner_nextflow_opts             // string: [mandatory] Nextflow options for oncorefiner pipeline
+    val_sample_id_tumor                       // string: [mandatory] Sample ID of the tumor sample
+    val_sample_id_normal                      // string: [mandatory] Sample ID of the normal sample
+    val_subject_id                            // string: [mandatory] Subject ID
+    val_sex                                   // string: [mandatory] Sex of the patient
+    outdir                                    // string: [mandatory] The output directory where the results will be saved
 
     main:
 
     def ch_versions = channel.empty()
 
+    CREATE_ONCOANALYSER_PARAMS_FILE(
+        val_oncoanalyser_mode,
+        val_oncoanalyser_genome,
+        val_oncoanalyser_create_stub_placeholders,
+        outdir
+        )
+
     NFCORE_ONCOANALYSER(
         'https://github.com/beatrizsavinhas/oncoanalyser',
         val_oncoanalyser_nextflow_opts,
-        val_oncoanalyser_params_file,
+        CREATE_ONCOANALYSER_PARAMS_FILE.out.params_file,
         val_oncoanalyser_samplesheet,
         val_oncoanalyser_config,
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
@@ -92,10 +102,11 @@ workflow ONCOFLOW {
         )
 
     emit:
-    oncoanalyser_output     = NFCORE_ONCOANALYSER.out.output                 // channel: [path(analysis_output_directory)]
-    oncorefiner_params_file = CREATE_ONCOREFINER_PARAMS_FILE.out.params_file // channel: [path(yaml)]
-    oncorefiner_output      = CLINICAL_GENOMICS_ONCOREFINER.out.output       // channel: [path(oncorefiner_output_directory)]
-    versions                = ch_versions                                    // channel: [path(versions.yml)]
+    oncoanalyser_params_file = CREATE_ONCOANALYSER_PARAMS_FILE.out.params_file // channel: [path(yaml)]
+    oncoanalyser_output      = NFCORE_ONCOANALYSER.out.output                  // channel: [path(analysis_output_directory)]
+    oncorefiner_params_file  = CREATE_ONCOREFINER_PARAMS_FILE.out.params_file  // channel: [path(yaml)]
+    oncorefiner_output       = CLINICAL_GENOMICS_ONCOREFINER.out.output        // channel: [path(oncorefiner_output_directory)]
+    versions                 = ch_versions                                     // channel: [path(versions.yml)]
 }
 
 /*

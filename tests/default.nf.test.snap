@@ -417,8 +417,8 @@
                 "sex: female",
                 "snv_vcf: <output_directory>/oncoanalyser/results/subject_a/purple/subject_a.tumor.purple.somatic.vcf.gz",
                 "sv_vcf: <output_directory>/oncoanalyser/results/subject_a/purple/subject_a.tumor.purple.sv.vcf.gz",
-                "bam_tumor: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/subject_a.normal.redux.bam",
-                "bai_tumor: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/subject_a.normal.redux.bam.bai",
+                "bam_tumor: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/subject_a.tumor.redux.bam",
+                "bai_tumor: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/subject_a.tumor.redux.bam.bai",
                 "bam_normal: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/subject_a.normal.redux.bam",
                 "bai_normal: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/subject_a.normal.redux.bam.bai"
             ]

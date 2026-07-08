@@ -21,8 +21,10 @@ Necessary input files and nextflow options for running nf-core/oncoanlyser.
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `oncoanalyser_config` | Path to config file for nf-core/oncoanlyser (optional). | `string` |  |  |  |
+| `oncoanalyser_create_stub_placeholders` | Create placeholders for reference data during stub run. | `boolean` | False |  |  |
+| `oncoanalyser_genome` | Name of genome reference. | `string` |  |  |  |
+| `oncoanalyser_mode` | Workflow run mode. | `string` |  |  |  |
 | `oncoanalyser_nextflow_opts` | Nextflow options for running nf-core/oncoanlyser. | `string` |  | True |  |
-| `oncoanalyser_params_file` | Path to params file for nf-core/oncoanlyser. | `string` |  |  |  |
 | `oncoanalyser_samplesheet` | Path to csv samplesheet file for nf-core/oncoanalyser. | `string` |  |  |  |
 
 ## Oncorefiner

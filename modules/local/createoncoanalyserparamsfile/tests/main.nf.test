@@ -1,0 +1,69 @@
+nextflow_process {
+
+    name "Test Process CREATE_ONCOREFINER_PARAMS_FILE"
+    script "../main.nf"
+    process "CREATE_ONCOREFINER_PARAMS_FILE"
+
+    tag "modules"
+    tag "create_oncorefiner_params_file"
+
+    test("Given a valid oncoanalyser results directory") {
+
+        when {
+            process {
+                """
+                input[0] = "test_case_id"
+                input[1] = "test_subject_id"
+                input[2] = "test_sample_id_tumor"
+                input[3] = "test_sample_id_normal"
+                input[4] = "female"
+                input[5] = "$projectDir"
+                input[6] = "$outputDir"
+                """
+            }
+        }
+
+        then {
+            // The oncorefiner params file contains $outputDir (includes the full path to the nf-test work directory), which varies for every test run
+            def oncorefiner_params_file = file(process.out.params_file[0])
+            def clean_oncorefiner_params_file_content = oncorefiner_params_file.text.replace("$outputDir", "<output_directory>")
+
+            assert process.success
+            assertAll(
+                { assert snapshot(
+                    process.out.versions_createoncorefinerparamsfile,
+                    clean_oncorefiner_params_file_content.split("\n")
+                    ).match() }
+            )
+        }
+
+    }
+
+    test("-stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = "test_case_id"
+                input[1] = "test_subject_id"
+                input[2] = "test_sample_id_tumor"
+                input[3] = "test_sample_id_normal"
+                input[4] = "female"
+                input[5] = "$projectDir"
+                input[6] = "$outputDir"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

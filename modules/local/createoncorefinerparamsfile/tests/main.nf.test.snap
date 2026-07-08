@@ -1,33 +1,5 @@
 {
-    "Given a valid oncoanalyser results directory": {
-        "content": [
-            [
-                [
-                    "CREATE_ONCOREFINER_PARAMS_FILE",
-                    "createoncorefinerparamsfile",
-                    "1.0"
-                ]
-            ],
-            [
-                "case_id: test_case_id",
-                "sample_id_tumor: test_sample_id_tumor",
-                "sample_id_normal: test_sample_id_normal",
-                "sex: female",
-                "snv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.somatic.vcf.gz",
-                "sv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.sv.vcf.gz",
-                "bam_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam",
-                "bai_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam.bai",
-                "bam_normal: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam",
-                "bai_normal: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam.bai"
-            ]
-        ],
-        "timestamp": "2026-07-07T15:42:48.686446",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
-        }
-    },
-    "-stub": {
+    "Tumor Normal -stub": {
         "content": [
             {
                 "0": [
@@ -52,7 +24,94 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-06T14:09:16.928105",
+        "timestamp": "2026-07-08T10:54:19.476191",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "Tumor Normal": {
+        "content": [
+            [
+                [
+                    "CREATE_ONCOREFINER_PARAMS_FILE",
+                    "createoncorefinerparamsfile",
+                    "1.0"
+                ]
+            ],
+            [
+                "case_id: test_case_id",
+                "sample_id_tumor: test_sample_id_tumor",
+                "sample_id_normal: test_sample_id_normal",
+                "sex: female",
+                "snv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.somatic.vcf.gz",
+                "sv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.sv.vcf.gz",
+                "bam_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.tumor.redux.bam",
+                "bai_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.tumor.redux.bam.bai",
+                "bam_normal: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam",
+                "bai_normal: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam.bai"
+            ]
+        ],
+        "timestamp": "2026-07-08T10:54:15.18238",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "Tumor Only": {
+        "content": [
+            [
+                [
+                    "CREATE_ONCOREFINER_PARAMS_FILE",
+                    "createoncorefinerparamsfile",
+                    "1.0"
+                ]
+            ],
+            [
+                "case_id: test_case_id",
+                "sample_id_tumor: test_sample_id_tumor",
+                "sample_id_normal: ",
+                "sex: female",
+                "snv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.somatic.vcf.gz",
+                "sv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.sv.vcf.gz",
+                "bam_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.tumor.redux.bam",
+                "bai_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.tumor.redux.bam.bai",
+                "bam_normal: ",
+                "bai_normal: "
+            ]
+        ],
+        "timestamp": "2026-07-08T15:36:03.021214",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "Tumor Only -stub": {
+        "content": [
+            {
+                "0": [
+                    "oncorefiner_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "1": [
+                    [
+                        "CREATE_ONCOREFINER_PARAMS_FILE",
+                        "createoncorefinerparamsfile",
+                        "1.0"
+                    ]
+                ],
+                "params_file": [
+                    "oncorefiner_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "versions_createoncorefinerparamsfile": [
+                    [
+                        "CREATE_ONCOREFINER_PARAMS_FILE",
+                        "createoncorefinerparamsfile",
+                        "1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-08T10:55:32.388213",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

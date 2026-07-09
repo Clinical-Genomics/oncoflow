@@ -18,11 +18,10 @@ workflow ONCOFLOW {
 
     take:
     val_case_id                    // string: [mandatory] Case ID
-    val_oncoanalyser_config        // string: [optional]  Config file for oncoanalyser pipeline
+    val_config                     // string: [optional]  Config file for oncoanalyser pipeline
     val_oncoanalyser_nextflow_opts // string: [mandatory] Nextflow options for oncoanalyser pipeline
     val_oncoanalyser_params_file   // string: [mandatory] Parameters file for oncoanalyser pipeline
     val_oncoanalyser_samplesheet   // string: [mandatory] Samplesheet file for oncoanalyser pipeline
-    val_oncorefiner_config         // string: [optional]  Config file for oncorefiner pipeline
     val_oncorefiner_nextflow_opts  // string: [mandatory] Nextflow options for oncorefiner pipeline
     val_outdir                     // string: [mandatory] The output directory where the results will be saved
     val_sample_id_tumor            // string: [mandatory] Sample ID of the tumor sample
@@ -39,7 +38,7 @@ workflow ONCOFLOW {
         val_oncoanalyser_nextflow_opts,
         val_oncoanalyser_params_file,
         val_oncoanalyser_samplesheet,
-        val_oncoanalyser_config,
+        val_config,
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
     )
 
@@ -58,7 +57,7 @@ workflow ONCOFLOW {
         val_oncorefiner_nextflow_opts,
         CREATE_ONCOREFINER_PARAMS_FILE.out.params_file,
         '',
-        val_oncorefiner_config,
+        val_config,
         workflow.workDir.resolve('Clinical-Genomics/oncorefiner').toUriString(),
     )
 

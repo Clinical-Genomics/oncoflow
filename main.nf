@@ -28,11 +28,10 @@ workflow CLINICALGENOMICS_ONCOFLOW {
 
     take:
     val_case_id                    // string: [mandatory] Case ID
-    val_oncoanalyser_config        // string: [optional]  Config file for oncoanalyser pipeline
+    val_config                     // string: [optional]  Config file for oncoanalyser pipeline
     val_oncoanalyser_nextflow_opts // string: [mandatory] Nextflow options for oncoanalyser pipeline
     val_oncoanalyser_params_file   // string: [mandatory] Parameters file for oncoanalyser pipeline
     val_oncoanalyser_samplesheet   // string: [mandatory] Samplesheet file for oncoanalyser pipeline
-    val_oncorefiner_config         // string: [optional]  Config file for oncorefiner pipeline
     val_oncorefiner_nextflow_opts  // string: [mandatory] Nextflow options for oncorefiner pipeline
     val_outdir                     // string: [mandatory] The output directory where the results will be saved
     val_sample_id_tumor            // string: [mandatory] Sample ID of the tumor sample
@@ -47,11 +46,10 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     //
     ONCOFLOW (
         val_case_id,
-        val_oncoanalyser_config,
+        val_config,
         val_oncoanalyser_nextflow_opts,
         val_oncoanalyser_params_file,
         val_oncoanalyser_samplesheet,
-        val_oncorefiner_config,
         val_oncorefiner_nextflow_opts,
         val_sample_id_tumor,
         val_sample_id_normal,
@@ -93,11 +91,10 @@ workflow {
     //
     CLINICALGENOMICS_ONCOFLOW (
         params.case_id,
-        params.oncoanalyser_config,
+        workflow.configFiles[0],
         params.oncoanalyser_nextflow_opts,
         params.oncoanalyser_params_file,
         params.oncoanalyser_samplesheet,
-        params.oncorefiner_config,
         params.oncorefiner_nextflow_opts,
         params.sample_id_tumor,
         params.sample_id_normal,

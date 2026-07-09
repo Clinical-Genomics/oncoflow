@@ -3,9 +3,10 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER } from "../modules/local/nextflow/run/main"
-include { CREATE_ONCOREFINER_PARAMS_FILE      } from "../modules/local/createoncorefinerparamsfile/main"
-include { softwareVersionsToYAML              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER                       } from "../modules/local/nextflow/run/main"
+include { CREATE_PARAMS_FILE as CREATE_ONCOREFINER_PARAMS_FILE      } from "../modules/local/createparamsfile/main"
+include { getOncorefinerParamsList                                  } from "../subworkflows/local/utils_nfcore_oncoflow_pipeline"
+include { softwareVersionsToYAML                                    } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -25,7 +26,7 @@ workflow ONCOFLOW {
     val_sample_id_normal           // string: [mandatory] Sample ID of the normal sample
     val_subject_id                 // string: [mandatory] Subject ID
     val_sex                        // string: [mandatory] Sex of the patient
-    outdir                         // string: [mandatory] The output directory where the results will be saved
+    val_outdir                     // string: [mandatory] The output directory where the results will be saved
 
     main:
 
@@ -40,14 +41,18 @@ workflow ONCOFLOW {
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
     )
 
-    CREATE_ONCOREFINER_PARAMS_FILE(
+    def oncorefiner_params_list = getOncorefinerParamsList(
         val_case_id,
-        val_subject_id,
-        val_sample_id_tumor,
-        val_sample_id_normal,
-        val_sex,
         NFCORE_ONCOANALYSER.out.output,
-        outdir
+        val_outdir,
+        val_sample_id_normal,
+        val_sample_id_tumor,
+        val_sex,
+        val_subject_id,
+    )
+
+    CREATE_ONCOREFINER_PARAMS_FILE(
+        oncorefiner_params_list
         )
 
     //
@@ -73,7 +78,7 @@ workflow ONCOFLOW {
     def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${outdir}/pipeline_info",
+            storeDir: "${val_outdir}/pipeline_info",
             name:  'oncoflow_software_'  + 'versions.yml',
             sort: true,
             newLine: true

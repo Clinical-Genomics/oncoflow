@@ -1,27 +1,34 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "createoncoanalyserparamsfile"
-description: Generate a parameters file for the oncoanalyser pipeline given the input parameters for oncoflow.
+name: "createparamsfile"
+description: Generate a parameters file based on the provided parameters list.
 keywords:
   - params_file
-  - oncoflow
-  - oncoanalyser
+  - create
+  - parameters
 
 input:
-  - TODO
-  - outdir:
-      type: string
-      description: Output directory for pipeline output files
+  - params_list:
+      type: list
+      description: |
+        A list of parameters for the pipeline, with format:
+        ```
+        [
+          "param1: value1",
+          "param2: value2",
+          ...
+        ]
+        ```
 output:
   parameters_file:
-    - "oncoanalyser_params.yaml":
+    - "${prefix}_params.yaml":
         type: file
-        description: Parameters file for the oncoanalyser pipeline
-        pattern: "oncoanalyser_params.yaml"
-  versions_createoncoanalyserparamsfile:
+        description: Parameters file
+        pattern: "${prefix}_params.yaml"
+  versions_createparamsfile:
     - - ${task.process}:
           type: string
           description: The name of the process
-      - createoncoanalyserparamsfile:
+      - createparamsfile:
           type: string
           description: The name of the tool
       - "1.0":
@@ -32,7 +39,7 @@ topics:
     - - ${task.process}:
           type: string
           description: The name of the process
-      - createoncoanalyserparamsfile:
+      - createparamsfile:
           type: string
           description: The name of the tool
       - "1.0":

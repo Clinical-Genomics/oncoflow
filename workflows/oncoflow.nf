@@ -3,9 +3,10 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER } from "../modules/local/nextflow/run/main"
-include { CREATE_ONCOREFINER_PARAMS_FILE      } from "../modules/local/createoncorefinerparamsfile/main"
-include { softwareVersionsToYAML              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { CREATE_ONCOREFINER_PARAMS_FILE                } from "../modules/local/createoncorefinerparamsfile/main"
+include { NEXTFLOW_RUN as CLINICAL_GENOMICS_ONCOREFINER } from '../modules/local/nextflow/run'
+include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER           } from "../modules/local/nextflow/run/main"
+include { softwareVersionsToYAML                        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -21,6 +22,8 @@ workflow ONCOFLOW {
     val_oncoanalyser_nextflow_opts // string: [mandatory] Nextflow options for oncoanalyser pipeline
     val_oncoanalyser_params_file   // string: [mandatory] Parameters file for oncoanalyser pipeline
     val_oncoanalyser_samplesheet   // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    val_oncorefiner_config         // string: [optional]  Config file for oncorefiner pipeline
+    val_oncorefiner_nextflow_opts  // string: [mandatory] Nextflow options for oncorefiner pipeline
     val_sample_id_tumor            // string: [mandatory] Sample ID of the tumor sample
     val_sample_id_normal           // string: [mandatory] Sample ID of the normal sample
     val_subject_id                 // string: [mandatory] Subject ID
@@ -49,6 +52,15 @@ workflow ONCOFLOW {
         NFCORE_ONCOANALYSER.out.output,
         outdir
         )
+
+    CLINICAL_GENOMICS_ONCOREFINER(
+        'Clinical-Genomics/oncorefiner',
+        val_oncorefiner_nextflow_opts,
+        CREATE_ONCOREFINER_PARAMS_FILE.out.params_file,
+        '',
+        val_oncorefiner_config,
+        workflow.workDir.resolve('Clinical-Genomics/oncorefiner').toUriString(),
+    )
 
     //
     // Collate and save software versions
@@ -80,9 +92,10 @@ workflow ONCOFLOW {
         )
 
     emit:
-    oncoanalyser_output     = NFCORE_ONCOANALYSER.out.output                 // channel: [path(oncoanalyser_output_directory)]
+    oncoanalyser_output     = NFCORE_ONCOANALYSER.out.output                 // channel: [path(analysis_output_directory)]
+    oncorefiner_output      = CLINICAL_GENOMICS_ONCOREFINER.out.output       // channel: [path(analysis_output_directory)]
     oncorefiner_params_file = CREATE_ONCOREFINER_PARAMS_FILE.out.params_file // channel: [path(yaml)]
-    versions                = ch_versions
+    versions                = ch_versions                                    // channel: [path(versions.yml)]
 }
 
 /*

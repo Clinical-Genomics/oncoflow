@@ -28,11 +28,11 @@ workflow ONCOFLOW {
     val_oncoanalyser_samplesheet              // string: [mandatory] Samplesheet file for oncoanalyser pipeline
     val_oncorefiner_config                    // string: [optional]  Config file for oncorefiner pipeline
     val_oncorefiner_nextflow_opts             // string: [mandatory] Nextflow options for oncorefiner pipeline
+    val_outdir                                // string: [mandatory] The output directory where the results will be saved
     val_sample_id_tumor                       // string: [mandatory] Sample ID of the tumor sample
     val_sample_id_normal                      // string: [mandatory] Sample ID of the normal sample
     val_subject_id                            // string: [mandatory] Subject ID
     val_sex                                   // string: [mandatory] Sex of the patient
-    outdir                                    // string: [mandatory] The output directory where the results will be saved
 
     main:
 
@@ -64,7 +64,7 @@ workflow ONCOFLOW {
         val_sample_id_normal,
         val_sex,
         NFCORE_ONCOANALYSER.out.output,
-        outdir
+        val_outdir
         )
 
     CLINICAL_GENOMICS_ONCOREFINER(
@@ -99,7 +99,7 @@ workflow ONCOFLOW {
     def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${outdir}/pipeline_info",
+            storeDir: "${val_outdir}/pipeline_info",
             name:  'oncoflow_software_'  + 'versions.yml',
             sort: true,
             newLine: true

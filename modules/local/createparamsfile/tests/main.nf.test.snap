@@ -1,58 +1,61 @@
 {
-    "Given a valid oncoanalyser results directory": {
-        "content": [
-            [
-                [
-                    "CREATE_ONCOREFINER_PARAMS_FILE",
-                    "createoncorefinerparamsfile",
-                    "1.0"
-                ]
-            ],
-            [
-                "case_id: test_case_id",
-                "sample_id_tumor: test_sample_id_tumor",
-                "sample_id_normal: test_sample_id_normal",
-                "sex: female",
-                "snv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.somatic.vcf.gz",
-                "sv_vcf: <output_directory>/oncoanalyser/oncoflow/test_subject_id/purple/test_subject_id.tumor.purple.sv.vcf.gz",
-                "bam_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam",
-                "bai_tumor: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam.bai",
-                "bam_normal: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam",
-                "bai_normal: <output_directory>/oncoanalyser/oncoflow/test_subject_id/alignments/dna/test_subject_id.normal.redux.bam.bai"
-            ]
-        ],
-        "timestamp": "2026-07-07T15:42:48.686446",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
-        }
-    },
-    "-stub": {
+    "With oncoanalyser params list -stub": {
         "content": [
             {
                 "0": [
-                    "oncorefiner_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    "pipeline_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ],
                 "1": [
                     [
-                        "CREATE_ONCOREFINER_PARAMS_FILE",
-                        "createoncorefinerparamsfile",
+                        "CREATE_PARAMS_FILE",
+                        "createparamsfile",
                         "1.0"
                     ]
                 ],
                 "params_file": [
-                    "oncorefiner_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    "pipeline_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ],
-                "versions_createoncorefinerparamsfile": [
+                "versions_createparamsfile": [
                     [
-                        "CREATE_ONCOREFINER_PARAMS_FILE",
-                        "createoncorefinerparamsfile",
+                        "CREATE_PARAMS_FILE",
+                        "createparamsfile",
                         "1.0"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-07-06T14:09:16.928105",
+        "timestamp": "2026-07-09T10:27:45.65139",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "With oncoanalyser params list": {
+        "content": [
+            {
+                "0": [
+                    "pipeline_params.yaml:md5,ae88cb695685959dc4d970c61347728d"
+                ],
+                "1": [
+                    [
+                        "CREATE_PARAMS_FILE",
+                        "createparamsfile",
+                        "1.0"
+                    ]
+                ],
+                "params_file": [
+                    "pipeline_params.yaml:md5,ae88cb695685959dc4d970c61347728d"
+                ],
+                "versions_createparamsfile": [
+                    [
+                        "CREATE_PARAMS_FILE",
+                        "createparamsfile",
+                        "1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-09T10:27:12.050778",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

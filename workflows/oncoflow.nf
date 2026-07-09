@@ -4,7 +4,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { CREATE_ONCOREFINER_PARAMS_FILE                } from "../modules/local/createoncorefinerparamsfile/main"
-include { CREATE_ONCOANALYSER_PARAMS_FILE               } from "../modules/local/createoncoanalyserparamsfile/main"
+include { CREATE_PARAMS_FILE as CREATE_ONCOANALYSER_PARAMS_FILE } from "../modules/local/createparamsfile/main"
 include { NEXTFLOW_RUN as CLINICAL_GENOMICS_ONCOREFINER } from '../modules/local/nextflow/run'
 include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER           } from "../modules/local/nextflow/run/main"
 include { softwareVersionsToYAML                        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -37,11 +37,14 @@ workflow ONCOFLOW {
 
     def ch_versions = channel.empty()
 
+    oncoanalyser_params_list = [
+            "mode: $val_oncoanalyser_mode",
+            "genome: $val_oncoanalyser_genome",
+            "create_stub_placeholders: $val_oncoanalyser_create_stub_placeholders"
+        ]
+
     CREATE_ONCOANALYSER_PARAMS_FILE(
-        val_oncoanalyser_mode,
-        val_oncoanalyser_genome,
-        val_oncoanalyser_create_stub_placeholders,
-        outdir
+        oncoanalyser_params_list
         )
 
     NFCORE_ONCOANALYSER(

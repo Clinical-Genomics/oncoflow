@@ -44,7 +44,6 @@ workflow ONCOFLOW {
     def oncorefiner_params_list = getOncorefinerParamsList(
         val_case_id,
         NFCORE_ONCOANALYSER.out.output,
-        val_outdir,
         val_sample_id_normal,
         val_sample_id_tumor,
         val_sex,

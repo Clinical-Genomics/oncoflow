@@ -211,12 +211,10 @@ def methodsDescriptionText(mqc_methods_yaml) {
 //
 // Generate params lists for each pipeline
 //
-def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, outdir, sample_id_normal, sample_id_tumor, sex, subject_id) {
+def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, sample_id_tumor, sex, subject_id) {
     // Generate a parameters file for the oncorefiner pipeline based on metadata parameters and the output of the oncoanalyser pipeline.
 
-    ch_oncoanalyser_output.map { oncoanalyser_output ->
-        def oncoanalyser_output_dir = file(outdir).resolve("oncoanalyser/${oncoanalyser_output}")
-
+    ch_oncoanalyser_output.map { oncoanalyser_output_dir ->
         def bam_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.normal.redux.bam") : ''
         def bai_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.normal.redux.bam.bai") : ''
         def bam_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.tumor.redux.bam")

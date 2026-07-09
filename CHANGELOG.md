@@ -10,7 +10,7 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 ### `Added`
 
 - [#2](https://github.com/Clinical-Genomics/oncoflow/pull/2) Added `NEXTFLOW_RUN` local module based on `mahesh-panchal/nf-cascade`.
-- [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Added `NFCORE_ONCOANALYSER` using the `NEXTFLOW_RUN` local module to run the `Clinical-Genomics/oncoanalyser` pipeline in `ONCOFLOW` workflow.
+- [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Added `NFCORE_ONCOANALYSER` using the `NEXTFLOW_RUN` local module to run the `nf-core/oncoanalyser` pipeline in `ONCOFLOW` workflow.
 - [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Added input parameters for running `nf-core/oncoanalyser`: `oncoanalyser_config`, `oncoanalyser_nextflow_opts`, `oncoanalyser_params_file` and `oncoanalyser_samplesheet`.
 - [#5](https://github.com/Clinical-Genomics/oncoflow/pull/5) Added `CREATE_ONCOREFINER_PARAMS_FILE` local module.
 - [#5](https://github.com/Clinical-Genomics/oncoflow/pull/5) Added metadata parameters `case_id`, `sample_id_tumor`, `sample_id_normal`, `subject_id` and `sex`, necessary for creating the `oncoanalyser` params file using the `CREATE_ONCOREFINER_PARAMS_FILE` local module.
@@ -22,6 +22,8 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 - [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Updated `.nftignore` to ignore `pipeline_info` and `multiqc` files for all pipelines.
 - [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Updated `.nftignore` to ignore gzipped output files from `oncoanalyser` due to https://github.com/nf-core/oncoanalyser/issues/299.
 - [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Updated `.nftignore` to ignore `*.command.*` output files from `oncoanalyser` since several files include the run directory and platform information which changes for each run and therefore cannot be snapshot.
+- [#8](https://github.com/Clinical-Genomics/oncoflow/pull/8) Changed `NFCORE_ONCOANALYSER` to run forked fixed `Clinical-Genomics/oncoanalyser` instead, due to bug https://github.com/nf-core/oncoanalyser/issues/301.
+- [#8](https://github.com/Clinical-Genomics/oncoflow/pull/8) Changed test config to run the above with revision `2.2.0-with-purple-tbi-fix` which includes the fix for https://github.com/nf-core/oncoanalyser/issues/301 and `nf-core/oncoanalyser` version 2.2.0 since this was the version used for previous test runs.
 
 ### `Fixed`
 

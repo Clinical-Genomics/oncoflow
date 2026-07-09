@@ -25,11 +25,11 @@ workflow ONCOFLOW {
     val_oncoanalyser_samplesheet   // string: [mandatory] Samplesheet file for oncoanalyser pipeline
     val_oncorefiner_config         // string: [optional]  Config file for oncorefiner pipeline
     val_oncorefiner_nextflow_opts  // string: [mandatory] Nextflow options for oncorefiner pipeline
+    val_outdir                     // string: [mandatory] The output directory where the results will be saved
     val_sample_id_tumor            // string: [mandatory] Sample ID of the tumor sample
     val_sample_id_normal           // string: [mandatory] Sample ID of the normal sample
     val_subject_id                 // string: [mandatory] Subject ID
     val_sex                        // string: [mandatory] Sex of the patient
-    val_outdir                     // string: [mandatory] The output directory where the results will be saved
 
     main:
 
@@ -55,7 +55,7 @@ workflow ONCOFLOW {
 
     CREATE_ONCOREFINER_PARAMS_FILE(
         oncorefiner_params_list
-        )
+    )
 
     CLINICAL_GENOMICS_ONCOREFINER(
         'Clinical-Genomics/oncorefiner',

@@ -488,7 +488,7 @@
                 "bai_normal: <output_directory>/oncoanalyser/results/subject_a/alignments/dna/subject_a.normal.redux.bam.bai"
             ]
         ],
-        "timestamp": "2026-07-08T10:49:19.901227",
+        "timestamp": "2026-07-08T11:12:38.15633",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

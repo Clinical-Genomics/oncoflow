@@ -16,7 +16,7 @@ Pipeline cascade of nf-core/oncoanalyser + Clinical-Genomics/oncorefiner, writte
 
 ## Oncoanalyser
 
-Necessary input parameters, files and nextflow options for running nf-core/oncoanlyser.
+Input files and nextflow options for running nf-core/oncoanlyser.
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
@@ -29,7 +29,7 @@ Necessary input parameters, files and nextflow options for running nf-core/oncoa
 
 ## Oncorefiner
 
-Necessary input files and nextflow options for running Clinical-Genomics/oncorefiner.
+Input files and nextflow options for running Clinical-Genomics/oncorefiner.
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|

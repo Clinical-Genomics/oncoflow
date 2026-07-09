@@ -39,7 +39,7 @@
         "oncoanalyser": {
             "title": "Oncoanalyser",
             "type": "object",
-            "description": "Necessary input parameters, files and nextflow options for running nf-core/oncoanlyser.",
+            "description": "Input files and nextflow options for running nf-core/oncoanlyser.",
             "default": "",
             "properties": {
                 "oncoanalyser_config": {
@@ -87,7 +87,7 @@
         "oncorefiner": {
             "title": "Oncorefiner",
             "type": "object",
-            "description": "Necessary input files and nextflow options for running Clinical-Genomics/oncorefiner.",
+            "description": "Input files and nextflow options for running Clinical-Genomics/oncorefiner.",
             "default": "",
             "properties": {
                 "oncorefiner_config": {

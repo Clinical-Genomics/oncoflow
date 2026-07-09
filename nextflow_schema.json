@@ -39,7 +39,7 @@
         "oncoanalyser": {
             "title": "Oncoanalyser",
             "type": "object",
-            "description": "Necessary input files and nextflow options for running nf-core/oncoanlyser.",
+            "description": "Input files and nextflow options for running nf-core/oncoanlyser.",
             "default": "",
             "properties": {
                 "oncoanalyser_config": {
@@ -73,6 +73,28 @@
                 }
             },
             "required": ["oncoanalyser_nextflow_opts"],
+            "fa_icon": "fas fa-file-import"
+        },
+        "oncorefiner": {
+            "title": "Oncorefiner",
+            "type": "object",
+            "description": "Input files and nextflow options for running Clinical-Genomics/oncorefiner.",
+            "default": "",
+            "properties": {
+                "oncorefiner_config": {
+                    "type": "string",
+                    "description": "Path to config file for Clinical-Genomics/oncorefiner (optional).",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "far fa-file"
+                },
+                "oncorefiner_nextflow_opts": {
+                    "type": "string",
+                    "description": "Nextflow options for running Clinical-Genomics/oncorefiner.",
+                    "fa_icon": "fas fa-terminal"
+                }
+            },
+            "required": ["oncorefiner_nextflow_opts"],
             "fa_icon": "fas fa-file-import"
         },
         "input_output_options": {
@@ -228,6 +250,9 @@
         },
         {
             "$ref": "#/$defs/oncoanalyser"
+        },
+        {
+            "$ref": "#/$defs/oncorefiner"
         },
         {
             "$ref": "#/$defs/input_output_options"

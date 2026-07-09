@@ -3,3 +3,4 @@
 **/multiqc/**
 oncoanalyser/**/*.gz
 oncoanalyser/**/*.command.*
+oncorefiner/**/vep/*.{html}

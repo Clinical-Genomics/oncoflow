@@ -1,0 +1,58 @@
+nextflow_process {
+
+    name "Test Process CREATE_PARAMS_FILE"
+    script "../main.nf"
+    process "CREATE_PARAMS_FILE"
+
+    tag "modules"
+    tag "create_params_file"
+
+    test("With oncoanalyser params list") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    "mode: wgts",
+                    "genome: GRCh38_hmf",
+                    "create_stub_placeholders: true"
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("With oncoanalyser params list -stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    "mode: wgts",
+                    "genome: GRCh38_hmf",
+                    "create_stub_placeholders: true"
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

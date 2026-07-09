@@ -24,6 +24,8 @@ process CREATE_PARAMS_FILE {
     """
 
     stub:
+    prefix = task.ext.prefix ?: "pipeline"
+
     """
     touch ${prefix}_params.yaml
     """

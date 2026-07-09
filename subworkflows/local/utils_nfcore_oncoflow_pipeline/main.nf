@@ -208,3 +208,14 @@ def methodsDescriptionText(mqc_methods_yaml) {
 
     return description_html.toString()
 }
+
+//
+// Generate params lists for each pipeline
+//
+def getOncoanalyserParamsList(val_oncoanalyser_mode, val_oncoanalyser_genome, val_oncoanalyser_create_stub_placeholders) {
+    return [
+        "mode: $val_oncoanalyser_mode",
+        "genome: $val_oncoanalyser_genome",
+        "create_stub_placeholders: $val_oncoanalyser_create_stub_placeholders"
+    ]
+}

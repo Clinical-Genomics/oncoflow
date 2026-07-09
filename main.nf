@@ -42,7 +42,6 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     val_subject_id                            // string: [mandatory] Subject ID
     val_sex                                   // string: [mandatory] Sex of the patient
 
-
     main:
 
     //

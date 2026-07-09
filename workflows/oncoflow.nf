@@ -32,7 +32,7 @@ workflow ONCOFLOW {
     def ch_versions = channel.empty()
 
     NFCORE_ONCOANALYSER(
-        'nf-core/oncoanalyser',
+        'Clinical-Genomics/oncoanalyser',
         val_oncoanalyser_nextflow_opts,
         val_oncoanalyser_params_file,
         val_oncoanalyser_samplesheet,

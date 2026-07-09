@@ -21,7 +21,7 @@ nextflow_pipeline {
             // The oncorefiner params file contains $workDir for NFCORE_ONCOANALYSER, which varies for every run
             def oncorefiner_params_file_path = "$outputDir/oncorefiner/oncorefiner_params.yaml"
             def oncorefiner_params_file = file(oncorefiner_params_file_path)
-            def clean_oncorefiner_params_file_content = oncorefiner_params_file.text.replaceAll("$workDir/.*/results", "<output_directory>")
+            def clean_oncorefiner_params_file_content = oncorefiner_params_file.text.replaceAll("$workDir/.*/results", "<oncoanalyser_work_directory>")
 
             assert workflow.success
             assertAll(

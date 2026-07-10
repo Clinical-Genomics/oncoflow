@@ -53,11 +53,11 @@ workflow CLINICALGENOMICS_ONCOFLOW {
         val_oncoanalyser_samplesheet,
         val_oncorefiner_config,
         val_oncorefiner_nextflow_opts,
+        val_outdir,
         val_sample_id_tumor,
         val_sample_id_normal,
         val_subject_id,
-        val_sex,
-        val_outdir
+        val_sex
     )
 
     emit:

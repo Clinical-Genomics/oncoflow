@@ -30,6 +30,7 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 - [#3](https://github.com/Clinical-Genomics/oncoflow/pull/3) Updated `.nftignore` to ignore `*.command.*` output files from `oncoanalyser` since several files include the run directory and platform information which changes for each run and therefore cannot be snapshot.
 - [#8](https://github.com/Clinical-Genomics/oncoflow/pull/8) Changed `NFCORE_ONCOANALYSER` to run forked fixed `Clinical-Genomics/oncoanalyser` instead, due to bug https://github.com/nf-core/oncoanalyser/issues/301.
 - [#8](https://github.com/Clinical-Genomics/oncoflow/pull/8) Changed test config to run the above with revision `2.2.0-with-purple-tbi-fix` which includes the fix for https://github.com/nf-core/oncoanalyser/issues/301 and `nf-core/oncoanalyser` version 2.2.0 since this was the version used for previous test runs.
+- [#11](https://github.com/Clinical-Genomics/oncoflow/pull/11) Set `process.errorStrategy = 'finish'` for all processes to allow for resuming runs after there is an error while running a pipeline.
 
 ### `Fixed`
 

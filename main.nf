@@ -65,9 +65,9 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     )
 
     emit:
-    oncoanalyser_output      = ONCOFLOW.out.oncoanalyser_output      // channel: [path(oncoanalyser_output_directory)]
+    oncoanalyser_output      = ONCOFLOW.out.oncoanalyser_output      // channel: [path(analysis_output_directory)]
     oncoanalyser_params_file = ONCOFLOW.out.oncoanalyser_params_file // channel: [path(yaml)]
-    oncorefiner_output       = ONCOFLOW.out.oncorefiner_output       // channel: [path(oncorefiner_output_directory)]
+    oncorefiner_output       = ONCOFLOW.out.oncorefiner_output       // channel: [path(analysis_output_directory)]
     oncorefiner_params_file  = ONCOFLOW.out.oncorefiner_params_file  // channel: [path(yaml)]
 }
 /*

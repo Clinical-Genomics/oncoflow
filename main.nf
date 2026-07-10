@@ -103,7 +103,7 @@ workflow {
         params.sample_id_tumor,
         params.sample_id_normal,
         params.subject_id,
-        params.sex,
+        params.sex
     )
 
     //

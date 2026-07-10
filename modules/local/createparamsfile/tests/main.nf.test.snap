@@ -1,9 +1,9 @@
 {
-    "With oncoanalyser params list -stub": {
+    "With test params list": {
         "content": [
             {
                 "0": [
-                    "pipeline_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    "pipeline_params.yaml:md5,fee731cd040d1f00fbd4fc1185f035e4"
                 ],
                 "1": [
                     [
@@ -13,7 +13,7 @@
                     ]
                 ],
                 "params_file": [
-                    "pipeline_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    "pipeline_params.yaml:md5,fee731cd040d1f00fbd4fc1185f035e4"
                 ],
                 "versions_createparamsfile": [
                     [
@@ -24,17 +24,17 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-09T10:27:45.65139",
+        "timestamp": "2026-07-09T11:56:31.355167",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"
         }
     },
-    "With oncoanalyser params list": {
+    "With test params list -stub": {
         "content": [
             {
                 "0": [
-                    "pipeline_params.yaml:md5,ae88cb695685959dc4d970c61347728d"
+                    "pipeline_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ],
                 "1": [
                     [
@@ -44,7 +44,7 @@
                     ]
                 ],
                 "params_file": [
-                    "pipeline_params.yaml:md5,ae88cb695685959dc4d970c61347728d"
+                    "pipeline_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ],
                 "versions_createparamsfile": [
                     [
@@ -55,7 +55,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-09T10:27:12.050778",
+        "timestamp": "2026-07-09T11:56:35.702258",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

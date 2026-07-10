@@ -3,10 +3,11 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { CREATE_ONCOREFINER_PARAMS_FILE                } from "../modules/local/createoncorefinerparamsfile/main"
-include { NEXTFLOW_RUN as CLINICAL_GENOMICS_ONCOREFINER } from '../modules/local/nextflow/run'
-include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER           } from "../modules/local/nextflow/run/main"
-include { softwareVersionsToYAML                        } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { CREATE_PARAMS_FILE as CREATE_ONCOREFINER_PARAMS_FILE      } from "../modules/local/createparamsfile/main"
+include { NEXTFLOW_RUN as CLINICAL_GENOMICS_ONCOREFINER             } from '../modules/local/nextflow/run'
+include { NEXTFLOW_RUN as NFCORE_ONCOANALYSER                       } from "../modules/local/nextflow/run"
+include { getOncorefinerParamsList                                  } from "../subworkflows/local/utils_nfcore_oncoflow_pipeline"
+include { softwareVersionsToYAML                                    } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,15 +44,18 @@ workflow ONCOFLOW {
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
     )
 
-    CREATE_ONCOREFINER_PARAMS_FILE(
+    def oncorefiner_params_list = getOncorefinerParamsList(
         val_case_id,
-        val_subject_id,
-        val_sample_id_tumor,
-        val_sample_id_normal,
-        val_sex,
         NFCORE_ONCOANALYSER.out.output,
-        val_outdir
-        )
+        val_sample_id_normal,
+        val_sample_id_tumor,
+        val_sex,
+        val_subject_id,
+    )
+
+    CREATE_ONCOREFINER_PARAMS_FILE(
+        oncorefiner_params_list
+    )
 
     CLINICAL_GENOMICS_ONCOREFINER(
         'Clinical-Genomics/oncorefiner',

@@ -99,11 +99,11 @@ workflow {
         params.oncoanalyser_samplesheet,
         params.oncorefiner_config,
         params.oncorefiner_nextflow_opts,
+        params.outdir,
         params.sample_id_tumor,
         params.sample_id_normal,
         params.subject_id,
         params.sex,
-        params.outdir
     )
 
     //

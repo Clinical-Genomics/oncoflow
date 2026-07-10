@@ -78,10 +78,11 @@
                     "mimetype": "text/csv",
                     "pattern": "^\\S+\\.csv$",
                     "exists": true,
-                    "fa_icon": "fas fa-file-csv"
+                    "fa_icon": "fas fa-file-csv",
+                    "help_text": ""
                 }
             },
-            "required": ["oncoanalyser_nextflow_opts"],
+            "required": ["oncoanalyser_nextflow_opts", "oncoanalyser_genome", "oncoanalyser_mode"],
             "fa_icon": "fas fa-file-import"
         },
         "oncorefiner": {

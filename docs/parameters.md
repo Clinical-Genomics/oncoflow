@@ -22,8 +22,8 @@ Input files and nextflow options for running nf-core/oncoanlyser.
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `oncoanalyser_config` | Path to config file for nf-core/oncoanlyser (optional). | `string` |  |  |  |
 | `oncoanalyser_create_stub_placeholders` | Create placeholders for reference data during stub run. Used for creating the params file for oncoanalyser. | `boolean` | False |  |  |
-| `oncoanalyser_genome` | Name of genome reference. Used for creating the params file for oncoanalyser. | `string` |  |  |  |
-| `oncoanalyser_mode` | Workflow run mode. Used for creating the params file for oncoanalyser. | `string` |  |  |  |
+| `oncoanalyser_genome` | Name of genome reference. Used for creating the params file for oncoanalyser. | `string` |  | True |  |
+| `oncoanalyser_mode` | Workflow run mode. Used for creating the params file for oncoanalyser. | `string` |  | True |  |
 | `oncoanalyser_nextflow_opts` | Nextflow options for running nf-core/oncoanlyser. | `string` |  | True |  |
 | `oncoanalyser_samplesheet` | Path to csv samplesheet file for nf-core/oncoanalyser. | `string` |  |  |  |
 

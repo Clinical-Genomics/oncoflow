@@ -51,11 +51,11 @@ workflow CLINICALGENOMICS_ONCOFLOW {
         val_oncoanalyser_params_file,
         val_oncoanalyser_samplesheet,
         val_oncorefiner_nextflow_opts,
+        val_outdir,
         val_sample_id_tumor,
         val_sample_id_normal,
         val_subject_id,
-        val_sex,
-        val_outdir
+        val_sex
     )
 
     emit:
@@ -96,11 +96,11 @@ workflow {
         params.oncoanalyser_params_file,
         params.oncoanalyser_samplesheet,
         params.oncorefiner_nextflow_opts,
+        params.outdir,
         params.sample_id_tumor,
         params.sample_id_normal,
         params.subject_id,
-        params.sex,
-        params.outdir
+        params.sex
     )
 
     //

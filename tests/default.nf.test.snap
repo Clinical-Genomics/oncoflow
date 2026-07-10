@@ -4,6 +4,7 @@
             null,
             [
                 "oncoanalyser",
+                "oncoanalyser/oncoanalyser_params.yaml",
                 "oncoanalyser/results",
                 "oncoanalyser/results/pipeline_info",
                 "oncoanalyser/results/pipeline_info/software_versions.yml",
@@ -368,6 +369,7 @@
                 "pipeline_info/oncoflow_software_versions.yml"
             ],
             [
+                "oncoanalyser_params.yaml:md5,ae88cb695685959dc4d970c61347728d",
                 "subject_a.normal.duplicate_freq.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a.normal.jitter_params.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a.normal.redux.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -476,6 +478,11 @@
                 "test_case_id_svdbquery_vep.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
             ],
             [
+                "mode: wgts",
+                "genome: GRCh38_hmf",
+                "create_stub_placeholders: true"
+            ],
+            [
                 "case_id: test_case_id",
                 "sample_id_normal: test_sample_id_normal",
                 "sample_id_tumor: test_sample_id_tumor",
@@ -488,7 +495,7 @@
                 "sv_vcf: <oncoanalyser_work_directory>/subject_a/purple/subject_a.tumor.purple.sv.vcf.gz"
             ]
         ],
-        "timestamp": "2026-07-09T16:02:29.273775",
+        "timestamp": "2026-07-10T10:24:46.667977",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

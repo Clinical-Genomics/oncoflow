@@ -32,6 +32,8 @@ nextflow_pipeline {
                     stable_path,
                     // All files with stable contents
                     stable_content,
+                    // Oncoanalyser params file
+                    file("$outputDir/oncoanalyser/oncoanalyser_params.yaml").text.split("\n"),
                     // Oncorefiner params file without the run $outputDir path
                     clean_oncorefiner_params_file_content.split("\n")
                 ).match() }

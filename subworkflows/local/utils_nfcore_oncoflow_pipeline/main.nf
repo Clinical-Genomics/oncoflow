@@ -211,6 +211,17 @@ def methodsDescriptionText(mqc_methods_yaml) {
 //
 // Generate params lists for each pipeline
 //
+def getOncoanalyserParamsList(val_oncoanalyser_mode, val_oncoanalyser_genome, val_oncoanalyser_create_stub_placeholders) {
+    return [
+        "mode: $val_oncoanalyser_mode",
+        "genome: $val_oncoanalyser_genome",
+        "create_stub_placeholders: $val_oncoanalyser_create_stub_placeholders"
+    ]
+}
+
+//
+// Generate params lists for each pipeline
+//
 def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, sample_id_tumor, sex, subject_id) {
     // Generate a parameters file for the oncorefiner pipeline based on metadata parameters and the output of the oncoanalyser pipeline.
 

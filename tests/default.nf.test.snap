@@ -1,7 +1,17 @@
 {
     "-profile test (stub runs for all pipelines)": {
         "content": [
-            null,
+            {
+                "CREATE_ONCOANALYSER_PARAMS_FILE": {
+                    "createparamsfile": 1.0
+                },
+                "CREATE_ONCOREFINER_PARAMS_FILE": {
+                    "createparamsfile": 1.0
+                },
+                "Workflow": {
+                    "Clinical-Genomics/oncoflow": "v1.0.0dev"
+                }
+            },
             [
                 "oncoanalyser",
                 "oncoanalyser/oncoanalyser_params.yaml",
@@ -495,7 +505,7 @@
                 "sv_vcf: <oncoanalyser_work_directory>/subject_a/purple/subject_a.tumor.purple.sv.vcf.gz"
             ]
         ],
-        "timestamp": "2026-08-10T14:56:59.51878",
+        "timestamp": "2026-08-10T15:46:50.139258",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

@@ -29,11 +29,13 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     take:
     val_case_id                               // string: [mandatory] Case ID
     val_config                                // string: [optional]  Config file for oncoanalyser pipeline
+    val_oncoanalyser_config                   // string: [optional]  Config file for oncoanalyser pipeline
     val_oncoanalyser_create_stub_placeholders // bool:   [mandatory] Create stub placeholders for oncoanalyser pipeline
     val_oncoanalyser_genome                   // string: [mandatory] Genome for oncoanalyser pipeline
     val_oncoanalyser_mode                     // string: [mandatory] Mode for oncoanalyser pipeline
     val_oncoanalyser_nextflow_opts            // string: [mandatory] Nextflow options for oncoanalyser pipeline
     val_oncoanalyser_samplesheet              // string: [mandatory] Samplesheet file for oncoanalyser pipeline
+    val_oncorefiner_config                    // string: [optional]  Config file for oncorefiner pipeline
     val_oncorefiner_nextflow_opts             // string: [mandatory] Nextflow options for oncorefiner pipeline
     val_outdir                                // string: [mandatory] The output directory where the results will be saved
     val_sample_id_tumor                       // string: [mandatory] Sample ID of the tumor sample
@@ -49,11 +51,13 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     ONCOFLOW (
         val_case_id,
         val_config,
+        val_oncoanalyser_config,
         val_oncoanalyser_create_stub_placeholders,
         val_oncoanalyser_genome,
         val_oncoanalyser_mode,
         val_oncoanalyser_nextflow_opts,
         val_oncoanalyser_samplesheet,
+        val_oncorefiner_config,
         val_oncorefiner_nextflow_opts,
         val_outdir,
         val_sample_id_tumor,
@@ -96,12 +100,14 @@ workflow {
     //
     CLINICALGENOMICS_ONCOFLOW (
         params.case_id,
-        workflow.configFiles[0],
+        workflow.configFiles.last(),
+        params.oncoanalyser_config,
         params.oncoanalyser_create_stub_placeholders,
         params.oncoanalyser_genome,
         params.oncoanalyser_mode,
         params.oncoanalyser_nextflow_opts,
         params.oncoanalyser_samplesheet,
+        params.oncorefiner_config,
         params.oncorefiner_nextflow_opts,
         params.outdir,
         params.sample_id_tumor,

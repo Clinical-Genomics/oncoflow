@@ -219,9 +219,6 @@ def getOncoanalyserParamsList(val_oncoanalyser_mode, val_oncoanalyser_genome, va
     ]
 }
 
-//
-// Generate params lists for each pipeline
-//
 def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, sample_id_tumor, sex, subject_id) {
     // Generate a parameters file for the oncorefiner pipeline based on metadata parameters and the output of the oncoanalyser pipeline.
 
@@ -234,7 +231,6 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
         def sv_vcf_path     = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
 
     return [
-
             "case_id: $case_id",
             "sample_id_normal: $sample_id_normal",
             "sample_id_tumor: $sample_id_tumor",

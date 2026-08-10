@@ -20,7 +20,7 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 - [#5](https://github.com/Clinical-Genomics/oncoflow/pull/5) Added metadata parameters `case_id`, `sample_id_tumor`, `sample_id_normal`, `subject_id` and `sex`, necessary for creating the `oncorefiner` params file using the `CREATE_ONCOREFINER_PARAMS_FILE` local module.
 - [#10](https://github.com/Clinical-Genomics/oncoflow/pull/10) Added `getOncorefinerParamsList` function to produce the list of parameters necessary for `CREATE_ONCOREFINER_PARAMS_FILE`.
 - [#4](https://github.com/Clinical-Genomics/oncoflow/pull/4) Added `CLINICAL_GENOMICS_ONCOREFINER` using the `NEXTFLOW_RUN` local module to run the `Clinical-Genomics/oncorefiner` pipeline in `ONCOFLOW` workflow.
-- [#4](https://github.com/Clinical-Genomics/oncoflow/pull/4) Added input parameter for running `Clinical-Genomics/oncorefiner`: `oncorefiner_nextflow_opts`.
+- [#4](https://github.com/Clinical-Genomics/oncoflow/pull/4) Added input parameters for running `Clinical-Genomics/oncorefiner`: `oncorefiner_config` and `oncorefiner_nextflow_opts`.
 
 ### `Changed`
 

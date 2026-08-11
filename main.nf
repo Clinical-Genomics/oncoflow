@@ -98,9 +98,14 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
+
+    // The file(s) provided with the -c/-config option is(are) appended to the end of the list of config files.
+    // The last file will be propagated to the run pipelines if specific config files are not provided through the corresponding input parameters.
+    def oncoflow_config = workflow.configFiles.last()
+
     CLINICALGENOMICS_ONCOFLOW (
         params.case_id,
-        workflow.configFiles.last(), // The file provided with the -c/-config option is appended to the end of the list of config files
+        oncoflow_config,
         params.oncoanalyser_config,
         params.oncoanalyser_create_stub_placeholders,
         params.oncoanalyser_genome,

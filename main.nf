@@ -100,7 +100,7 @@ workflow {
     //
     CLINICALGENOMICS_ONCOFLOW (
         params.case_id,
-        workflow.configFiles.last(),
+        workflow.configFiles.last(), // The file provided with the -c/-config option is appended to the end of the list of config files
         params.oncoanalyser_config,
         params.oncoanalyser_create_stub_placeholders,
         params.oncoanalyser_genome,

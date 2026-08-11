@@ -21,7 +21,7 @@ workflow ONCOFLOW {
 
     take:
     val_case_id                               // string: [mandatory] Case ID
-    val_config                                // string: [optional]  Config file for oncoanalyser pipeline
+    val_config                                // string: [optional]  Config file for oncoflow pipeline
     val_oncoanalyser_config                   // string: [optional]  Config file for oncoanalyser pipeline
     val_oncoanalyser_create_stub_placeholders // bool:   [mandatory] Create stub placeholders for oncoanalyser pipeline
     val_oncoanalyser_genome                   // string: [mandatory] Genome for oncoanalyser pipeline

@@ -28,6 +28,7 @@ workflow CLINICALGENOMICS_ONCOFLOW {
 
     take:
     val_case_id                               // string: [mandatory] Case ID
+    val_config                                // string: [optional]  Config file for oncoflow pipeline
     val_oncoanalyser_config                   // string: [optional]  Config file for oncoanalyser pipeline
     val_oncoanalyser_create_stub_placeholders // bool:   [mandatory] Create stub placeholders for oncoanalyser pipeline
     val_oncoanalyser_genome                   // string: [mandatory] Genome for oncoanalyser pipeline
@@ -49,6 +50,7 @@ workflow CLINICALGENOMICS_ONCOFLOW {
     //
     ONCOFLOW (
         val_case_id,
+        val_config,
         val_oncoanalyser_config,
         val_oncoanalyser_create_stub_placeholders,
         val_oncoanalyser_genome,
@@ -96,8 +98,14 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
+
+    // The file(s) provided with the -c/-config option is(are) appended to the end of the list of config files.
+    // The last file will be propagated to the run pipelines if specific config files are not provided through the corresponding input parameters.
+    def oncoflow_config = workflow.configFiles.last()
+
     CLINICALGENOMICS_ONCOFLOW (
         params.case_id,
+        oncoflow_config,
         params.oncoanalyser_config,
         params.oncoanalyser_create_stub_placeholders,
         params.oncoanalyser_genome,

@@ -21,6 +21,7 @@ workflow ONCOFLOW {
 
     take:
     val_case_id                               // string: [mandatory] Case ID
+    val_config                                // string: [optional]  Config file for oncoflow pipeline
     val_oncoanalyser_config                   // string: [optional]  Config file for oncoanalyser pipeline
     val_oncoanalyser_create_stub_placeholders // bool:   [mandatory] Create stub placeholders for oncoanalyser pipeline
     val_oncoanalyser_genome                   // string: [mandatory] Genome for oncoanalyser pipeline
@@ -54,7 +55,7 @@ workflow ONCOFLOW {
         val_oncoanalyser_nextflow_opts,
         CREATE_ONCOANALYSER_PARAMS_FILE.out.params_file,
         val_oncoanalyser_samplesheet,
-        val_oncoanalyser_config,
+        val_oncoanalyser_config ? val_oncoanalyser_config : val_config,
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
     )
 
@@ -76,7 +77,7 @@ workflow ONCOFLOW {
         val_oncorefiner_nextflow_opts,
         CREATE_ONCOREFINER_PARAMS_FILE.out.params_file,
         '',
-        val_oncorefiner_config,
+        val_oncorefiner_config ? val_oncorefiner_config : val_config,
         workflow.workDir.resolve('Clinical-Genomics/oncorefiner').toUriString(),
     )
 

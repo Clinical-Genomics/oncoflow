@@ -2,6 +2,40 @@
 
 Pipeline cascade of nf-core/oncoanalyser + Clinical-Genomics/oncorefiner, written in Nextflow.
 
+## Metadata
+
+
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `case_id` | Case ID. | `string` |  | True |  |
+| `sample_id_tumor` | Sample id of the tumor sample. | `string` |  | True |  |
+| `sample_id_normal` | Sample id of the normal sample. | `string` |  | True |  |
+| `subject_id` | Subject ID of the patient. | `string` |  | True |  |
+| `sex` | Sex of the patient. (accepted: `female`\|`male`\|`unknown`) | `string` |  | True |  |
+
+## Oncoanalyser
+
+Input files and nextflow options for running nf-core/oncoanlyser.
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `oncoanalyser_config` | Path to config file for nf-core/oncoanlyser (optional). | `string` |  |  |  |
+| `oncoanalyser_create_stub_placeholders` | Create placeholders for reference data during stub run. Used for creating the params file for oncoanalyser. | `boolean` | False |  |  |
+| `oncoanalyser_genome` | Name of genome reference. Used for creating the params file for oncoanalyser. | `string` | GRCh38_hmf | True |  |
+| `oncoanalyser_mode` | Workflow run mode. Used for creating the params file for oncoanalyser. | `string` |  | True |  |
+| `oncoanalyser_nextflow_opts` | Nextflow options for running nf-core/oncoanlyser. | `string` |  | True |  |
+| `oncoanalyser_samplesheet` | Path to csv samplesheet file for nf-core/oncoanalyser. | `string` |  |  |  |
+
+## Oncorefiner
+
+Input files and nextflow options for running Clinical-Genomics/oncorefiner.
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `oncorefiner_config` | Path to config file for Clinical-Genomics/oncorefiner (optional). | `string` |  |  |  |
+| `oncorefiner_nextflow_opts` | Nextflow options for running Clinical-Genomics/oncorefiner. | `string` |  | True |  |
+
 ## Input/output options
 
 Define where the pipeline should find input data and save output data.

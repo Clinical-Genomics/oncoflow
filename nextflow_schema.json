@@ -5,6 +5,109 @@
     "description": "Pipeline cascade of nf-core/oncoanalyser + Clinical-Genomics/oncorefiner, written in Nextflow.",
     "type": "object",
     "$defs": {
+        "metadata": {
+            "title": "Metadata",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "fa_icon": "fas fa-info-circle",
+            "properties": {
+                "case_id": {
+                    "type": "string",
+                    "description": "Case ID."
+                },
+                "sample_id_tumor": {
+                    "type": "string",
+                    "description": "Sample id of the tumor sample."
+                },
+                "sample_id_normal": {
+                    "type": "string",
+                    "description": "Sample id of the normal sample."
+                },
+                "subject_id": {
+                    "type": "string",
+                    "description": "Subject ID of the patient."
+                },
+                "sex": {
+                    "type": "string",
+                    "enum": ["female", "male", "unknown"],
+                    "description": "Sex of the patient."
+                }
+            },
+            "required": ["case_id", "sample_id_tumor", "sample_id_normal", "subject_id", "sex"]
+        },
+        "oncoanalyser": {
+            "title": "Oncoanalyser",
+            "type": "object",
+            "description": "Input files and nextflow options for running nf-core/oncoanlyser.",
+            "default": "",
+            "properties": {
+                "oncoanalyser_config": {
+                    "type": "string",
+                    "description": "Path to config file for nf-core/oncoanlyser (optional).",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "far fa-file"
+                },
+                "oncoanalyser_create_stub_placeholders": {
+                    "type": "boolean",
+                    "description": "Create placeholders for reference data during stub run. Used for creating the params file for oncoanalyser.",
+                    "default": false,
+                    "fa_icon": "fas fa-diagram-project"
+                },
+                "oncoanalyser_genome": {
+                    "type": "string",
+                    "description": "Name of genome reference. Used for creating the params file for oncoanalyser.",
+                    "fa_icon": "fas fa-book",
+                    "default": "GRCh38_hmf"
+                },
+                "oncoanalyser_mode": {
+                    "type": "string",
+                    "description": "Workflow run mode. Used for creating the params file for oncoanalyser.",
+                    "fa_icon": "fas fa-diagram-project",
+                    "pattern": "^(wgts|targeted|purity_estimate|panel_resource_creation|prepare_reference)"
+                },
+                "oncoanalyser_nextflow_opts": {
+                    "type": "string",
+                    "description": "Nextflow options for running nf-core/oncoanlyser.",
+                    "fa_icon": "fas fa-terminal"
+                },
+                "oncoanalyser_samplesheet": {
+                    "type": "string",
+                    "description": "Path to csv samplesheet file for nf-core/oncoanalyser.",
+                    "format": "file-path",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "exists": true,
+                    "fa_icon": "fas fa-file-csv",
+                    "help_text": ""
+                }
+            },
+            "required": ["oncoanalyser_nextflow_opts", "oncoanalyser_genome", "oncoanalyser_mode"],
+            "fa_icon": "fas fa-file-import"
+        },
+        "oncorefiner": {
+            "title": "Oncorefiner",
+            "type": "object",
+            "description": "Input files and nextflow options for running Clinical-Genomics/oncorefiner.",
+            "default": "",
+            "properties": {
+                "oncorefiner_config": {
+                    "type": "string",
+                    "description": "Path to config file for Clinical-Genomics/oncorefiner (optional).",
+                    "format": "file-path",
+                    "exists": true,
+                    "fa_icon": "far fa-file"
+                },
+                "oncorefiner_nextflow_opts": {
+                    "type": "string",
+                    "description": "Nextflow options for running Clinical-Genomics/oncorefiner.",
+                    "fa_icon": "fas fa-terminal"
+                }
+            },
+            "required": ["oncorefiner_nextflow_opts"],
+            "fa_icon": "fas fa-file-import"
+        },
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -153,6 +256,15 @@
         }
     },
     "allOf": [
+        {
+            "$ref": "#/$defs/metadata"
+        },
+        {
+            "$ref": "#/$defs/oncoanalyser"
+        },
+        {
+            "$ref": "#/$defs/oncorefiner"
+        },
         {
             "$ref": "#/$defs/input_output_options"
         },

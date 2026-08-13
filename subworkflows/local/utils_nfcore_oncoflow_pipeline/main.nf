@@ -209,3 +209,39 @@ def methodsDescriptionText(mqc_methods_yaml) {
 
     return description_html.toString()
 }
+//
+// Generate params lists for each pipeline
+//
+def getOncoanalyserParamsList(val_oncoanalyser_mode, val_oncoanalyser_genome, val_oncoanalyser_create_stub_placeholders) {
+    return [
+        "mode: $val_oncoanalyser_mode",
+        "genome: $val_oncoanalyser_genome",
+        "create_stub_placeholders: $val_oncoanalyser_create_stub_placeholders"
+    ]
+}
+
+def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, sample_id_tumor, sex, subject_id) {
+    // Generate a parameters file for the oncorefiner pipeline based on metadata parameters and the output of the oncoanalyser pipeline.
+
+    ch_oncoanalyser_output.map { oncoanalyser_output_dir ->
+        def bam_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.normal.redux.bam") : ''
+        def bai_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.normal.redux.bam.bai") : ''
+        def bam_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.tumor.redux.bam")
+        def bai_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.tumor.redux.bam.bai")
+        def snv_vcf_path    = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.somatic.vcf.gz")
+        def sv_vcf_path     = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
+
+    return [
+            "case_id: $case_id",
+            "sample_id_normal: $sample_id_normal",
+            "sample_id_tumor: $sample_id_tumor",
+            "sex: $sex",
+            "bam_normal: $bam_normal_path",
+            "bai_normal: $bai_normal_path",
+            "bam_tumor: $bam_tumor_path",
+            "bai_tumor: $bai_tumor_path",
+            "snv_vcf: $snv_vcf_path",
+            "sv_vcf: $sv_vcf_path"
+        ]
+    }
+}

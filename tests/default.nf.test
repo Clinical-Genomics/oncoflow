@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("-profile test") {
+    test("-profile test (stub runs for all pipelines)") {
 
         when {
             params {
@@ -14,18 +14,28 @@ nextflow_pipeline {
 
         then {
             // stable_path: All files + folders in ${params.outdir}/ with a stable path (including file name)
-            def stable_path = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def stable_path = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['**pipeline_info/*.{html,json,txt}'])
             // stable_content: All files in ${params.outdir}/ with stable content
-            def stable_content = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            def stable_content = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore', ignore: ['oncorefiner/oncorefiner_params.yaml'])
+
+            // The oncorefiner params file contains $workDir for NFCORE_ONCOANALYSER, which varies for every run
+            def oncorefiner_params_file_path = "$outputDir/oncorefiner/oncorefiner_params.yaml"
+            def oncorefiner_params_file = file(oncorefiner_params_file_path)
+            def clean_oncorefiner_params_file_content = oncorefiner_params_file.text.replaceAll("$workDir/.*/results", "<oncoanalyser_work_directory>")
+
             assert workflow.success
             assertAll(
                 { assert snapshot(
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we test pipelines on multiple Nextflow versions
-                    removeNextflowVersion("$outputDir/pipeline_info/oncoflow_software_mqc_versions.yml"),
+                    removeNextflowVersion("$outputDir/pipeline_info/oncoflow_software_versions.yml"),
                     // All stable path name, with a relative path
                     stable_path,
                     // All files with stable contents
-                    stable_content
+                    stable_content,
+                    // Oncoanalyser params file
+                    file("$outputDir/oncoanalyser/oncoanalyser_params.yaml").text.split("\n"),
+                    // Oncorefiner params file without the run $outputDir path
+                    clean_oncorefiner_params_file_content.split("\n")
                 ).match() }
             )
         }

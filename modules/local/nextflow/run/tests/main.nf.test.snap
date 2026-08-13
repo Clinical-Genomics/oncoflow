@@ -1,0 +1,67 @@
+{
+    "Nextflow run nf-core/demo -revision 1.2.0 -profile docker,test -stub": {
+        "content": [
+            {
+                "COWPY": {
+                    "cowpy": "1.1.5"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "SEQTK_TRIM": {
+                    "seqtk": "1.4-r122"
+                },
+                "Workflow": {
+                    "nf-core/demo": "v1.2.0-g32893af"
+                }
+            },
+            [
+                "",
+                "cowpy",
+                "cowpy/cowpy.txt",
+                "fastqc",
+                "fastqc/SAMPLE1_PE",
+                "fastqc/SAMPLE1_PE/SAMPLE1_PE.html",
+                "fastqc/SAMPLE2_PE",
+                "fastqc/SAMPLE2_PE/SAMPLE2_PE.html",
+                "fastqc/SAMPLE3_SE",
+                "fastqc/SAMPLE3_SE/SAMPLE3_SE.html",
+                "fq",
+                "fq/SAMPLE1_PE",
+                "fq/SAMPLE1_PE/SAMPLE1_PE_sample1_R1.fastq.gz",
+                "fq/SAMPLE1_PE/SAMPLE1_PE_sample1_R2.fastq.gz",
+                "fq/SAMPLE2_PE",
+                "fq/SAMPLE2_PE/SAMPLE2_PE_sample2_R1.fastq.gz",
+                "fq/SAMPLE2_PE/SAMPLE2_PE_sample2_R2.fastq.gz",
+                "fq/SAMPLE3_SE",
+                "fq/SAMPLE3_SE/SAMPLE3_SE_sample1_R1.fastq.gz",
+                "fq/SAMPLE3_SE/SAMPLE3_SE_sample2_R1.fastq.gz",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_plots/.stub",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_demo_software_mqc_versions.yml"
+            ],
+            [
+                "cowpy.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "SAMPLE1_PE.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "SAMPLE2_PE.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "SAMPLE3_SE.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "SAMPLE1_PE_sample1_R1.fastq.gz:md5,7dd2fd0d542d9259d9aed53550907fae",
+                "SAMPLE1_PE_sample1_R2.fastq.gz:md5,1995fe8488384d801807805f26ceca8a",
+                "SAMPLE2_PE_sample2_R1.fastq.gz:md5,05dba9c26396cbdbe0e6da26f037106e",
+                "SAMPLE2_PE_sample2_R2.fastq.gz:md5,63d5e4ac37927c2ecec4b74d2ff99a10",
+                "SAMPLE3_SE_sample1_R1.fastq.gz:md5,7dd2fd0d542d9259d9aed53550907fae",
+                "SAMPLE3_SE_sample2_R1.fastq.gz:md5,05dba9c26396cbdbe0e6da26f037106e"
+            ]
+        ],
+        "timestamp": "2026-07-02T17:47:51.590456",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    }
+}

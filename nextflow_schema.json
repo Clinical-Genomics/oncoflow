@@ -58,7 +58,8 @@
                 "oncoanalyser_genome": {
                     "type": "string",
                     "description": "Name of genome reference. Used for creating the params file for oncoanalyser.",
-                    "fa_icon": "fas fa-book"
+                    "fa_icon": "fas fa-book",
+                    "default": "GRCh38_hmf"
                 },
                 "oncoanalyser_mode": {
                     "type": "string",

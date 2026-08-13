@@ -6,7 +6,6 @@ process CREATE_PARAMS_FILE {
     val params_list
 
     output:
-
     path "${prefix}_params.yaml", emit: params_file
     // WARN: Please update version string when the module is updated.
     tuple val("${task.process}"), val('createparamsfile'), val('1.0'), topic: versions, emit: versions_createparamsfile

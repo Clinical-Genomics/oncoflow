@@ -1,5 +1,5 @@
 process CREATE_PARAMS_FILE {
-    tag 'params_file'
+    tag 'create_params_file'
     label 'process_single'
 
     input:

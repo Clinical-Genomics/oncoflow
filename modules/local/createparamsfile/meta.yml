@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "createparamsfile"
+description: Generate a parameters file based on the provided parameters list.
+keywords:
+  - params_file
+  - create
+  - parameters
+
+input:
+  - params_list:
+      type: list
+      description: |
+        A list of parameters for the pipeline, with format:
+        ```
+        [
+          "param1: value1",
+          "param2: value2",
+          ...
+        ]
+        ```
+output:
+  parameters_file:
+    - "${prefix}_params.yaml":
+        type: file
+        description: Parameters file
+        pattern: "${prefix}_params.yaml"
+  versions_createparamsfile:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - createparamsfile:
+          type: string
+          description: The name of the tool
+      - "1.0":
+          type: string
+          description: The version of the tool
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - createparamsfile:
+          type: string
+          description: The name of the tool
+      - "1.0":
+          type: string
+          description: The version of the tool
+authors:
+  - "@beatrizsavinhas"
+maintainers:
+  - "@beatrizsavinhas"

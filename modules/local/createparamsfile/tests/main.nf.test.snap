@@ -1,0 +1,64 @@
+{
+    "With test params list": {
+        "content": [
+            {
+                "0": [
+                    "pipeline_params.yaml:md5,fee731cd040d1f00fbd4fc1185f035e4"
+                ],
+                "1": [
+                    [
+                        "CREATE_PARAMS_FILE",
+                        "createparamsfile",
+                        "1.0"
+                    ]
+                ],
+                "params_file": [
+                    "pipeline_params.yaml:md5,fee731cd040d1f00fbd4fc1185f035e4"
+                ],
+                "versions_createparamsfile": [
+                    [
+                        "CREATE_PARAMS_FILE",
+                        "createparamsfile",
+                        "1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-09T11:56:31.355167",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "With test params list -stub": {
+        "content": [
+            {
+                "0": [
+                    "pipeline_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "1": [
+                    [
+                        "CREATE_PARAMS_FILE",
+                        "createparamsfile",
+                        "1.0"
+                    ]
+                ],
+                "params_file": [
+                    "pipeline_params.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "versions_createparamsfile": [
+                    [
+                        "CREATE_PARAMS_FILE",
+                        "createparamsfile",
+                        "1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-09T11:56:35.702258",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    }
+}

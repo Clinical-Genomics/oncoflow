@@ -1,0 +1,8 @@
+case_id: "test_case_id"
+sample_id_tumor: "test_sample_id_tumor"
+sample_id_normal: "test_sample_id_normal"
+sex: "female"
+
+oncoanalyser_create_stub_placeholders: true
+oncoanalyser_genome: "GRCh38_hmf"
+oncoanalyser_mode: "wgts"

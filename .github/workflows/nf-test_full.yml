@@ -83,7 +83,7 @@ jobs:
             --changed-since HEAD^ \
             --verbose \
             --tap=test.tap \
-            -c assets/nf-test_full.config
+            --config assets/nf-test_full.config
 
             # Save the absolute path of the test.tap file to the output
             echo "tap_file_path=$(realpath test.tap)" >> $GITHUB_OUTPUT

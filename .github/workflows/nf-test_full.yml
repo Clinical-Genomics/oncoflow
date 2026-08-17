@@ -1,0 +1,208 @@
+name: Run nf-test
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - "docs/**"
+      - "**/meta.yml"
+      - "**/*.md"
+      - "**/*.png"
+      - "**/*.svg"
+  release:
+    types: [published]
+  workflow_dispatch:
+
+# Cancel if a newer run is started
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NFT_VER: "0.9.5"
+  NFT_WORKDIR: "~"
+  NXF_ANSI_LOG: false
+  NXF_SINGULARITY_CACHEDIR: ${{ github.workspace }}/.singularity
+  NXF_SINGULARITY_LIBRARYDIR: ${{ github.workspace }}/.singularity
+
+jobs:
+  nf-test:
+    name: "Run full test"
+    runs-on: # use GitHub runners
+      - "ubuntu-latest"
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [docker, singularity]
+        NXF_VER:
+          - "25.10.4"
+          - "latest-everything"
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Nextflow
+        uses: nf-core/setup-nextflow@893c28b667aedeba26e37f296d260ccc5bc4d914 # v3
+        with:
+          version: "${{ matrix.NXF_VER }}"
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.14"
+
+      - name: Install nf-test
+        uses: nf-core/setup-nf-test@4069fbbaabe94c08faba4ad261bfa88225ba133f # v2
+        with:
+          version: "${{ env.NFT_VER }}"
+          install-pdiff: true
+
+      - name: Setup apptainer
+        if: contains(matrix.profile, 'singularity')
+        uses: eWaterCycle/setup-apptainer@3f706d898c9db585b1d741b4692e66755f3a1b40 # v2.0.0
+
+      - name: Set up Singularity
+        if: contains(matrix.profile, 'singularity')
+        shell: bash
+        run: |
+          mkdir -p $NXF_SINGULARITY_CACHEDIR
+          mkdir -p $NXF_SINGULARITY_LIBRARYDIR
+
+      - name: Run nf-test with test_full profile
+        id: run_nf_test_full
+        shell: bash
+        env:
+          NFT_WORKDIR: ${{ env.NFT_WORKDIR }}
+        run: |
+          nf-test test \
+            --profile test_full,${{ matrix.profile }} \
+            --ci \
+            --changed-since HEAD^ \
+            --verbose \
+            --tap=test.tap \
+            -c assets/test_full.config
+
+            # Save the absolute path of the test.tap file to the output
+            echo "tap_file_path=$(realpath test.tap)" >> $GITHUB_OUTPUT
+
+      - name: Generate test summary
+        if: always()
+        shell: bash
+        run: |
+          # Add header if it doesn't exist (using a token file to track this)
+          if [ ! -f ".summary_header" ]; then
+            echo "# 🚀 nf-test results" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "| Status | Test Name | Profile | Shard |" >> $GITHUB_STEP_SUMMARY
+            echo "|:------:|-----------|---------|-------|" >> $GITHUB_STEP_SUMMARY
+            touch .summary_header
+          fi
+
+          if [ -f test.tap ]; then
+            while IFS= read -r line; do
+              if [[ $line =~ ^ok ]]; then
+                test_name="${line#ok }"
+                # Remove the test number from the beginning
+                test_name="${test_name#* }"
+                echo "| ✅ | ${test_name} | ${{ matrix.profile }} |" >> $GITHUB_STEP_SUMMARY
+              elif [[ $line =~ ^not\ ok ]]; then
+                test_name="${line#not ok }"
+                # Remove the test number from the beginning
+                test_name="${test_name#* }"
+                echo "| ❌ | ${test_name} | ${{ matrix.profile }} |" >> $GITHUB_STEP_SUMMARY
+              fi
+            done < test.tap
+          else
+            echo "| ⚠️ | No test results found | ${{ matrix.profile }} |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Clean up
+        if: always()
+        shell: bash
+        run: |
+          sudo rm -rf /home/ubuntu/tests/
+
+      - name: Report test status
+        if: ${{ always() }}
+        run: |
+          if [[ "${{ steps.run_nf_test_full.outcome }}" == "failure" ]]; then
+            echo "::error::Test with ${{ matrix.NXF_VER }} failed"
+            # Add to workflow summary
+            echo "## ❌ Test failed: ${{ matrix.profile }} | ${{ matrix.NXF_VER }}" >> $GITHUB_STEP_SUMMARY
+            if [[ "${{ matrix.NXF_VER }}" == "latest-everything" ]]; then
+              echo "::warning::Test with latest-everything failed but will not cause workflow failure. Please check if the error is expected or if it needs fixing."
+            fi
+            if [[ "${{ matrix.NXF_VER }}" != "latest-everything" ]]; then
+              exit 1
+            fi
+          fi
+
+  confirm-pass:
+    needs: [nf-test]
+    if: always()
+    runs-on: # use GitHub runners
+      - "ubuntu-latest"
+    steps:
+      - name: One or more tests failed (excluding latest-everything)
+        if: ${{ contains(needs.*.result, 'failure') }}
+        run: exit 1
+
+      - name: One or more tests cancelled
+        if: ${{ contains(needs.*.result, 'cancelled') }}
+        run: exit 1
+
+      - name: All tests ok
+        if: ${{ contains(needs.*.result, 'success') }}
+        run: exit 0
+
+      - name: debug-print
+        if: always()
+        run: |
+          echo "::group::DEBUG: `needs` Contents"
+          echo "DEBUG: toJSON(needs) = ${{ toJSON(needs) }}"
+          echo "DEBUG: toJSON(needs.*.result) = ${{ toJSON(needs.*.result) }}"
+          echo "::endgroup::"
+
+      - name: Download PR comment fragments
+        if: ${{ always() }}
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        continue-on-error: true
+        with:
+          pattern: pr-comment-fragment-*
+          path: pr-comment-fragments
+          merge-multiple: true
+
+      # Build a comment for the shared pr-comment.yml poster to publish on the PR.
+      # Based on the fragments above (not needs.*.result) so non-blocking failures are still reported.
+      - name: Prepare PR comment
+        if: ${{ always() }}
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          mkdir -p pr-comment
+          echo "$PR_NUMBER" > pr-comment/pr_number.txt
+          echo "nf-test" > pr-comment/header.txt
+          if [ -d pr-comment-fragments ] && [ -n "$(ls -A pr-comment-fragments)" ]; then
+            {
+              echo "## ❌ nf-test failed with latest Nextflow version"
+              echo ""
+              echo "> [!NOTE]"
+              echo "> Tests with Nextflow's latest version failed but it will not cause a CI workflow failure."
+              echo "> Please check if the failure is expected with newer (edge-)releases of Nextflow or if it needs fixing."
+              echo ""
+              cat pr-comment-fragments/*.md
+              echo ""
+              echo "See the [full run](${RUN_URL}) for details."
+            } > pr-comment/comment.md
+          fi
+
+      - name: Upload PR comment artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: pr-comment
+          path: pr-comment/

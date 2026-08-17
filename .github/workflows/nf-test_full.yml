@@ -78,12 +78,12 @@ jobs:
           NFT_WORKDIR: ${{ env.NFT_WORKDIR }}
         run: |
           nf-test test \
-            --profile test_full,${{ matrix.profile }} \
+            --profile=+${{ matrix.profile }} \
             --ci \
             --changed-since HEAD^ \
             --verbose \
             --tap=test.tap \
-            -c assets/oncoflow_test_full.config
+            -c assets/nf-test_full.config
 
             # Save the absolute path of the test.tap file to the output
             echo "tap_file_path=$(realpath test.tap)" >> $GITHUB_OUTPUT

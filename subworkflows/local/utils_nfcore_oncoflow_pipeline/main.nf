@@ -230,6 +230,7 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
         def bai_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.tumor.redux.bam.bai")
         def snv_vcf_path    = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.somatic.vcf.gz")
         def sv_vcf_path     = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
+        def sv_vcf_tbi_path = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz.tbi")
 
     return [
             "case_id: $case_id",
@@ -241,7 +242,8 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
             "bam_tumor: $bam_tumor_path",
             "bai_tumor: $bai_tumor_path",
             "snv_vcf: $snv_vcf_path",
-            "sv_vcf: $sv_vcf_path"
+            "sv_vcf: $sv_vcf_path",
+            "sv_vcf_tbi: $sv_vcf_tbi_path"
         ]
     }
 }

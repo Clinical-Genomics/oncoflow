@@ -230,6 +230,10 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
         def bai_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.tumor.redux.bam.bai")
         def snv_vcf_path    = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.somatic.vcf.gz")
         def sv_vcf_path     = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
+        def linx_fusion_tsv_path = oncoanalyser_output_dir.resolve("${subject_id}/linx/somatic_annotations/${subject_id}.tumor.linx.fusion.tsv")
+        def linx_breakends_tsv_path = oncoanalyser_output_dir.resolve("${subject_id}/linx/somatic_annotations/${subject_id}.tumor.linx.breakend.tsv")
+        def linx_sv_tsv_path = oncoanalyser_output_dir.resolve("${subject_id}/linx/somatic_annotations/${subject_id}.tumor.linx.svs.tsv")
+
 
     return [
             "case_id: $case_id",
@@ -241,7 +245,10 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
             "bam_tumor: $bam_tumor_path",
             "bai_tumor: $bai_tumor_path",
             "snv_vcf: $snv_vcf_path",
-            "sv_vcf: $sv_vcf_path"
+            "sv_vcf: $sv_vcf_path",
+            "linx_fusion_tsv: $linx_fusion_tsv_path",
+            "linx_breakends_tsv: $linx_breakends_tsv_path",
+            "linx_sv_tsv: $linx_sv_tsv_path"
         ]
     }
 }

@@ -82,7 +82,9 @@
                 "oncoanalyser/results/subject_a/linx/germline_annotations",
                 "oncoanalyser/results/subject_a/linx/germline_annotations/placeholder",
                 "oncoanalyser/results/subject_a/linx/somatic_annotations",
-                "oncoanalyser/results/subject_a/linx/somatic_annotations/placeholder",
+                "oncoanalyser/results/subject_a/linx/somatic_annotations/subject_a.tumor.tumor.linx.breakend.tsv",
+                "oncoanalyser/results/subject_a/linx/somatic_annotations/subject_a.tumor.tumor.linx.fusion.tsv",
+                "oncoanalyser/results/subject_a/linx/somatic_annotations/subject_a.tumor.tumor.linx.svs.tsv",
                 "oncoanalyser/results/subject_a/linx/somatic_plots",
                 "oncoanalyser/results/subject_a/linx/somatic_plots/all",
                 "oncoanalyser/results/subject_a/linx/somatic_plots/all/placeholder",
@@ -414,7 +416,9 @@
                 "placeholder:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "placeholder:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "placeholder:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "placeholder:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "subject_a.tumor.tumor.linx.breakend.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "subject_a.tumor.tumor.linx.fusion.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "subject_a.tumor.tumor.linx.svs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "placeholder:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "placeholder:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "subject_a.tumor_linx.html:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -505,7 +509,7 @@
                 "sv_vcf: <oncoanalyser_work_directory>/subject_a/purple/subject_a.tumor.purple.sv.vcf.gz"
             ]
         ],
-        "timestamp": "2026-08-10T15:46:50.139258",
+        "timestamp": "2026-08-31T14:39:29.504955",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

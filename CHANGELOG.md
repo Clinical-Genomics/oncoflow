@@ -21,6 +21,7 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 - [#10](https://github.com/Clinical-Genomics/oncoflow/pull/10) Added `getOncorefinerParamsList` function to produce the list of parameters necessary for `CREATE_ONCOREFINER_PARAMS_FILE`.
 - [#4](https://github.com/Clinical-Genomics/oncoflow/pull/4) Added `CLINICAL_GENOMICS_ONCOREFINER` using the `NEXTFLOW_RUN` local module to run the `Clinical-Genomics/oncorefiner` pipeline in `ONCOFLOW` workflow.
 - [#4](https://github.com/Clinical-Genomics/oncoflow/pull/4) Added input parameters for running `Clinical-Genomics/oncorefiner`: `oncorefiner_config` and `oncorefiner_nextflow_opts`.
+- [#17](https://github.com/Clinical-Genomics/oncoflow/pull/17) Added `linx_fusion_tsv`, `linx_breakends_tsv` and `linx_sv_tsv` parameters to `getOncorefinerParamsList`.
 
 ### `Changed`
 

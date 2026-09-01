@@ -525,10 +525,13 @@
                 "bam_tumor: <oncoanalyser_work_directory>/subject_a/alignments/dna/subject_a.tumor.redux.bam",
                 "bai_tumor: <oncoanalyser_work_directory>/subject_a/alignments/dna/subject_a.tumor.redux.bam.bai",
                 "snv_vcf: <oncoanalyser_work_directory>/subject_a/purple/subject_a.tumor.purple.somatic.vcf.gz",
-                "sv_vcf: <oncoanalyser_work_directory>/subject_a/purple/subject_a.tumor.purple.sv.vcf.gz"
+                "sv_vcf: <oncoanalyser_work_directory>/subject_a/purple/subject_a.tumor.purple.sv.vcf.gz",
+                "linx_fusion_tsv: <oncoanalyser_work_directory>/subject_a/linx/somatic_annotations/subject_a.tumor.linx.fusion.tsv",
+                "linx_breakends_tsv: <oncoanalyser_work_directory>/subject_a/linx/somatic_annotations/subject_a.tumor.linx.breakend.tsv",
+                "linx_sv_tsv: <oncoanalyser_work_directory>/subject_a/linx/somatic_annotations/subject_a.tumor.linx.svs.tsv"
             ]
         ],
-        "timestamp": "2026-08-31T16:46:52.240005",
+        "timestamp": "2026-09-01T10:47:49.207694",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

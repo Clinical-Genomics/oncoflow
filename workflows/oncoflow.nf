@@ -57,6 +57,7 @@ workflow ONCOFLOW {
         val_oncoanalyser_samplesheet,
         val_oncoanalyser_config ? val_oncoanalyser_config : val_config,
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
+        val_case_id,
     )
 
     def oncorefiner_params_list = getOncorefinerParamsList(
@@ -79,6 +80,7 @@ workflow ONCOFLOW {
         '',
         val_oncorefiner_config ? val_oncorefiner_config : val_config,
         workflow.workDir.resolve('Clinical-Genomics/oncorefiner').toUriString(),
+        val_case_id,
     )
 
     //

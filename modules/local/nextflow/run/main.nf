@@ -20,11 +20,18 @@ process NEXTFLOW_RUN {
     task.ext.when == null || task.ext.when
 
     exec:
-    def env_path = System.getenv("PATH")
-    def nxf_scm_file = System.getenv("NXF_SCM_FILE")
+    // def env_path = System.getenv("PATH")
+    // def nxf_scm_file = System.getenv("NXF_SCM_FILE")
+
+    // Env vars inherited from a Tower/Seqera Platform launch break the nested run - see #6.
+    def child_env = (System.getenv() + [NXF_SCM_FILE: ''])
+        .collect { k, v -> "${k}=${v}" }
+
 
     // Save environment info to a file in the work directory
-    file("$task.workDir/environment_info.txt").text = env_path + "\n" + nxf_scm_file
+    // file("$task.workDir/environment_info.txt").text = env_path + "\n" + nxf_scm_file
+
+
     // Set cache directory so workflow can `-resume`
     def cache_path = file(cache_dir)
     assert cache_path.mkdirs()
@@ -48,7 +55,7 @@ process NEXTFLOW_RUN {
 
 
     // Run nextflow command locally in cache directory
-    def process = nxf_cmd.execute(null, cache_path.toFile())
+    def process = nxf_cmd.execute(child_env, cache_path.toFile())
 
     // Print process output to stdout and stderr
     process.consumeProcessOutput(System.out, System.err)

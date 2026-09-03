@@ -41,6 +41,6 @@ process NEXTFLOW_RUN {
     process.waitFor()
     stdout = process.text
     // Copy nextflow log to work directory
-    cache_path.resolve(".nextflow.log").copyTo("${task.workDir}/nextflow.log")
+    cache_path.resolve("${task.workflowId}.log").copyTo("${task.workDir}/nextflow.log")
     assert process.exitValue() == 0: stdout
 }

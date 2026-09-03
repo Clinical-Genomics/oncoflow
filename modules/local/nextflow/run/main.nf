@@ -20,6 +20,9 @@ process NEXTFLOW_RUN {
     task.ext.when == null || task.ext.when
 
     exec:
+    println "System.getenv(\"PATH\")"
+    println System.getenv("PATH")
+
     // Set cache directory so workflow can `-resume`
     def cache_path = file(cache_dir)
     assert cache_path.mkdirs()
@@ -41,7 +44,6 @@ process NEXTFLOW_RUN {
     // Copy command to shell script in work dir for reference/debugging.
     file("$task.workDir/nf-cmd.sh").text = nxf_cmd
 
-    println System.getenv("PATH")
 
     // Run nextflow command locally in cache directory
     def process = nxf_cmd.execute(null, cache_path.toFile())

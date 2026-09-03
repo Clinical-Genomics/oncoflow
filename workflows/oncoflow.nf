@@ -55,7 +55,7 @@ workflow ONCOFLOW {
         val_oncoanalyser_nextflow_opts,
         CREATE_ONCOANALYSER_PARAMS_FILE.out.params_file,
         val_oncoanalyser_samplesheet,
-        val_oncoanalyser_config ? val_oncoanalyser_config : val_config,
+        val_oncoanalyser_config,
         workflow.workDir.resolve('nf-core/oncoanalyser').toUriString(),
         val_case_id,
     )
@@ -78,7 +78,7 @@ workflow ONCOFLOW {
         val_oncorefiner_nextflow_opts,
         CREATE_ONCOREFINER_PARAMS_FILE.out.params_file,
         '',
-        val_oncorefiner_config ? val_oncorefiner_config : val_config,
+        val_oncorefiner_config,
         workflow.workDir.resolve('Clinical-Genomics/oncorefiner').toUriString(),
         val_case_id,
     )

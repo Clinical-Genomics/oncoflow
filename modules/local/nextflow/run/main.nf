@@ -23,6 +23,9 @@ process NEXTFLOW_RUN {
     println "System.getenv(\"PATH\")"
     println System.getenv("PATH")
 
+    println "System.getenv(\"NXF_SCM_FILE\")"
+    println System.getenv("NXF_SCM_FILE")
+
     // Set cache directory so workflow can `-resume`
     def cache_path = file(cache_dir)
     assert cache_path.mkdirs()

@@ -40,6 +40,9 @@ process NEXTFLOW_RUN {
     ].join(" ")
     // Copy command to shell script in work dir for reference/debugging.
     file("$task.workDir/nf-cmd.sh").text = nxf_cmd
+
+    println System.getenv("PATH")
+
     // Run nextflow command locally in cache directory
     def process = nxf_cmd.execute(null, cache_path.toFile())
     // Print process output to stdout and stderr

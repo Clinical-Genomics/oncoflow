@@ -24,7 +24,9 @@ process NEXTFLOW_RUN {
     assert cache_path.mkdirs()
     // Construct nextflow command
     def nxf_cmd = [
-        'nextflow run',
+        'nextflow',
+            '-log .nextflow.log',
+            'run',
             pipeline_name,
             nextflow_opts,
             params_file ? "-params-file $params_file" : '',
@@ -41,6 +43,6 @@ process NEXTFLOW_RUN {
     process.waitFor()
     stdout = process.text
     // Copy nextflow log to work directory
-    cache_path.resolve("${task.workflowId}.log").copyTo("${task.workDir}/nextflow.log")
+    cache_path.resolve(".nextflow.log").copyTo("${task.workDir}/nextflow.log")
     assert process.exitValue() == 0: stdout
 }

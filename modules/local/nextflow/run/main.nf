@@ -25,6 +25,11 @@ process NEXTFLOW_RUN {
     assert cache_path.mkdirs()
     // Create timestamp for an unique run name
     def timestamp = new Date().format("yyyy-MM-dd_HH-mm-ss")
+
+    // Env vars inherited from a Tower/Seqera Platform launch break the nested run - see #6.
+    def child_env = (System.getenv() + [NXF_IGNORE_RESUME_HISTORY: 'false'])
+        .collect { k, v -> "${k}=${v}" }
+
     // Construct nextflow command
     def nxf_cmd = [
         'nextflow',
@@ -41,7 +46,7 @@ process NEXTFLOW_RUN {
     // Copy command to shell script in work dir for reference/debugging.
     file("$task.workDir/nf-cmd.sh").text = nxf_cmd
     // Run nextflow command locally in cache directory
-    def process = nxf_cmd.execute(null, cache_path.toFile())
+    def process = nxf_cmd.execute(child_env, cache_path.toFile())
     // Print process output to stdout and stderr
     process.consumeProcessOutput(System.out, System.err)
     process.waitFor()

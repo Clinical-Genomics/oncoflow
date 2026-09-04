@@ -24,7 +24,9 @@ process NEXTFLOW_RUN {
     assert cache_path.mkdirs()
     // Construct nextflow command
     def nxf_cmd = [
-        'nextflow run',
+        'nextflow',
+            '-log .nextflow.log',
+            'run',
             pipeline_name,
             nextflow_opts,
             params_file ? "-params-file $params_file" : '',

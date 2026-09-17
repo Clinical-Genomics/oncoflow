@@ -22,6 +22,25 @@ process NEXTFLOW_RUN {
     // Set cache directory so workflow can `-resume`
     def cache_path = file(cache_dir)
     assert cache_path.mkdirs()
+
+    // NXF_* env vars inherited from a Tower/Seqera Platform launch break the nested run - see #6.
+    // Excluded so the nested run falls back to its own defaults, except shared, namespaced
+    // storage locations we still want it to reuse.
+    def nxf_passthrough = [
+        'NXF_HOME',
+        'NXF_ASSETS',
+        'NXF_TEMP',
+        'NXF_PLUGINS_DIR',
+        'NXF_SINGULARITY_LIBRARYDIR',
+        'NXF_CONDA_CACHEDIR',
+        'NXF_SINGULARITY_CACHEDIR',
+        'NXF_CHARLIECLOUD_CACHEDIR',
+        'NXF_SPACK_CACHEDIR',
+    ]
+    def child_env = System.getenv()
+        .findAll { k, v -> !k.startsWith('NXF') || k in nxf_passthrough }
+        .collect { k, v -> "${k}=${v}" }
+
     // Construct nextflow command
     def nxf_cmd = [
         'nextflow run',
@@ -35,7 +54,7 @@ process NEXTFLOW_RUN {
     // Copy command to shell script in work dir for reference/debugging.
     file("$task.workDir/nf-cmd.sh").text = nxf_cmd
     // Run nextflow command locally in cache directory
-    def process = nxf_cmd.execute(null, cache_path.toFile())
+    def process = nxf_cmd.execute(child_env, cache_path.toFile())
     // Print process output to stdout and stderr
     process.consumeProcessOutput(System.out, System.err)
     process.waitFor()

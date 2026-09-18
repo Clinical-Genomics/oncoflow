@@ -36,6 +36,7 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 - [#19](https://github.com/Clinical-Genomics/oncoflow/pull/19) Set revision for `oncorefiner` in test config.
 - [#18](https://github.com/Clinical-Genomics/oncoflow/pull/18) Updated test config to use the revised oncoanalyser version `2.2.0-with-purple-and-linx-stub-fix`.
 - [#21](https://github.com/Clinical-Genomics/oncoflow/pull/21) Updated test config to use latest dev revision of `oncorefiner`.
+- [#22](https://github.com/Clinical-Genomics/oncoflow/pull/22) Removed logic to propagate config file to child pipelines.
 
 ### `Fixed`
 

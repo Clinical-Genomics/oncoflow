@@ -26,21 +26,14 @@ process NEXTFLOW_RUN {
     // NXF_* env vars inherited from a Tower/Seqera Platform launch break the nested run - see #6.
     // Excluded so the nested run falls back to its own defaults, except shared, namespaced
     // storage locations we still want it to reuse.
-    def nxf_passthrough = [
-        'NXF_HOME',
-        'NXF_WORK',
-        'NXF_ASSETS',
-        'NXF_TEMP',
-        'NXF_PLUGINS_DIR',
-        'NXF_SINGULARITY_LIBRARYDIR',
-        'NXF_CONDA_CACHEDIR',
-        'NXF_SINGULARITY_CACHEDIR',
-        'NXF_CHARLIECLOUD_CACHEDIR',
-        'NXF_SPACK_CACHEDIR',
+    def environment_variables_to_unset = [
+        'NXF_OUT_FILE',
+        'NXF_LOG_FILE',
+        'NXF_IGNORE_RESUME_HISTORY',
+        'NXF_SCM_FILE',
     ]
     def child_env = System.getenv()
-        .findAll { k, v -> !k.startsWith('NXF') || k in nxf_passthrough }
-        .collect { k, v -> "${k}=${v}" }
+        .collect { k, v -> k in environment_variables_to_unset ? "${k}=''" : "${k}=${v}" }
 
     // Construct nextflow command
     def nxf_cmd = [

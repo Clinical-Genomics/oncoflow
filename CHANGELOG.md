@@ -39,6 +39,7 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 - [#22](https://github.com/Clinical-Genomics/oncoflow/pull/22) Removed logic to propagate config file to child pipelines.
 - [#23](https://github.com/Clinical-Genomics/oncoflow/pull/23) Updated the revision for `oncoanalyser` to `OA fork 3.0.0-with-linx-stub-fix ` and `oncorefiner` to a version compatible with this `d876cc0b576892210bc52c1486c3eec3d3aaa1de` in the test config.
 - [#23](https://github.com/Clinical-Genomics/oncoflow/pull/23) Updated the paths for `bam_normal/tumor_path and bai_normal/tumor_path` to fit the new output path from Oncoanalyser.
+- [#23](https://github.com/Clinical-Genomics/oncoflow/pull/23) Updated bam file paths in `getOncorefinerParamsList` for compatibility with updated output file structure of `oncoanalyser` version 3.0.0.
 
 ### `Fixed`
 

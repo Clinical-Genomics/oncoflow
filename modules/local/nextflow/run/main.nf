@@ -44,7 +44,9 @@ process NEXTFLOW_RUN {
 
     // Construct nextflow command
     def nxf_cmd = [
-        'nextflow run',
+        'nextflow',
+        '-log .nextflow.log',
+        'run',
             pipeline_name,
             nextflow_opts,
             params_file ? "-params-file $params_file" : '',

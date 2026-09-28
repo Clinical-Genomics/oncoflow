@@ -41,6 +41,7 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 - [#23](https://github.com/Clinical-Genomics/oncoflow/pull/23) Updated bam file paths in `getOncorefinerParamsList` for compatibility with updated output file structure of `oncoanalyser` version 3.0.0.
 - [#24](https://github.com/Clinical-Genomics/oncoflow/pull/24) Updated the nextflow version from 25.10.4 to 26.04.0.
 - [#25](https://github.com/Clinical-Genomics/oncoflow/pull/25) Updated `NEXTFLOW_RUN` local module based on fix from https://github.com/mahesh-panchal/nf-cascade/issues/6, to ensure compatibility with running with Nextflow Tower.
+- [#26](https://github.com/Clinical-Genomics/oncoflow/pull/26) Updated `NEXTFLOW_RUN` module to sync with new version from `mahesh-panchal/nf-cascade`.
 
 ### `Fixed`
 

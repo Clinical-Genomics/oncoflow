@@ -224,10 +224,10 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
     // Generate a parameters file for the oncorefiner pipeline based on metadata parameters and the output of the oncoanalyser pipeline.
 
     ch_oncoanalyser_output.map { oncoanalyser_output_dir ->
-        def bam_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.normal.redux.bam") : ''
-        def bai_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.normal.redux.bam.bai") : ''
-        def bam_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.tumor.redux.bam")
-        def bai_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/dna/${subject_id}.tumor.redux.bam.bai")
+        def bam_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${subject_id}/alignments/${subject_id}.normal/${subject_id}.normal.redux.bam") : ''
+        def bai_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${subject_id}/alignments/${subject_id}.normal/${subject_id}.normal.redux.bam.bai") : ''
+        def bam_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/${subject_id}.tumor/${subject_id}.tumor.redux.bam")
+        def bai_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/${subject_id}.tumor/${subject_id}.tumor.redux.bam.bai")
         def snv_vcf_path    = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.somatic.vcf.gz")
         def sv_vcf_path     = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
         def linx_fusion_tsv_path = oncoanalyser_output_dir.resolve("${subject_id}/linx/somatic_annotations/${subject_id}.tumor.linx.fusion.tsv")

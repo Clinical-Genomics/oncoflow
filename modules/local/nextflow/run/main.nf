@@ -36,6 +36,8 @@ process NEXTFLOW_RUN {
         'NXF_SINGULARITY_CACHEDIR',
         'NXF_CHARLIECLOUD_CACHEDIR',
         'NXF_SPACK_CACHEDIR',
+        'TOWER_ACCESS_TOKEN',
+        'TOWER_REFRESH_TOKEN',
     ]
     def child_env = System.getenv()
         .findAll { k, v -> !k.startsWith('NXF') || k in nxf_passthrough }

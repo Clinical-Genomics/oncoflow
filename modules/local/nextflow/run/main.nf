@@ -28,7 +28,6 @@ process NEXTFLOW_RUN {
     // storage locations we still want it to reuse.
     def nxf_passthrough = [
         'NXF_HOME',
-        'NXF_WORK',
         'NXF_ASSETS',
         'NXF_TEMP',
         'NXF_PLUGINS_DIR',

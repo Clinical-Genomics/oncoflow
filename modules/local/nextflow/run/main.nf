@@ -48,9 +48,7 @@ process NEXTFLOW_RUN {
     def timestamp = new Date().format("yyyy-MM-dd_HH-mm-ss")
     // Construct nextflow command
     def nxf_cmd = [
-        'nextflow',
-            '-log .nextflow.log',
-            'run',
+        'nextflow run',
             pipeline_name,
             nextflow_opts,
             "-name ${run_name}_${timestamp}",

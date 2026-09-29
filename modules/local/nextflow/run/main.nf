@@ -33,7 +33,8 @@ process NEXTFLOW_RUN {
         'NXF_SCM_FILE',
     ]
     def child_env = System.getenv()
-        .collect { k, v -> k in environment_variables_to_unset ? "${k}=''" : "${k}=${v}" }
+        .findAll { k, v -> !k in environment_variables_to_unset }
+        .collect { k, v -> "${k}=${v}" }
 
     // Construct nextflow command
     def nxf_cmd = [

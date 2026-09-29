@@ -38,7 +38,7 @@ process NEXTFLOW_RUN {
         'NXF_SCM_FILE',
     ]
     def child_env = System.getenv()
-        .findAll { k, v -> !k in environment_variables_to_unset }
+        .findAll { k, v -> !(k in environment_variables_to_unset) }
         .collect { k, v -> "${k}=${v}" }
 
     file("$task.workDir/child_env.txt").text = child_env

@@ -32,9 +32,9 @@ process NEXTFLOW_RUN {
     // Excluded so the nested run falls back to its own defaults, except shared, namespaced
     // storage locations we still want it to reuse.
     def environment_variables_to_unset = [
-        'NXF_OUT_FILE',
-        'NXF_LOG_FILE',
-        'NXF_IGNORE_RESUME_HISTORY',
+        // 'NXF_OUT_FILE',
+        // 'NXF_LOG_FILE',
+        // 'NXF_IGNORE_RESUME_HISTORY',
         'NXF_SCM_FILE',
     ]
     def child_env = System.getenv()

@@ -37,6 +37,7 @@ process NEXTFLOW_RUN {
         // 'NXF_LOG_FILE',
         'NXF_IGNORE_RESUME_HISTORY', // Error: "Missing workflow run name"
         'NXF_SCM_FILE',
+        'NXF_PLUGINS_DEFAULT',
     ]
     def child_env = System.getenv()
         .findAll { k, v -> !(k in environment_variables_to_unset) }

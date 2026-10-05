@@ -62,6 +62,7 @@ process NEXTFLOW_RUN {
             params_file ? "-params-file $params_file" : '',
             additional_config ? "-c $additional_config" : '',
             samplesheet ? "--input $samplesheet" : '',
+            '-with-tower',
             "--outdir ${task.workDir}/results",
     ].join(" ")
     // Copy command to shell script in work dir for reference/debugging.

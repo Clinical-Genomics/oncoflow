@@ -10,7 +10,6 @@ process NEXTFLOW_RUN {
     val samplesheet       // pipeline samplesheet
     val additional_config // custom configs
     val cache_dir         // cache directory
-    val run_name          // run name for Tower
 
     output:
     path "results", emit: output
@@ -53,8 +52,6 @@ process NEXTFLOW_RUN {
         .findAll { k, v -> !(k in environment_variables_to_unset) }
         .collect { k, v -> "${k}=${v}" }
 
-    // Create timestamp for an unique run name
-    def timestamp = new Date().format("yyyy-MM-dd_HH-mm-ss")
     // Construct nextflow command
     def nxf_cmd = [
         'nextflow',
@@ -62,7 +59,6 @@ process NEXTFLOW_RUN {
             'run',
             pipeline_name,
             nextflow_opts,
-            "-name ${run_name}_${timestamp}",
             params_file ? "-params-file $params_file" : '',
             additional_config ? "-c $additional_config" : '',
             samplesheet ? "--input $samplesheet" : '',

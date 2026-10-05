@@ -45,7 +45,7 @@ process NEXTFLOW_RUN {
         .findAll { k, v -> !(k in environment_variables_to_unset) }
         .collect { k, v -> "${k}=${v}" }
 
-    child_env.TOWER_API_ENDPOINT = params.platform_endpoint // Set the Tower API endpoint for the child process, since it is not recorded in a dedicated environment variable
+    child_env = child_env + ["TOWER_API_ENDPOINT=${params.platform_endpoint}"] // Set the Tower API endpoint for the child process, since it is not recorded in a dedicated environment variable
 
     file("$task.workDir/child_env.txt").text = child_env
 

@@ -33,12 +33,16 @@ process NEXTFLOW_RUN {
     // Excluded so the nested run falls back to its own defaults, except shared, namespaced
     // storage locations we still want it to reuse.
     def environment_variables_to_unset = [
-        // 'NXF_OUT_FILE',
-        // 'NXF_LOG_FILE',
         'NXF_IGNORE_RESUME_HISTORY', // Error: "Missing workflow run name"
-        'NXF_SCM_FILE',
-        'TOWER_ACCESS_TOKEN',
-
+        'NXF_SCM_FILE',              // Is an ephemeral file that is no longer available when the child pipeline is called.
+        'TOWER_WORKFLOW_ID',         // turns on reporting and makes the child act as the parent run
+        'TOWER_REFRESH_TOKEN',       // parent's launch refresh token
+        'TOWER_CONFIG_BASE64',       // parent's tower.yml
+        'TOWER_CONFIG_FILE',
+        'TOWER_REPORTS_FILE',
+        // Testing not tracking with Tower
+        'TOWER_API_ENDPOINT',
+        'TOWER_ACCESS_TOKEN'
     ]
     def child_env = System.getenv()
         .findAll { k, v -> !(k in environment_variables_to_unset) }

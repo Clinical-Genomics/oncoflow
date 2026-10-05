@@ -21,7 +21,7 @@ Input files and nextflow options for running nf-core/oncoanlyser.
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `oncoanalyser_config` | Path to config file for nf-core/oncoanlyser (optional). | `string` |  |  |  |
-| `oncoanalyser_create_stub_placeholders` | Create placeholders for reference data during stub run. Used for creating the params file for oncoanalyser. | `boolean` | False |  |  |
+| `oncoanalyser_create_stub_placeholders` | Create placeholders for reference data during stub run. Used for creating the params file for oncoanalyser. | `boolean` |  |  |  |
 | `oncoanalyser_genome` | Name of genome reference. Used for creating the params file for oncoanalyser. | `string` | GRCh38_hmf | True |  |
 | `oncoanalyser_mode` | Workflow run mode. Used for creating the params file for oncoanalyser. | `string` |  | True |  |
 | `oncoanalyser_nextflow_opts` | Nextflow options for running nf-core/oncoanlyser. | `string` |  | True |  |
@@ -75,3 +75,9 @@ Less common options for the pipeline, typically set in a config file.
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
 | `help_full` | Display the full detailed help message. | `boolean` |  |  |  |
 | `show_hidden` | Display hidden parameters in the help message (only works when --help or --help_full are provided). | `boolean` |  |  |  |
+
+## Other parameters
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `platform_endpoint` |  | `string` |  |  |  |

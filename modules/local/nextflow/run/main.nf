@@ -34,20 +34,20 @@ process NEXTFLOW_RUN {
     // storage locations we still want it to reuse.
     def environment_variables_to_unset = [
         // Nextflow variables
-        // 'NXF_UUID', // Points to parent session ID
-        // 'NXF_WORK', // Points to parent's work directory
-        // 'NXF_LOG_FILE', //
-        // 'NXF_OUT_FILE', //
-        // 'NXF_TML_FILE', // Points to parent's paths
+        // 'NXF_UUID',               // Points to parent session ID
+        // 'NXF_WORK',               // Points to parent's work directory
+        // 'NXF_LOG_FILE',           //
+        // 'NXF_OUT_FILE',           //
+        // 'NXF_TML_FILE',           // Points to parent's paths
         'NXF_SCM_FILE',              // One-time ephemeral file that is no longer available when the child pipeline is called.
         'NXF_IGNORE_RESUME_HISTORY', // Error: "Missing workflow run name"
-        // 'NXF_PRERUN_BASE64', // Points to parent's pre-run script
-        // 'NXF_POSTRUN_BASE64', // Points to parent's post-run script
+        // 'NXF_PRERUN_BASE64',      // Points to parent's pre-run script
+        // 'NXF_POSTRUN_BASE64',     // Points to parent's post-run script
 
         // Tower variables
         'TOWER_WORKFLOW_ID',         // Activates reporting to Tower and points to the parent workflow ID
-        // 'TOWER_REFRESH_TOKEN',       // parent's launch refresh token
-        // 'TOWER_CONFIG_BASE64',       // parent's tower.yml
+        // 'TOWER_REFRESH_TOKEN',    // parent's launch refresh token
+        // 'TOWER_CONFIG_BASE64',    // parent's tower.yml
         // 'TOWER_CONFIG_FILE',
         // 'TOWER_REPORTS_FILE',
     ]

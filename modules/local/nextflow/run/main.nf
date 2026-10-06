@@ -24,9 +24,9 @@ process NEXTFLOW_RUN {
     assert cache_path.mkdirs()
 
 
-    // When starting oncoflow, environment variables are set - both nextflow and tower related -
-    // which point specifically to settings of the parent pipeline and are incompatible with nested runs.
-    // Therefore, certain environment variables need to be unset for the child pipeline to run correctly.
+    // When starting the parent pipeline, environment variables are set - both nextflow and tower related -
+    // which point specifically to settings of the parent pipeline and are incompatible with nested runs of child pipelines.
+    // Therefore, a set of environment variables need to be unset for the child pipeline to run correctly.
 
     def parent_env = System.getenv()
         .collect { k, v -> "${k}=${v}" }

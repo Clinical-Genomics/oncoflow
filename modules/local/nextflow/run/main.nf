@@ -22,18 +22,18 @@ process NEXTFLOW_RUN {
     // Prepare environment for running the child pipeline
     //
 
-    // When starting the parent pipeline, environment variables are set - both nextflow and tower related -
-    // which point specifically to settings of the parent pipeline and are incompatible with nested runs of child pipelines.
-    // Therefore, a set of environment variables need to be unset for the child pipeline to run correctly.
+    // When starting the parent pipeline, nextflow and tower related environment variables are set and point
+    // specifically to settings of the parent pipeline which are incompatible with nested runs of child pipelines.
+    // Therefore, these environment variables need to be unset for the child pipeline to run correctly.
 
     def parent_env = System.getenv()
         .collect { k, v -> "${k}=${v}" }
 
-    def environment_variables_to_skip = [
+    def environment_variables_to_unset = [
         // Nextflow variables
         'NXF_UUID',                  // Points to parent session ID
         'NXF_WORK',                  // Points to parent's work directory
-        'NXF_LOG_FILE',              //
+        'NXF_LOG_FILE',              // Sets the name of the log file for the parent pipeline. Also overwritten by 'nextflow -log .nextflow.log run'.
         'NXF_OUT_FILE',              //
         'NXF_TML_FILE',              // Points to parent's paths
         'NXF_SCM_FILE',              // One-time ephemeral file that is no longer available when the child pipeline is called (required)
@@ -49,7 +49,7 @@ process NEXTFLOW_RUN {
         'TOWER_REPORTS_FILE',
     ]
     def child_env = System.getenv()
-        .findAll { k, v -> !(k in environment_variables_to_skip) }
+        .findAll { k, v -> !(k in environment_variables_to_unset) }
         .collect { k, v -> "${k}=${v}" }
 
     // Construct nextflow command

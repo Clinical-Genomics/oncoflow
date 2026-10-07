@@ -23,6 +23,9 @@ process NEXTFLOW_RUN {
     def cache_path = file(cache_dir)
     assert cache_path.mkdirs()
 
+    //
+    // Prepare environment for running the child pipeline
+    //
 
     // When starting the parent pipeline, environment variables are set - both nextflow and tower related -
     // which point specifically to settings of the parent pipeline and are incompatible with nested runs of child pipelines.
@@ -31,7 +34,7 @@ process NEXTFLOW_RUN {
     def parent_env = System.getenv()
         .collect { k, v -> "${k}=${v}" }
 
-    def environment_variables_to_unset = [
+    def environment_variables_to_skip = [
         // Nextflow variables
         'NXF_UUID',                  // Points to parent session ID
         'NXF_WORK',                  // Points to parent's work directory
@@ -44,14 +47,14 @@ process NEXTFLOW_RUN {
         'NXF_POSTRUN_BASE64',        // Points to parent's post-run script
 
         // Tower variables
-        'TOWER_WORKFLOW_ID',         // Activates reporting to Tower and points to the parent workflow ID (required)
+        'TOWER_WORKFLOW_ID',         // The presence of this variable activates reporting to Tower which  (required)
         'TOWER_REFRESH_TOKEN',       // parent's launch refresh token
         'TOWER_CONFIG_BASE64',       // parent's tower.yml
         'TOWER_CONFIG_FILE',
         'TOWER_REPORTS_FILE',
     ]
     def child_env = System.getenv()
-        .findAll { k, v -> !(k in environment_variables_to_unset) }
+        .findAll { k, v -> !(k in environment_variables_to_skip) }
         .collect { k, v -> "${k}=${v}" }
 
     // Construct nextflow command

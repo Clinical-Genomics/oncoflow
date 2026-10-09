@@ -64,7 +64,7 @@ process NEXTFLOW_RUN {
         additional_config ? "-c ${additional_config}" : '',
         samplesheet ? "--input ${samplesheet}" : '',
         "--outdir ${task.workDir}/results",
-        "-work-dir ${cache_path}/work",
+        "-work-dir ${cache_path}/work", // Ensure that `NXF_WORK` is set in the cache directory, as expected by the cache cleaning logic below.
     ].join(" ")
 
     // Copy command to shell script in work dir for reference/debugging.

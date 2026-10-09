@@ -18,28 +18,45 @@ process NEXTFLOW_RUN {
     def cache_path = file(cache_dir)
     assert cache_path.mkdirs()
 
-    // NXF_* env vars inherited from a Tower/Seqera Platform launch break the nested run - see #6.
-    // Excluded so the nested run falls back to its own defaults, except shared, namespaced
-    // storage locations we still want it to reuse.
-    def nxf_passthrough = [
-        'NXF_HOME',
-        'NXF_ASSETS',
-        'NXF_TEMP',
-        'NXF_PLUGINS_DIR',
-        'NXF_SINGULARITY_LIBRARYDIR',
-        'NXF_CONDA_CACHEDIR',
-        'NXF_SINGULARITY_CACHEDIR',
-        'NXF_CHARLIECLOUD_CACHEDIR',
-        'NXF_SPACK_CACHEDIR',
+    //
+    // Prepare environment for running the child pipeline
+    //
+
+    // When starting the parent pipeline through Tower, nextflow and Tower related environment variables are set and
+    // point specifically to settings of the parent pipeline which are incompatible with nested runs of child pipelines.
+    // Therefore, these environment variables need to be unset for the child pipeline to run correctly.
+
+    def parent_env = System.getenv()
+        .collect { k, v -> "${k}=${v}" }
+
+    def environment_variables_to_unset = [
+        // Nextflow variables
+        'NXF_UUID',                  // Parent's Nextflow session ID.
+        'NXF_WORK',                  // Parent's work directory.
+        'NXF_LOG_FILE',              // Path to the log file of the parent pipeline.
+        'NXF_OUT_FILE',              // Path to the Nextflow console output file of the parent pipeline.
+        'NXF_TML_FILE',              // Path to the timeline report HTML file of the parent pipeline.
+        'NXF_SCM_FILE',              // Path to one-time ephemeral file that is no longer available when the child pipeline is called. Strictly necessary to unset.
+        'NXF_IGNORE_RESUME_HISTORY', // Set to `true` for parent pipeline, which would require providing an explicit run name (-name) and session ID when using `-resume` in the `nextflow run` command of the child pipeline. Strictly necessary to unset.
+        'NXF_PRERUN_BASE64',         // Path to parent's pre-run script.
+        'NXF_POSTRUN_BASE64',        // Path to parent's post-run script.
+
+        // Tower variables
+        'TOWER_WORKFLOW_ID',         // The presence of this variable activates reporting to Tower which is not necessary for the child pipeline and would not work correctly as the API is not specified. Strictly necessary to unset.
+        'TOWER_REFRESH_TOKEN',       // Parent's launch refresh token.
+        'TOWER_CONFIG_BASE64',       // Path to parent's tower.yml file.
+        'TOWER_CONFIG_FILE',         // Path to parent's Tower configuration file.
+        'TOWER_REPORTS_FILE',        // Path to parent's Tower reports file.
     ]
+
     def child_env = System.getenv()
-        .findAll { k, v -> !k.startsWith('NXF') || k in nxf_passthrough }
+        .findAll { k, v -> !(k in environment_variables_to_unset) }
         .collect { k, v -> "${k}=${v}" }
 
     // Construct nextflow command
     def nxf_cmd = [
         'nextflow',
-        '-log .nextflow.log',
+        '-log .nextflow.log', // Ensure that the log file with the expected name. Takes precedence over `NXF_LOG_FILE` environment variable.
         'run',
             pipeline_name,
             nextflow_opts,
@@ -47,6 +64,7 @@ process NEXTFLOW_RUN {
             additional_config ? "-c ${additional_config}" : '',
             samplesheet ? "--input ${samplesheet}" : '',
             "--outdir ${task.workDir}/results",
+            "-work-dir ${cache_path}/work", // Ensure that `NXF_WORK` is set in the cache directory, as expected by the cache cleaning logic below.
     ].join(" ")
 
     // Copy command to shell script in work dir for reference/debugging.

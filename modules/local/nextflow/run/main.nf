@@ -51,19 +51,20 @@ process NEXTFLOW_RUN {
 
     def child_env = System.getenv()
         .findAll { k, v -> !(k in environment_variables_to_unset) }
-        .collect { k, v -> "${k}=${v}" } + [ "NXF_WORK=${task.workDir}" ]
+        .collect { k, v -> "${k}=${v}" }
 
     // Construct nextflow command
     def nxf_cmd = [
         'nextflow',
         '-log .nextflow.log', // Ensure that the log file with the expected name. Takes precedence over `NXF_LOG_FILE` environment variable.
         'run',
-            pipeline_name,
-            nextflow_opts,
-            params_file ? "-params-file ${params_file}" : '',
-            additional_config ? "-c ${additional_config}" : '',
-            samplesheet ? "--input ${samplesheet}" : '',
-            "--outdir ${task.workDir}/results",
+        pipeline_name,
+        nextflow_opts,
+        params_file ? "-params-file ${params_file}" : '',
+        additional_config ? "-c ${additional_config}" : '',
+        samplesheet ? "--input ${samplesheet}" : '',
+        "--outdir ${task.workDir}/results",
+        "-work-dir ${cache_path}/work",
     ].join(" ")
 
     // Copy command to shell script in work dir for reference/debugging.

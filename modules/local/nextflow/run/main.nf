@@ -48,9 +48,10 @@ process NEXTFLOW_RUN {
         'TOWER_CONFIG_FILE',         // Path to parent's Tower configuration file.
         'TOWER_REPORTS_FILE',        // Path to parent's Tower reports file.
     ]
+
     def child_env = System.getenv()
         .findAll { k, v -> !(k in environment_variables_to_unset) }
-        .collect { k, v -> "${k}=${v}" }
+        .collect { k, v -> "${k}=${v}" } + [ "NXF_WORK=${task.workDir}" ]
 
     // Construct nextflow command
     def nxf_cmd = [

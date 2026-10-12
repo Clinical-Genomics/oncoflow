@@ -50,9 +50,12 @@ process NEXTFLOW_RUN {
     ]
 
     def child_env = (
-        System.getenv() + ['NXF_WORK':"${cache_path}/work"] // Set `NXF_WORK` for the child pipeline as the hasta config depends on this variable to set the JAVA temporary directory. Matches the expected work directory for the cache cleaning logic.
+        // Set `NXF_WORK` for the child pipeline for compatibility with the nextflow hasta config.
+        // The config file depends on this variable to set the JAVA temporary directory.
+        // `${cache_path}/work` is the nextflow default as the run command is executed in the cache directory and also matches the expected work directory for the cache cleaning logic below.
+        System.getenv() + ['NXF_WORK':"${cache_path}/work"]
         )
-        .findAll { k, v -> !(k in environment_variables_to_unset) }
+        .findAll { k, _v -> !(k in environment_variables_to_unset) }
         .collect { k, v -> "${k}=${v}" }
 
     // Construct nextflow command

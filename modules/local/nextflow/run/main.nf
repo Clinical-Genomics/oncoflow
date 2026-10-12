@@ -53,7 +53,7 @@ process NEXTFLOW_RUN {
         // Set `NXF_WORK` for the child pipeline for compatibility with the nextflow hasta config.
         // The config file depends on this variable to set the JAVA temporary directory.
         // `${cache_path}/work` is the nextflow default as the run command is executed in the cache directory and also matches the expected work directory for the cache cleaning logic below.
-        System.getenv() + ["NXF_WORK:${cache_path}/work"]
+        System.getenv() + ['NXF_WORK':"${cache_path}/work"]
         )
         .findAll { k, _v -> !(k in environment_variables_to_unset) }
         .collect { k, v -> "${k}=${v}" }

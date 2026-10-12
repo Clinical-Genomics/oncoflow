@@ -49,7 +49,9 @@ process NEXTFLOW_RUN {
         'TOWER_REPORTS_FILE',        // Path to parent's Tower reports file.
     ]
 
-    def child_env = System.getenv()
+    def child_env = (
+        System.getenv() + ['NXF_WORK':"${cache_path}/work"] // Set `NXF_WORK` for the child pipeline as the hasta config depends on this variable to set the JAVA temporary directory. Matches the expected work directory for the cache cleaning logic.
+        )
         .findAll { k, v -> !(k in environment_variables_to_unset) }
         .collect { k, v -> "${k}=${v}" }
 

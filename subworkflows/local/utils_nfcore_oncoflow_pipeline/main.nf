@@ -233,6 +233,11 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
         def linx_fusion_tsv_path = oncoanalyser_output_dir.resolve("${subject_id}/linx/somatic_annotations/${subject_id}.tumor.linx.fusion.tsv")
         def linx_breakends_tsv_path = oncoanalyser_output_dir.resolve("${subject_id}/linx/somatic_annotations/${subject_id}.tumor.linx.breakend.tsv")
         def linx_sv_tsv_path = oncoanalyser_output_dir.resolve("${subject_id}/linx/somatic_annotations/${subject_id}.tumor.linx.svs.tsv")
+        def amber_baf_tsv_gz = oncoanalyser_output_dir.resolve("${case_id}/amber/${sample_id_tumor}.amber.baf.tsv.gz")
+        def cobalt_ratio_pcf_normal = sample_id_normal ? oncoanalyser_output_dir.resolve("${case_id}/cobalt/${sample_id_tumor}.cobalt.ratio.pcf") : ''
+        def cobalt_ratio_pcf_tumor  = oncoanalyser_output_dir.resolve("${case_id}/cobalt/${sample_id_tumor}.cobalt.ratio.pcf")
+        def cnv_gene_tsv = oncoanalyser_output_dir.resolve("${case_id}/purple/${sample_id_tumor}.purple.cnv.gene.tsv")
+        def cnv_segment_tsv = oncoanalyser_output_dir.resolve("${case_id}/purple/${sample_id_tumor}.purple.cnv.segment.tsv")
 
 
     return [
@@ -248,7 +253,12 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
             "sv_vcf: $sv_vcf_path",
             "linx_fusion_tsv: $linx_fusion_tsv_path",
             "linx_breakends_tsv: $linx_breakends_tsv_path",
-            "linx_sv_tsv: $linx_sv_tsv_path"
+            "linx_sv_tsv: $linx_sv_tsv_path",
+            "amber_baf_tsv_gz: $amber_baf_tsv_gz",
+            "cobalt_ratio_pcf_normal: $cobalt_ratio_pcf_normal",
+            "cobalt_ratio_pcf_tumor: $cobalt_ratio_pcf_tumor",
+            "cnv_gene_tsv: $cnv_gene_tsv",
+            "cnv_segment_tsv: $cnv_segment_tsv"
         ]
     }
 }

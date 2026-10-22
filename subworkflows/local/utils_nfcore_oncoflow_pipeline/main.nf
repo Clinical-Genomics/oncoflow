@@ -224,20 +224,20 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
     // Generate a parameters file for the oncorefiner pipeline based on metadata parameters and the output of the oncoanalyser pipeline.
 
     ch_oncoanalyser_output.map { oncoanalyser_output_dir ->
-        def bam_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${subject_id}/alignments/${subject_id}.normal/${subject_id}.normal.redux.bam") : ''
-        def bai_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${subject_id}/alignments/${subject_id}.normal/${subject_id}.normal.redux.bam.bai") : ''
-        def bam_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/${subject_id}.tumor/${subject_id}.tumor.redux.bam")
-        def bai_tumor_path  = oncoanalyser_output_dir.resolve("${subject_id}/alignments/${subject_id}.tumor/${subject_id}.tumor.redux.bam.bai")
-        def snv_vcf_path    = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.somatic.vcf.gz")
-        def sv_vcf_path     = oncoanalyser_output_dir.resolve("${subject_id}/purple/${subject_id}.tumor.purple.sv.vcf.gz")
-        def linx_fusion_tsv_path = oncoanalyser_output_dir.resolve("${subject_id}/linx/somatic_annotations/${subject_id}.tumor.linx.fusion.tsv")
-        def linx_breakends_tsv_path = oncoanalyser_output_dir.resolve("${subject_id}/linx/somatic_annotations/${subject_id}.tumor.linx.breakend.tsv")
-        def linx_sv_tsv_path = oncoanalyser_output_dir.resolve("${subject_id}/linx/somatic_annotations/${subject_id}.tumor.linx.svs.tsv")
         def amber_baf_tsv_gz = oncoanalyser_output_dir.resolve("${case_id}/amber/${sample_id_tumor}.amber.baf.tsv.gz")
-        def cobalt_ratio_pcf_normal = sample_id_normal ? oncoanalyser_output_dir.resolve("${case_id}/cobalt/${sample_id_tumor}.cobalt.ratio.pcf") : ''
-        def cobalt_ratio_pcf_tumor  = oncoanalyser_output_dir.resolve("${case_id}/cobalt/${sample_id_tumor}.cobalt.ratio.pcf")
+        def bam_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${case_id}/alignments/${sample_id_normal}/${sample_id_normal}.redux.bam") : ''
+        def bai_normal_path = sample_id_normal ? oncoanalyser_output_dir.resolve("${case_id}/alignments/${sample_id_normal}/${sample_id_normal}.redux.bam.bai") : ''
+        def bam_tumor_path  = oncoanalyser_output_dir.resolve("${case_id}/alignments/${sample_id_tumor}/${sample_id_tumor}.redux.bam")
+        def bai_tumor_path  = oncoanalyser_output_dir.resolve("${case_id}/alignments/${sample_id_tumor}/${sample_id_tumor}.redux.bam.bai")
         def cnv_gene_tsv = oncoanalyser_output_dir.resolve("${case_id}/purple/${sample_id_tumor}.purple.cnv.gene.tsv")
         def cnv_segment_tsv = oncoanalyser_output_dir.resolve("${case_id}/purple/${sample_id_tumor}.purple.cnv.segment.tsv")
+        def cobalt_ratio_pcf_normal = sample_id_normal ? oncoanalyser_output_dir.resolve("${case_id}/cobalt/${sample_id_tumor}.cobalt.ratio.pcf") : ''
+        def cobalt_ratio_pcf_tumor  = oncoanalyser_output_dir.resolve("${case_id}/cobalt/${sample_id_tumor}.cobalt.ratio.pcf")
+        def snv_vcf_path    = oncoanalyser_output_dir.resolve("${case_id}/purple/${sample_id_tumor}.purple.somatic.vcf.gz")
+        def sv_vcf_path     = oncoanalyser_output_dir.resolve("${case_id}/purple/${sample_id_tumor}.purple.sv.vcf.gz")
+        def linx_fusion_tsv_path = oncoanalyser_output_dir.resolve("${case_id}/linx/somatic_annotations/${sample_id_tumor}.linx.fusion.tsv")
+        def linx_breakends_tsv_path = oncoanalyser_output_dir.resolve("${case_id}/linx/somatic_annotations/${sample_id_tumor}.linx.breakend.tsv")
+        def linx_sv_tsv_path = oncoanalyser_output_dir.resolve("${case_id}/linx/somatic_annotations/${sample_id_tumor}.linx.svs.tsv")
 
 
     return [
@@ -245,20 +245,20 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
             "sample_id_normal: $sample_id_normal",
             "sample_id_tumor: $sample_id_tumor",
             "sex: $sex",
+            "amber_baf_tsv_gz: $amber_baf_tsv_gz",
             "bam_normal: $bam_normal_path",
             "bai_normal: $bai_normal_path",
             "bam_tumor: $bam_tumor_path",
             "bai_tumor: $bai_tumor_path",
+            "cnv_gene_tsv: $cnv_gene_tsv",
+            "cnv_segment_tsv: $cnv_segment_tsv",
+            "cobalt_ratio_pcf_normal: $cobalt_ratio_pcf_normal",
+            "cobalt_ratio_pcf_tumor: $cobalt_ratio_pcf_tumor",
             "snv_vcf: $snv_vcf_path",
             "sv_vcf: $sv_vcf_path",
             "linx_fusion_tsv: $linx_fusion_tsv_path",
             "linx_breakends_tsv: $linx_breakends_tsv_path",
-            "linx_sv_tsv: $linx_sv_tsv_path",
-            "amber_baf_tsv_gz: $amber_baf_tsv_gz",
-            "cobalt_ratio_pcf_normal: $cobalt_ratio_pcf_normal",
-            "cobalt_ratio_pcf_tumor: $cobalt_ratio_pcf_tumor",
-            "cnv_gene_tsv: $cnv_gene_tsv",
-            "cnv_segment_tsv: $cnv_segment_tsv"
+            "linx_sv_tsv: $linx_sv_tsv_path"
         ]
     }
 }

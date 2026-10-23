@@ -230,7 +230,7 @@ def getOncorefinerParamsList(case_id, ch_oncoanalyser_output, sample_id_normal, 
         def bam_tumor_path  = oncoanalyser_output_dir.resolve("${case_id}/alignments/${sample_id_tumor}/${sample_id_tumor}.redux.bam")
         def bai_tumor_path  = oncoanalyser_output_dir.resolve("${case_id}/alignments/${sample_id_tumor}/${sample_id_tumor}.redux.bam.bai")
         def cnv_gene_tsv = oncoanalyser_output_dir.resolve("${case_id}/purple/${sample_id_tumor}.purple.cnv.gene.tsv")
-        def cnv_segment_tsv = oncoanalyser_output_dir.resolve("${case_id}/purple/${sample_id_tumor}.purple.cnv.segment.tsv")
+        def cnv_segment_tsv = oncoanalyser_output_dir.resolve("${case_id}/purple/${sample_id_tumor}.purple.cnv.somatic.tsv")
         def cobalt_ratio_pcf_normal = sample_id_normal ? oncoanalyser_output_dir.resolve("${case_id}/cobalt/${sample_id_tumor}.cobalt.ratio.pcf") : ''
         def cobalt_ratio_pcf_tumor  = oncoanalyser_output_dir.resolve("${case_id}/cobalt/${sample_id_tumor}.cobalt.ratio.pcf")
         def snv_vcf_path    = oncoanalyser_output_dir.resolve("${case_id}/purple/${sample_id_tumor}.purple.somatic.vcf.gz")

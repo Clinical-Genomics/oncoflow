@@ -601,10 +601,15 @@
                 "sample_id_normal: subject_a.normal",
                 "sample_id_tumor: subject_a.tumor",
                 "sex: female",
+                "amber_baf_tsv_gz: <oncoanalyser_work_directory>/subject_a/amber/subject_a.tumor.amber.baf.tsv.gz",
                 "bam_normal: <oncoanalyser_work_directory>/subject_a/alignments/subject_a.normal/subject_a.normal.redux.bam",
                 "bai_normal: <oncoanalyser_work_directory>/subject_a/alignments/subject_a.normal/subject_a.normal.redux.bam.bai",
                 "bam_tumor: <oncoanalyser_work_directory>/subject_a/alignments/subject_a.tumor/subject_a.tumor.redux.bam",
                 "bai_tumor: <oncoanalyser_work_directory>/subject_a/alignments/subject_a.tumor/subject_a.tumor.redux.bam.bai",
+                "cnv_gene_tsv: <oncoanalyser_work_directory>/subject_a/purple/subject_a.tumor.purple.cnv.gene.tsv",
+                "cnv_segment_tsv: <oncoanalyser_work_directory>/subject_a/purple/subject_a.tumor.purple.cnv.somatic.tsv",
+                "cobalt_ratio_pcf_normal: <oncoanalyser_work_directory>/subject_a/cobalt/subject_a.tumor.cobalt.ratio.pcf",
+                "cobalt_ratio_pcf_tumor: <oncoanalyser_work_directory>/subject_a/cobalt/subject_a.tumor.cobalt.ratio.pcf",
                 "snv_vcf: <oncoanalyser_work_directory>/subject_a/purple/subject_a.tumor.purple.somatic.vcf.gz",
                 "sv_vcf: <oncoanalyser_work_directory>/subject_a/purple/subject_a.tumor.purple.sv.vcf.gz",
                 "linx_fusion_tsv: <oncoanalyser_work_directory>/subject_a/linx/somatic_annotations/subject_a.tumor.linx.fusion.tsv",
@@ -612,7 +617,7 @@
                 "linx_sv_tsv: <oncoanalyser_work_directory>/subject_a/linx/somatic_annotations/subject_a.tumor.linx.svs.tsv"
             ]
         ],
-        "timestamp": "2026-10-22T16:48:36.721735",
+        "timestamp": "2026-10-23T16:40:06.906349",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

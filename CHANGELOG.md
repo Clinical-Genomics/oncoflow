@@ -46,6 +46,7 @@ Initial release of Clinical-Genomics/oncoflow, created with the [nf-core](https:
 - [#25](https://github.com/Clinical-Genomics/oncoflow/pull/25) Updated `NEXTFLOW_RUN` local module to ensure compatibility with running with Nextflow Tower with the current Hasta nextflow config.
 - [#28](https://github.com/Clinical-Genomics/oncoflow/pull/28) Updated file paths for Oncoanalyser collection to use `case_id` and `sample_id_tumor/normal`. Also updated meta information to match the test data from Oncoanalyser.
 - [#29][https://github.com/Clinical-Genomics/oncoflow/pull/29] Updated test config to use `oncoanalyser` version 3.0.0 - patched revision `3.0.0-with-linx-cobalt-amber-stub-fix `.
+- [#31](https://github.com/Clinical-Genomics/oncoflow/pull/31) Updated usage and output documentation.
 
 ### `Fixed`
 

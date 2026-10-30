@@ -1,6 +1,6 @@
 # Clinical-Genomics/oncoflow: Usage
 
-> _Documentation of pipeline parameters is generated automatically from the pipeline schema and can be found in ./parameters.md._
+> _Documentation of pipeline parameters is generated automatically from the pipeline schema and can be found in [parameters.md](./parameters.md)._
 
 ## Introduction
 

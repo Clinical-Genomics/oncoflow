@@ -21,6 +21,9 @@ This will launch the pipeline with:
 
 Parameters can be specified in a `yaml` or `json` params file through the `-params-file` option or instead given as a flag in the run command directly, i.e. `--outdir ./results/`. You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch). See [parameters documentation](./parameters.md) for more information on required parameters and their usage.
 
+> [!WARNING]
+> Note that all pipeline versions must be compatible and coordinated: the version of `Clinical-Genomics/oncorefiner` must match the version of `nf-core/oncoanalyser` used, and both must be supported by `oncoflow`. When providing pipeline revisions as input parameters, make sure all revisions are compatible with each other.
+
 For more information on the structure and content of the output files see [output documentation](./output.md).
 
 > [!WARNING]

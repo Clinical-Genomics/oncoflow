@@ -80,7 +80,7 @@
                     "pattern": "^\\S+\\.csv$",
                     "exists": true,
                     "fa_icon": "fas fa-file-csv",
-                    "help_text": ""
+                    "help_text": "For information on how to format the samplesheet, refer to the documentation for nf-core/oncoanalyser."
                 }
             },
             "required": ["oncoanalyser_nextflow_opts", "oncoanalyser_genome", "oncoanalyser_mode"],

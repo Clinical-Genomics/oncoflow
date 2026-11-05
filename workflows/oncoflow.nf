@@ -37,6 +37,8 @@ workflow ONCOFLOW {
 
     main:
 
+    file("${workflow.workDir}/workflow_command.txt").text = "${workflow.commandLine}"
+
     def ch_versions = channel.empty()
 
     oncoanalyser_params_list = getOncoanalyserParamsList(

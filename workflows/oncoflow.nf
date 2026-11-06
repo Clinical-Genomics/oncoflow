@@ -37,7 +37,7 @@ workflow ONCOFLOW {
 
     main:
 
-    file("${workflow.workDir}/workflow_command.txt").text = "${workflow.commandLine}"
+    file("${workflow.workDir}/workflow_config_text.txt").text = "${workflow.configText}"
 
     def ch_versions = channel.empty()
 
